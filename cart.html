@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Shopping Cart | The Solution Point
+    </title>
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Main Website CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /* =========================================
+           CART PAGE
+        ========================================= */
+
+        .cart-page {
+
+            padding: 60px 0;
+
+        }
+
+
+        .cart-title {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .cart-title h1 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: var(--navy);
+
+            font-size: 42px;
+
+            margin-top: 8px;
+
+        }
+
+
+        .cart-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr .7fr;
+
+            gap: 30px;
+
+        }
+
+
+        /* =========================================
+           CART ITEMS
+        ========================================= */
+
+        .cart-items {
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            background: white;
+
+        }
+
+
+        .cart-item {
+
+            display: grid;
+
+            grid-template-columns:
+                80px 1fr auto auto auto;
+
+            gap: 18px;
+
+            align-items: center;
+
+            padding: 20px;
+
+            border-bottom:
+                1px solid var(--line);
+
+        }
+
+
+        .cart-item:last-child {
+
+            border-bottom: 0;
+
+        }
+
+
+        .cart-item-image {
+
+            width: 80px;
+
+            height: 80px;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            background: #faf9f6;
+
+            display: grid;
+
+            place-items: center;
+
+        }
+
+
+        .cart-item-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+        }
+
+
+        .cart-placeholder {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 30px;
+
+            color: #a06d2d;
+
+        }
+
+
+        .cart-item h3 {
+
+            color: var(--navy);
+
+            font-size: 17px;
+
+            margin: 0 0 4px;
+
+        }
+
+
+        .cart-item-code {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+        }
+
+
+        .cart-price {
+
+            font-weight: 800;
+
+            color: var(--navy);
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =========================================
+           QUANTITY
+        ========================================= */
+
+        .quantity-control {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+        }
+
+
+        .quantity-control button {
+
+            width: 32px;
+
+            height: 32px;
+
+            border:
+                1px solid #ccd4d7;
+
+            background: white;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            line-height: 1;
+
+        }
+
+
+        .quantity-control button:hover {
+
+            background: #f5f3ef;
+
+        }
+
+
+        .quantity-control span {
+
+            min-width: 25px;
+
+            text-align: center;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================
+           REMOVE
+        ========================================= */
+
+        .remove-item {
+
+            border: 0;
+
+            background: transparent;
+
+            color: #a33;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+        }
+
+
+        .remove-item:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================================
+           SUMMARY
+        ========================================= */
+
+        .cart-summary {
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            background: #faf9f6;
+
+            height: fit-content;
+
+        }
+
+
+        .cart-summary h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: var(--navy);
+
+            margin: 0 0 20px;
+
+        }
+
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid var(--line);
+
+            font-size: 14px;
+
+        }
+
+
+        .summary-total {
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            color: var(--navy);
+
+            border-bottom: 0;
+
+            padding-top: 18px;
+
+        }
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .checkout-button {
+
+            display: block;
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .continue-shopping {
+
+            display: inline-block;
+
+            margin-top: 15px;
+
+            color: #9a6b2d;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+        }
+
+
+        .continue-shopping:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================================
+           EMPTY CART
+        ========================================= */
+
+        .empty-cart {
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            color: var(--muted);
+
+        }
+
+
+        .empty-cart h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color: var(--navy);
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .empty-cart p {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media(max-width: 850px) {
+
+            .cart-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .cart-item {
+
+                grid-template-columns:
+                    65px 1fr;
+
+                gap: 12px;
+
+            }
+
+
+            .cart-item-image {
+
+                width: 65px;
+
+                height: 65px;
+
+            }
+
+
+            .cart-price {
+
+                grid-column: 2;
+
+            }
+
+
+            .quantity-control {
+
+                grid-column: 2;
+
+            }
+
+
+            .remove-item {
+
+                grid-column: 2;
+
+                text-align: left;
+
+            }
+
+
+            .cart-title h1 {
+
+                font-size: 34px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+
+        <!-- BRAND -->
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+
+            <span>
+
+               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>                <small>
+                    Reliable Solutions. Professional Service. One Point.
+                </small>
+
+            </span>
+
+        </a>
+
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            class="menu-toggle"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="products.html">
+                Product
+            </a>
+
+            <a href="contact.html">
+                Contact 
+            </a>
+
+        </nav>
+
+
+
+        <!-- CART -->
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN CART
+===================================================== -->
+
+<main>
+
+<section class="cart-page">
+
+<div class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="cart-title">
+
+        <span class="eyebrow">
+            SHOPPING CART
+        </span>
+
+        <h1>
+            Your Cart
+        </h1>
+
+    </div>
+
+
+
+    <!-- CART WILL BE INSERTED HERE -->
+
+    <div
+        id="cartContainer"
+        class="cart-layout"
+    >
+
+    </div>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <!-- COMPANY -->
+
+        <div>
+
+            <a
+                class="brand footer-brand"
+                href="index.html"
+            >
+
+                <span class="brand-mark">
+                    TSP
+                </span>
+
+                <span>
+
+                    <strong>
+                        The Solution Point
+                    </strong>
+
+                    <small>
+                        Accounting & Tax Solutions
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <p>
+                Professional accounting and
+                compliance support.
+            </p>
+
+        </div>
+
+
+
+        <!-- QUICK LINKS -->
+
+        <div>
+
+            <h4>
+                Quick Links
+            </h4>
+
+            <a href="index.html">
+                Home
+            </a>
+              <a href="about.html">
+                About Us
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+             <a href="products.html">
+                Products
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div>
+
+            <h4>
+                Contact
+            </h4>
+
+            <a href="tel:+919217903420">
+                +91 9217903420
+            </a>
+
+            <a
+                href="mailto:info.thesolutionpoint@gmail.com"
+            >
+                info.thesolutionpoint@gmail.com
+            </a>
+
+            <span>
+                www.thesolutionpoint.co.in
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="copyright">
+
+        © 2026 The Solution Point.
+        All rights reserved.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     WEBSITE JAVASCRIPT
+===================================================== -->
+
+<script src="script.js"></script>
+
+<script src="products.js"></script>
+
+
+
+<script>
+
+/* =====================================================
+   DISPLAY CART
+===================================================== */
+
+function displayCart() {
+
+    const products =
+        getProducts();
+
+
+    const cart =
+        getCart();
+
+
+    const container =
+        document.getElementById(
+            "cartContainer"
+        );
+
+
+    /*
+       Remove products from cart that
+       no longer exist in product list.
+    */
+
+    const validCart =
+        cart.filter(function(item) {
+
+            return products.some(
+                function(product) {
+
+                    return (
+                        product.code ===
+                        item.code
+                    );
+
+                }
+            );
+
+        });
+
+
+    /*
+       Save cleaned cart
+    */
+
+    if (
+        validCart.length !==
+        cart.length
+    ) {
+
+        saveCart(validCart);
+
+    }
+
+
+
+    /* =================================================
+       EMPTY CART
+    ================================================= */
+
+    if (validCart.length === 0) {
+
+        container.innerHTML = `
+
+            <div
+                class="cart-items"
+                style="grid-column:1/-1"
+            >
+
+                <div class="empty-cart">
+
+                    <h2>
+                        Your cart is empty
+                    </h2>
+
+                    <p>
+                        You haven't added any
+                        products yet.
+                    </p>
+
+                    <a
+                        class="btn btn-primary"
+                        href="products.html"
+                    >
+                        Browse Products
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        updateCartCount();
+
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       CALCULATE TOTAL
+    ================================================= */
+
+    let subtotal = 0;
+
+
+    let itemsHTML = "";
+
+
+
+    validCart.forEach(function(item) {
+
+
+        const product =
+            products.find(
+                function(p) {
+
+                    return (
+                        p.code ===
+                        item.code
+                    );
+
+                }
+            );
+
+
+        if (!product) {
+
+            return;
+
+        }
+
+
+        const quantity =
+            Number(item.quantity);
+
+
+        const itemTotal =
+            product.price *
+            quantity;
+
+
+        subtotal += itemTotal;
+
+
+
+        /* =============================================
+           PRODUCT HTML
+        ============================================= */
+
+        itemsHTML += `
+
+            <div class="cart-item">
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <div
+                    class="cart-item-image"
+                >
+
+                    ${
+                        product.image
+
+                        ?
+
+                        `
+                        <img
+                            src="${escapeHTML(
+                                product.image
+                            )}"
+                            alt="${escapeHTML(
+                                product.name
+                            )}"
+                        >
+                        `
+
+                        :
+
+                        `
+                        <span
+                            class="cart-placeholder"
+                        >
+                            ${escapeHTML(
+                                product.name
+                                    .charAt(0)
+                                    .toUpperCase()
+                            )}
+                        </span>
+                        `
+                    }
+
+                </div>
+
+
+
+                <!-- PRODUCT NAME -->
+
+                <div>
+
+                    <h3>
+
+                        ${escapeHTML(
+                            product.name
+                        )}
+
+                    </h3>
+
+
+                    <div
+                        class="cart-item-code"
+                    >
+
+                        Item Code:
+                        ${escapeHTML(
+                            product.code
+                        )}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div
+                    class="cart-price"
+                >
+
+                    ₹${Number(
+                        product.price
+                    ).toLocaleString(
+                        "en-IN"
+                    )}
+
+                </div>
+
+
+
+                <!-- QUANTITY -->
+
+                <div
+                    class="quantity-control"
+                >
+
+                    <button
+                        type="button"
+                        onclick="changeQuantity(
+                            '${product.code}',
+                            -1
+                        )"
+                    >
+                        −
+                    </button>
+
+
+                    <span>
+                        ${quantity}
+                    </span>
+
+
+                    <button
+                        type="button"
+                        onclick="changeQuantity(
+                            '${product.code}',
+                            1
+                        )"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+
+                <!-- REMOVE -->
+
+                <button
+                    type="button"
+                    class="remove-item"
+                    onclick="removeFromCart(
+                        '${product.code}'
+                    )"
+                >
+
+                    Remove
+
+                </button>
+
+
+            </div>
+
+        `;
+
+    });
+
+
+
+   /* =================================================
+   DELIVERY SETTINGS FROM ADMIN PANEL
+================================================= */
+
+const SETTINGS_KEY =
+    "tsp_store_settings";
+
+
+const DEFAULT_SETTINGS = {
+
+    deliveryCharge: 50,
+
+    freeDeliveryAmount: 0,
+
+    discountThreshold: 500,
+
+    deliveryDiscount: 10,
+
+    estimatedDeliveryDays: 7
+
+};
+
+
+let storeSettings = {
+    ...DEFAULT_SETTINGS
+};
+
+
+try {
+
+    const savedSettings =
+        JSON.parse(
+            localStorage.getItem(
+                SETTINGS_KEY
+            )
+        );
+
+
+    if (
+        savedSettings &&
+        typeof savedSettings === "object"
+    ) {
+
+        storeSettings = {
+
+            ...DEFAULT_SETTINGS,
+
+            ...savedSettings
+
+        };
+
+    }
+
+}
+
+catch(error) {
+
+    console.log(
+        "Using default delivery settings."
+    );
+
+}
+
+
+/* =================================================
+   DELIVERY CALCULATION
+================================================= */
+
+const baseDeliveryCharge =
+    Number(
+        storeSettings.deliveryCharge
+    ) || 0;
+
+
+const freeDeliveryAmount =
+    Number(
+        storeSettings.freeDeliveryAmount
+    ) || 0;
+
+
+const discountThreshold =
+    Number(
+        storeSettings.discountThreshold
+    ) || 0;
+
+
+const configuredDeliveryDiscount =
+    Number(
+        storeSettings.deliveryDiscount
+    ) || 0;
+
+
+/* =================================================
+   FREE DELIVERY
+================================================= */
+
+let deliveryCharge =
+    baseDeliveryCharge;
+
+
+let deliveryDiscount =
+    0;
+
+
+/*
+   If the order qualifies for free delivery,
+   delivery becomes ₹0.
+*/
+
+if (
+    freeDeliveryAmount > 0 &&
+    subtotal >= freeDeliveryAmount
+) {
+
+    deliveryCharge = 0;
+
+    deliveryDiscount = 0;
+
+}
+
+
+/*
+   Otherwise apply delivery discount
+   when order is above the threshold.
+*/
+
+else if (
+    discountThreshold > 0 &&
+    subtotal > discountThreshold
+) {
+
+    deliveryDiscount =
+        Math.min(
+            configuredDeliveryDiscount,
+            baseDeliveryCharge
+        );
+
+
+    deliveryCharge =
+        Math.max(
+            0,
+            baseDeliveryCharge -
+            deliveryDiscount
+        );
+
+}
+
+
+/* =================================================
+   FINAL TOTAL
+================================================= */
+
+const grandTotal =
+    subtotal +
+    deliveryCharge;
+
+
+
+    /* =================================================
+       DISPLAY CART
+    ================================================= */
+
+    container.innerHTML = `
+
+        <!-- =========================================
+             PRODUCTS
+        ========================================== -->
+
+        <div class="cart-items">
+
+            ${itemsHTML}
+
+        </div>
+
+
+
+        <!-- =========================================
+             ORDER SUMMARY
+        ========================================== -->
+
+        <aside
+            class="cart-summary"
+        >
+
+            <h2>
+                Order Summary
+            </h2>
+
+
+
+            <div class="summary-row">
+
+                <span>
+                    Items
+                </span>
+
+                <strong>
+                    ${getCartCount()}
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
+
+                    ₹${subtotal.toLocaleString(
+                        "en-IN"
+                    )}
+
+                </strong>
+
+            </div>
+
+
+
+           <div class="summary-row">
+
+    <span>
+        Delivery Charge
+    </span>
+
+    <strong>
+        ₹${baseDeliveryCharge.toLocaleString(
+            "en-IN"
+        )}
+    </strong>
+
+</div>
+
+
+
+${deliveryDiscount > 0 ? `
+
+<div class="summary-row">
+
+    <span>
+        Delivery Discount
+    </span>
+
+    <strong style="color: #237a45;">
+
+        -₹${deliveryDiscount.toLocaleString(
+            "en-IN"
+        )}
+
+    </strong>
+
+</div>
+
+` : ""}
+
+
+<div class="summary-row">
+
+    <span>
+        Final Delivery Charge
+    </span>
+
+    <strong>
+
+        ${
+            deliveryCharge === 0
+                ? "FREE"
+                : "₹" +
+                  deliveryCharge.toLocaleString(
+                      "en-IN"
+                  )
+        }
+
+    </strong>
+
+</div>
+<div class="summary-row">
+
+    <span>
+        Estimated Delivery
+    </span>
+
+    <strong>
+        Within 7 Days
+    </strong>
+
+</div>
+
+
+
+            <div
+                class="summary-row summary-total"
+            >
+
+                <span>
+                    Total
+                </span>
+
+                <span>
+
+                    ₹${grandTotal.toLocaleString(
+                        "en-IN"
+                    )}
+
+                </span>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 PROCEED TO CHECKOUT
+
+                 IMPORTANT:
+                 This now goes to checkout.html
+                 instead of WhatsApp.
+            ====================================== -->
+
+            <a
+                class="btn btn-primary checkout-button"
+                href="checkout.html"
+            >
+
+                Proceed to Order
+
+            </a>
+
+
+
+            <a
+                class="continue-shopping"
+                href="products.html"
+            >
+
+                ← Continue Shopping
+
+            </a>
+
+
+        </aside>
+
+    `;
+
+
+
+    updateCartCount();
+
+}
+
+
+
+/* =====================================================
+   CHANGE QUANTITY
+===================================================== */
+
+function changeQuantity(
+    code,
+    amount
+) {
+
+
+    const cart =
+        getCart();
+
+
+    const item =
+        cart.find(
+            function(cartItem) {
+
+                return (
+                    cartItem.code ===
+                    code
+                );
+
+            }
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    item.quantity =
+        Number(item.quantity) +
+        Number(amount);
+
+
+
+    /* =============================================
+       REMOVE IF QUANTITY BECOMES ZERO
+    ============================================= */
+
+    if (
+        item.quantity <= 0
+    ) {
+
+
+        const newCart =
+            cart.filter(
+                function(cartItem) {
+
+                    return (
+                        cartItem.code !==
+                        code
+                    );
+
+                }
+            );
+
+
+        saveCart(newCart);
+
+
+    }
+
+    else {
+
+        saveCart(cart);
+
+    }
+
+
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   REMOVE PRODUCT
+===================================================== */
+
+function removeFromCart(code) {
+
+
+    const cart =
+        getCart();
+
+
+    const newCart =
+        cart.filter(
+            function(item) {
+
+                return (
+                    item.code !==
+                    code
+                );
+
+            }
+        );
+
+
+    saveCart(newCart);
+
+
+    displayCart();
+
+}
+
+
+
+/* =====================================================
+   DISPLAY CART
+===================================================== */
+
+displayCart();
+
+</script>
+
+
+</body>
+
+</html>

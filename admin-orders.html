@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Manage Orders | The Solution Point
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        .orders-page {
+            padding: 60px 0;
+        }
+
+        .orders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 15px;
+        }
+
+        .order-id {
+            font-weight: bold;
+            color: var(--navy);
+        }
+
+        .order-date {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .order-details {
+            margin-top: 20px;
+        }
+
+        .order-details p {
+            margin: 7px 0;
+        }
+
+        .order-items {
+            margin-top: 20px;
+            border-top: 1px solid var(--line);
+            padding-top: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 8px 0;
+        }
+
+        .order-total {
+            border-top: 1px solid var(--line);
+            margin-top: 15px;
+            padding-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .status-row {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .status-row select {
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+            <span>
+
+                <strong>
+                    THE SOLUTION POINT
+                </strong>
+
+                <small>
+                    Accounting & Tax Solutions
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+        </nav>
+
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+    <section class="orders-page">
+
+        <div class="container">
+
+
+            <div class="orders-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ADMIN PANEL
+                    </span>
+
+                    <h1
+                        style="
+                            margin-top:10px;
+                            color:var(--navy);
+                        "
+                    >
+                        Manage Orders
+                    </h1>
+
+                </div>
+
+
+                <a
+                    href="admin.html"
+                    class="btn btn-secondary"
+                >
+                    ← Back to Admin
+                </a>
+
+            </div>
+
+
+
+            <div id="ordersContainer">
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 The Solution Point.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        displayOrders();
+
+    }
+);
+
+
+
+function displayOrders() {
+
+    const container =
+        document.getElementById(
+            "ordersContainer"
+        );
+
+
+    let orders = [];
+
+
+    try {
+
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "tsp_orders"
+                )
+            ) || [];
+
+    }
+
+    catch(error) {
+
+        orders = [];
+
+    }
+
+
+    if (
+        !Array.isArray(orders) ||
+        orders.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty-orders">
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    Customer orders will appear
+                    here after an order is placed.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    orders
+        .slice()
+        .reverse()
+        .forEach(
+            function(order) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "order-card";
+
+
+                const customer =
+                    order.customer || {};
+
+
+                const items =
+                    Array.isArray(order.items)
+                        ? order.items
+                        : [];
+
+
+                let itemsHTML = "";
+
+
+                items.forEach(
+                    function(item) {
+
+                        itemsHTML += `
+
+                            <div class="order-item">
+
+                                <span>
+                                    ${escapeHTML(
+                                        item.name ||
+                                        item.code ||
+                                        "Product"
+                                    )}
+                                    ×
+                                    ${Number(
+                                        item.quantity || 1
+                                    )}
+                                </span>
+
+                                <strong>
+                                    ₹${Number(
+                                        item.amount || 0
+                                    ).toLocaleString("en-IN")}
+                                </strong>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+                card.innerHTML = `
+
+                    <div class="order-top">
+
+                        <div>
+
+                            <div class="order-id">
+                                Order:
+                                ${escapeHTML(
+                                    order.orderId || "-"
+                                )}
+                            </div>
+
+                            <div class="order-date">
+                                ${escapeHTML(
+                                    order.orderDate || ""
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-details">
+
+                        <p>
+                            <strong>Name:</strong>
+                            ${escapeHTML(
+                                customer.name || "-"
+                            )}
+                        </p>
+
+                        <p>
+                            <strong>Mobile:</strong>
+                            ${escapeHTML(
+                                customer.mobile || "-"
+                            )}
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            ${escapeHTML(
+                                customer.email || "-"
+                            )}
+                        </p>
+
+                        <p>
+                            <strong>Address:</strong>
+                            ${escapeHTML(
+                                customer.address || "-"
+                            )}
+                        </p>
+
+                        <p>
+                            <strong>PIN Code:</strong>
+                            ${escapeHTML(
+                                customer.pin || "-"
+                            )}
+                        </p>
+
+                    </div>
+
+
+                    <div class="order-items">
+
+                        <strong>
+                            Products
+                        </strong>
+
+                        ${itemsHTML}
+
+                    </div>
+
+
+                    <div class="order-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <span>
+                            ₹${Number(
+                                order.total || 0
+                            ).toLocaleString("en-IN")}
+                        </span>
+
+                    </div>
+
+
+                    <div class="status-row">
+
+                        <strong>
+                            Payment:
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(
+                                order.paymentStatus ||
+                                "Pending"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="status-row">
+
+                        <strong>
+                            Order Status:
+                        </strong>
+
+                        <select
+                            onchange="
+                                updateOrderStatus(
+                                    '${escapeAttribute(
+                                        order.orderId || ""
+                                    )}',
+                                    this.value
+                                )
+                            "
+                        >
+
+                            <option
+                                value="New"
+                                ${order.orderStatus === "New" ? "selected" : ""}
+                            >
+                                New
+                            </option>
+
+                            <option
+                                value="Confirmed"
+                                ${order.orderStatus === "Confirmed" ? "selected" : ""}
+                            >
+                                Confirmed
+                            </option>
+
+                            <option
+                                value="Packed"
+                                ${order.orderStatus === "Packed" ? "selected" : ""}
+                            >
+                                Packed
+                            </option>
+
+                            <option
+                                value="Shipped"
+                                ${order.orderStatus === "Shipped" ? "selected" : ""}
+                            >
+                                Shipped
+                            </option>
+
+                            <option
+                                value="Delivered"
+                                ${order.orderStatus === "Delivered" ? "selected" : ""}
+                            >
+                                Delivered
+                            </option>
+
+                            <option
+                                value="Cancelled"
+                                ${order.orderStatus === "Cancelled" ? "selected" : ""}
+                            >
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                        style="
+                            margin-top:15px;
+                            color:#555;
+                        "
+                    >
+
+                        <strong>
+                            Estimated Delivery:
+                        </strong>
+
+                        Within 7 Days
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+}
+
+
+
+function updateOrderStatus(
+    orderId,
+    newStatus
+) {
+
+    let orders = [];
+
+
+    try {
+
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "tsp_orders"
+                )
+            ) || [];
+
+    }
+
+    catch(error) {
+
+        orders = [];
+
+    }
+
+
+    const order =
+        orders.find(
+            function(order) {
+
+                return (
+                    order.orderId ===
+                    orderId
+                );
+
+            }
+        );
+
+
+    if (!order) {
+
+        return;
+
+    }
+
+
+    order.orderStatus =
+        newStatus;
+
+
+    localStorage.setItem(
+        "tsp_orders",
+        JSON.stringify(orders)
+    );
+
+
+    alert(
+        "Order status updated to " +
+        newStatus
+    );
+
+}
+
+
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+function escapeAttribute(value) {
+
+    return String(value)
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+
+}
+
+</script>
+
+
+<script>
+    if (
+        sessionStorage.getItem("tsp_admin_logged_in") !== "true"
+    ) {
+        window.location.href = "admin-login.html";
+    }
+</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Settings | The Solution Point
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /* =========================================
+           ADMIN PAGE
+        ========================================= */
+
+        .admin-page {
+            padding: 60px 0;
+        }
+
+
+        .admin-title {
+            margin-bottom: 30px;
+        }
+
+
+        .admin-title h1 {
+            font-family: "Playfair Display", serif;
+            color: var(--navy);
+            font-size: 40px;
+            margin-top: 8px;
+        }
+
+
+        .settings-card {
+            max-width: 900px;
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+
+        .settings-section {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+
+        .settings-section:first-child {
+            padding-top: 0;
+        }
+
+
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+
+
+        .settings-section h2 {
+            font-family: "Playfair Display", serif;
+            color: var(--navy);
+            margin: 0 0 15px;
+        }
+
+
+        .settings-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+
+        .form-group label {
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 14px;
+        }
+
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 14px;
+            border: 1px solid #ccd4d7;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #9a6b2d;
+        }
+
+
+        .help-text {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           FIXED DELIVERY TIME
+        ========================================= */
+
+        .delivery-time-box {
+            background: #f5f1e9;
+            border: 1px solid #e4d9c8;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+
+        .delivery-time-title {
+            color: var(--navy);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+
+        .delivery-time-value {
+            font-family: "Playfair Display", serif;
+            color: #9a6b2d;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+
+        .delivery-time-note {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           QR CODE
+        ========================================= */
+
+        .qr-preview {
+            margin-top: 15px;
+            width: 220px;
+            height: 220px;
+            border: 1px dashed #b8c0c3;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #faf9f6;
+        }
+
+
+        .qr-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+
+        .qr-placeholder {
+            text-align: center;
+            color: var(--muted);
+            padding: 20px;
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           SAVE
+        ========================================= */
+
+        .save-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+
+        .save-message {
+            display: none;
+            color: #237a45;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #9a6b2d;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media(max-width: 650px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+
+            .settings-card {
+                padding: 20px;
+            }
+
+
+            .admin-title h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+
+        <!-- BRAND -->
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+
+            <span>
+
+                <strong>
+                    THE SOLUTION POINT
+                </strong>
+
+                <small>
+                    Accounting & Tax Solutions
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            class="menu-toggle"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="products.html">
+                Product
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <!-- CART -->
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+<section class="admin-page">
+
+<div class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="admin-title">
+
+        <span class="eyebrow">
+            ADMIN PANEL
+        </span>
+
+        <h1>
+            Delivery & Payment Settings
+        </h1>
+
+    </div>
+
+
+
+    <div class="settings-card">
+
+
+        <!-- =================================================
+             DELIVERY CHARGE
+        ================================================== -->
+
+        <div class="settings-section">
+
+            <h2>
+                Delivery Charge
+            </h2>
+
+
+            <p class="settings-description">
+
+                You can change the delivery charge at
+                any time. The new amount will be used
+                for new orders.
+
+            </p>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="deliveryCharge">
+
+                        Delivery Charge (₹)
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="deliveryCharge"
+                        min="0"
+                        step="1"
+                        value="50"
+                    >
+
+
+                    <span class="help-text">
+
+                        Example: ₹50, ₹100, ₹150 or ₹200.
+
+                    </span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="freeDeliveryAmount">
+
+                        Free Delivery Above (₹)
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="freeDeliveryAmount"
+                        min="0"
+                        step="1"
+                        value="0"
+                    >
+
+
+                    <span class="help-text">
+
+                        Enter 0 if you do not want
+                        free delivery.
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DELIVERY DISCOUNT
+        ================================================== -->
+
+        <div class="settings-section">
+
+            <h2>
+                Delivery Discount
+            </h2>
+
+
+            <p class="settings-description">
+
+                You can offer a delivery discount
+                when the customer's order reaches
+                a particular amount.
+
+            </p>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="discountThreshold">
+
+                        Apply Discount Above (₹)
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="discountThreshold"
+                        min="0"
+                        step="1"
+                        value="500"
+                    >
+
+
+                    <span class="help-text">
+
+                        Example: ₹500 means the discount
+                        applies when the order is above ₹500.
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="deliveryDiscount">
+
+                        Delivery Discount (₹)
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="deliveryDiscount"
+                        min="0"
+                        step="1"
+                        value="10"
+                    >
+
+
+                    <span class="help-text">
+
+                        Example: ₹10 will be deducted
+                        from the delivery charge.
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ESTIMATED DELIVERY
+        ================================================== -->
+
+        <div class="settings-section">
+
+            <h2>
+                Estimated Delivery
+            </h2>
+
+
+            <div class="delivery-time-box">
+
+
+                <div class="delivery-time-title">
+
+                    Customer Delivery Promise
+
+                </div>
+
+
+                <div class="delivery-time-value">
+
+                    Within 7 Days
+
+                </div>
+
+
+                <div class="delivery-time-note">
+
+                    The website will automatically calculate
+                    the estimated delivery date as 7 days from
+                    the date the order is successfully placed.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PAYMENT
+        ================================================== -->
+
+        <div class="settings-section">
+
+            <h2>
+                Payment Settings
+            </h2>
+
+
+            <div class="form-grid">
+
+
+                <!-- UPI ID -->
+
+                <div class="form-group full">
+
+                    <label for="upiId">
+
+                        Your UPI ID
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="upiId"
+                        placeholder="example@upi"
+                    >
+
+
+                    <span class="help-text">
+
+                        Enter the UPI ID associated with
+                        your payment account.
+
+                    </span>
+
+                </div>
+
+
+
+               
+                <!-- QR CODE -->
+
+                <div class="form-group full">
+
+                    <label for="qrCode">
+
+                        Your Own QR Code
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="qrCode"
+                        accept="image/png,image/jpeg,image/webp"
+                    >
+
+
+                    <span class="help-text">
+
+                        Upload the QR code that customers
+                        can scan to make payment.
+
+                    </span>
+
+
+                    <div
+                        id="qrPreview"
+                        class="qr-preview"
+                    >
+
+                        <div class="qr-placeholder">
+
+                            No QR code uploaded.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SAVE
+        ================================================== -->
+
+        <div class="save-area">
+
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="saveSettings()"
+            >
+
+                Save Settings
+
+            </button>
+
+
+            <span
+                id="saveMessage"
+                class="save-message"
+            >
+
+                ✓ Settings Saved
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- BACK -->
+
+    <a
+        href="admin.html"
+        class="back-link"
+    >
+
+        ← Back to Admin Panel
+
+    </a>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="copyright">
+
+            © 2026 The Solution Point.
+            All rights reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   SETTINGS KEY
+===================================================== */
+
+const SETTINGS_KEY =
+    "tsp_store_settings";
+
+
+
+/* =====================================================
+   DEFAULT SETTINGS
+===================================================== */
+
+const DEFAULT_SETTINGS = {
+
+    deliveryCharge: 50,
+
+    freeDeliveryAmount: 0,
+
+    discountThreshold: 500,
+
+    deliveryDiscount: 10,
+
+    estimatedDeliveryDays: 7,
+
+    upiId: "",
+
+    qrCode: ""
+
+};
+
+
+
+/* =====================================================
+   LOAD SETTINGS
+===================================================== */
+
+function loadSettings() {
+
+
+    let settings = {
+        ...DEFAULT_SETTINGS
+    };
+
+
+    try {
+
+
+        const saved =
+            JSON.parse(
+                localStorage.getItem(
+                    SETTINGS_KEY
+                )
+            );
+
+
+        if (
+            saved &&
+            typeof saved === "object"
+        ) {
+
+
+            settings = {
+
+                ...DEFAULT_SETTINGS,
+
+                ...saved
+
+            };
+
+
+        }
+
+
+    }
+
+    catch(error) {
+
+
+        console.log(
+            "Using default settings."
+        );
+
+
+    }
+
+
+
+    /* DELIVERY */
+
+    document.getElementById(
+        "deliveryCharge"
+    ).value =
+        settings.deliveryCharge;
+
+
+
+    document.getElementById(
+        "freeDeliveryAmount"
+    ).value =
+        settings.freeDeliveryAmount;
+
+
+
+    /* DISCOUNT */
+
+    document.getElementById(
+        "discountThreshold"
+    ).value =
+        settings.discountThreshold;
+
+
+
+    document.getElementById(
+        "deliveryDiscount"
+    ).value =
+        settings.deliveryDiscount;
+
+
+
+    /* UPI */
+
+    document.getElementById(
+        "upiId"
+    ).value =
+        settings.upiId || "";
+
+
+
+    /* QR */
+
+    if (
+        settings.qrCode
+    ) {
+
+        showQRCode(
+            settings.qrCode
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE SETTINGS
+===================================================== */
+
+function saveSettings() {
+
+
+    const deliveryCharge =
+        Number(
+            document.getElementById(
+                "deliveryCharge"
+            ).value
+        );
+
+
+    const freeDeliveryAmount =
+        Number(
+            document.getElementById(
+                "freeDeliveryAmount"
+            ).value
+        );
+
+
+    const discountThreshold =
+        Number(
+            document.getElementById(
+                "discountThreshold"
+            ).value
+        );
+
+
+    const deliveryDiscount =
+        Number(
+            document.getElementById(
+                "deliveryDiscount"
+            ).value
+        );
+
+
+    const upiId =
+        document.getElementById(
+            "upiId"
+        ).value.trim();
+
+
+
+    /* =========================================
+       VALIDATION
+    ========================================= */
+
+
+    if (
+        deliveryCharge < 0
+    ) {
+
+        alert(
+            "Delivery charge cannot be negative."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        freeDeliveryAmount < 0
+    ) {
+
+        alert(
+            "Free delivery amount cannot be negative."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        discountThreshold < 0
+    ) {
+
+        alert(
+            "Discount threshold cannot be negative."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        deliveryDiscount < 0
+    ) {
+
+        alert(
+            "Delivery discount cannot be negative."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        deliveryDiscount >
+        deliveryCharge
+    ) {
+
+        alert(
+            "Delivery discount cannot be greater than the delivery charge."
+        );
+
+        return;
+
+    }
+
+
+
+    /* =========================================
+       KEEP EXISTING QR
+    ========================================= */
+
+    let oldSettings = {};
+
+
+    try {
+
+        oldSettings =
+            JSON.parse(
+                localStorage.getItem(
+                    SETTINGS_KEY
+                )
+            ) || {};
+
+    }
+
+    catch(error) {
+
+        oldSettings = {};
+
+    }
+
+
+
+    /* =========================================
+       SAVE
+    ========================================= */
+
+    const settings = {
+
+        deliveryCharge:
+            deliveryCharge,
+
+        freeDeliveryAmount:
+            freeDeliveryAmount,
+
+        discountThreshold:
+            discountThreshold,
+
+        deliveryDiscount:
+            deliveryDiscount,
+
+        /* ALWAYS 7 DAYS */
+
+        estimatedDeliveryDays:
+            7,
+
+        upiId:
+            upiId,
+
+        qrCode:
+            oldSettings.qrCode || ""
+
+    };
+
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(
+            settings
+        )
+    );
+
+
+
+    /* =========================================
+       SUCCESS MESSAGE
+    ========================================= */
+
+    const message =
+        document.getElementById(
+            "saveMessage"
+        );
+
+
+    message.style.display =
+        "inline";
+
+
+    setTimeout(
+        function() {
+
+            message.style.display =
+                "none";
+
+        },
+        3000
+    );
+
+}
+
+
+
+/* =====================================================
+   QR CODE UPLOAD
+===================================================== */
+
+document
+    .getElementById(
+        "qrCode"
+    )
+    .addEventListener(
+        "change",
+        function(event) {
+
+
+            const file =
+                event.target.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            /* CHECK IMAGE */
+
+            if (
+                !file.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                alert(
+                    "Please select a valid image file."
+                );
+
+                return;
+
+            }
+
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(e) {
+
+
+                    const qrCode =
+                        e.target.result;
+
+
+                    let settings = {};
+
+
+                    try {
+
+
+                        settings =
+                            JSON.parse(
+                                localStorage.getItem(
+                                    SETTINGS_KEY
+                                )
+                            ) || {};
+
+
+                    }
+
+                    catch(error) {
+
+                        settings = {};
+
+                    }
+
+
+
+                    settings = {
+
+                        ...DEFAULT_SETTINGS,
+
+                        ...settings,
+
+                        qrCode:
+                            qrCode,
+
+                        estimatedDeliveryDays:
+                            7
+
+                    };
+
+
+
+                    localStorage.setItem(
+                        SETTINGS_KEY,
+                        JSON.stringify(
+                            settings
+                        )
+                    );
+
+
+
+                    showQRCode(
+                        qrCode
+                    );
+
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+
+        }
+    );
+
+
+
+/* =====================================================
+   SHOW QR
+===================================================== */
+
+function showQRCode(
+    qrCode
+) {
+
+
+    const preview =
+        document.getElementById(
+            "qrPreview"
+        );
+
+
+    preview.innerHTML = `
+
+        <img
+            src="${qrCode}"
+            alt="The Solution Point UPI QR Code"
+        >
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadSettings();
+
+</script>
+
+
+</body>
+<script>
+    if (
+        sessionStorage.getItem("tsp_admin_logged_in") !== "true"
+    ) {
+        window.location.href = "admin-login.html";
+    }
+</script>
+</html>

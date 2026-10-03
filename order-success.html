@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Order Placed | The Solution Point
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        .success-wrapper {
+            max-width: 850px;
+            margin: 50px auto;
+        }
+
+        .success-card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 35px;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            background: #e9f7ef;
+        }
+
+        .success-title {
+            text-align: center;
+            color: var(--navy);
+            margin: 0;
+        }
+
+        .success-text {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .order-number {
+            text-align: center;
+            margin: 20px 0 30px;
+            font-weight: bold;
+        }
+
+        .section-box {
+            border-top: 1px solid var(--line);
+            padding-top: 25px;
+            margin-top: 25px;
+        }
+
+        .customer-details p {
+            margin: 8px 0;
+        }
+
+        .bill-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .bill-table th,
+        .bill-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+
+        .bill-table th:last-child,
+        .bill-table td:last-child {
+            text-align: right;
+        }
+
+        .bill-total {
+            margin-top: 20px;
+            max-width: 400px;
+            margin-left: auto;
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .bill-final {
+            border-top: 2px solid var(--navy);
+            margin-top: 8px;
+            padding-top: 12px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .delivery-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f7f5ef;
+        }
+
+        .delivery-box strong {
+            color: var(--navy);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        @media print {
+
+            .site-header,
+            .footer,
+            .action-buttons {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .success-card {
+                border: none;
+                box-shadow: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+            <span>
+
+               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
+                <small>
+                   Reliable Solutions. Professional Service. One Point.
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+        </nav>
+
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+    <section
+        style="
+            padding:60px 0;
+        "
+    >
+
+        <div class="container">
+
+            <div class="success-wrapper">
+
+                <div class="success-card">
+
+
+                    <!-- SUCCESS -->
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+
+                    <h1 class="success-title">
+                        Order Placed
+                    </h1>
+
+
+                    <p class="success-text">
+                        Thank you for your order!
+                    </p>
+
+
+                    <div class="order-number">
+
+                        Order Number:
+                        <span id="orderId">
+                            -
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- CUSTOMER -->
+
+                    <div class="section-box">
+
+                        <h2>
+                            Customer Details
+                        </h2>
+
+
+                        <div
+                            class="customer-details"
+                            id="customerDetails"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- PRODUCTS -->
+
+                    <div class="section-box">
+
+                        <h2>
+                            Order Details
+                        </h2>
+
+
+                        <table class="bill-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Product
+                                    </th>
+
+                                    <th>
+                                        Qty
+                                    </th>
+
+                                    <th>
+                                        Amount
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="orderItems">
+
+                            </tbody>
+
+                        </table>
+
+
+                        <div class="bill-total">
+
+
+                            <div class="bill-row">
+
+                                <span>
+                                    Product Total
+                                </span>
+
+                                <strong id="subtotal">
+                                    ₹0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="bill-row">
+
+                                <span>
+                                    Delivery Charge
+                                </span>
+
+                                <strong id="deliveryCharge">
+                                    ₹0
+                                </strong>
+
+                            </div>
+
+
+                            <div
+                                class="bill-row"
+                                id="discountRow"
+                                style="display:none;"
+                            >
+
+                                <span>
+                                    Delivery Discount
+                                </span>
+
+                                <strong id="deliveryDiscount">
+                                    -₹0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="bill-row bill-final">
+
+                                <span>
+                                    Total
+                                </span>
+
+                                <strong id="total">
+                                    ₹0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="delivery-box">
+
+                        <strong>
+                            Estimated Delivery
+                        </strong>
+
+                        <p>
+                            Within 7 Days
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="section-box">
+
+                        <h2>
+                            Payment Information
+                        </h2>
+
+
+                        <p>
+                            Payment Method:
+                            <strong id="paymentMethod">
+                                -
+                            </strong>
+                        </p>
+
+
+                        <p>
+                            Payment Status:
+                            <strong id="paymentStatus">
+                                Pending
+                            </strong>
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="action-buttons">
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            onclick="window.print()"
+                        >
+                            🖨 Print / Save Bill
+                        </button>
+
+
+                        <a
+                            href="products.html"
+                            class="btn btn-primary"
+                        >
+                            Continue Shopping
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 The Solution Point.
+            All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<script src="products.js"></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+
+        /* =================================
+           GET ORDER
+        ================================= */
+
+        let order = null;
+
+
+        try {
+
+            order =
+                JSON.parse(
+                    localStorage.getItem(
+                        "tsp_pending_order"
+                    )
+                );
+
+        }
+
+        catch(error) {
+
+            order = null;
+
+        }
+
+
+        if (!order) {
+
+            alert(
+                "Order information could not be found."
+            );
+
+            window.location.href =
+                "products.html";
+
+            return;
+
+        }
+
+
+        /* =================================
+           ORDER NUMBER
+        ================================= */
+
+        document
+            .getElementById("orderId")
+            .textContent =
+                order.orderId || "-";
+
+
+
+        /* =================================
+           CUSTOMER DETAILS
+        ================================= */
+
+        const customer =
+            order.customer || {};
+
+
+        document
+            .getElementById("customerDetails")
+            .innerHTML = `
+
+                <p>
+                    <strong>Name:</strong>
+                    ${escapeHTML(customer.name || "-")}
+                </p>
+
+                <p>
+                    <strong>Mobile:</strong>
+                    ${escapeHTML(customer.mobile || "-")}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    ${escapeHTML(customer.email || "-")}
+                </p>
+
+                <p>
+                    <strong>Address:</strong>
+                    ${escapeHTML(customer.address || "-")}
+                </p>
+
+                <p>
+                    <strong>PIN Code:</strong>
+                    ${escapeHTML(customer.pin || "-")}
+                </p>
+
+            `;
+
+
+
+        /* =================================
+           ORDER ITEMS
+        ================================= */
+
+        const products =
+            getProducts();
+
+
+        const items =
+            Array.isArray(order.items)
+                ? order.items
+                : [];
+
+
+        const orderItems =
+            document.getElementById(
+                "orderItems"
+            );
+
+
+        orderItems.innerHTML = "";
+
+
+        items.forEach(
+            function(item) {
+
+                const product =
+                    products.find(
+                        function(product) {
+
+                            return (
+                                product.code ===
+                                item.code
+                            );
+
+                        }
+                    );
+
+
+                if (!product) {
+
+                    return;
+
+                }
+
+
+                const quantity =
+                    Number(
+                        item.quantity
+                    ) || 1;
+
+
+                const price =
+                    Number(
+                        product.price
+                    ) || 0;
+
+
+                const amount =
+                    price * quantity;
+
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${escapeHTML(product.name)}
+                    </td>
+
+                    <td>
+                        ${quantity}
+                    </td>
+
+                    <td>
+                        ₹${amount.toLocaleString(
+                            "en-IN"
+                        )}
+                    </td>
+
+                `;
+
+
+                orderItems.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+
+        /* =================================
+           AMOUNTS
+        ================================= */
+
+        document
+            .getElementById("subtotal")
+            .textContent =
+                "₹" +
+                Number(
+                    order.subtotal || 0
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById("deliveryCharge")
+            .textContent =
+                "₹" +
+                Number(
+                    order.deliveryCharge || 0
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        const discount =
+            Number(
+                order.deliveryDiscount || 0
+            );
+
+
+        if (discount > 0) {
+
+            document
+                .getElementById(
+                    "discountRow"
+                )
+                .style.display =
+                    "flex";
+
+
+            document
+                .getElementById(
+                    "deliveryDiscount"
+                )
+                .textContent =
+                    "-₹" +
+                    discount.toLocaleString(
+                        "en-IN"
+                    );
+
+        }
+
+
+        document
+            .getElementById("total")
+            .textContent =
+                "₹" +
+                Number(
+                    order.total || 0
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+
+        /* =================================
+           PAYMENT
+        ================================= */
+
+        document
+            .getElementById(
+                "paymentMethod"
+            )
+            .textContent =
+                order.paymentMethod ||
+                "Not selected";
+
+
+        document
+            .getElementById(
+                "paymentStatus"
+            )
+            .textContent =
+                order.paymentStatus ||
+                "Pending";
+
+    }
+);
+
+
+/* =================================
+   HTML SAFETY
+================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

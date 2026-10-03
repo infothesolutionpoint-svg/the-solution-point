@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Payment | The Solution Point
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- RAZORPAY CHECKOUT -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+
+        .payment-box {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+        }
+
+        .payment-summary {
+            padding: 20px;
+            background: #f7f5ef;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .payment-row:last-child {
+            border-bottom: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .payment-option {
+            display: block;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            background: #f7f5ef;
+        }
+
+        .upi-options {
+            display: none;
+            margin: 15px 0 25px 25px;
+        }
+
+        .upi-option {
+            display: block;
+            margin: 12px 0;
+        }
+
+        .qr-box {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f7f5ef;
+            border-radius: 10px;
+        }
+
+        .qr-box img {
+            max-width: 300px;
+            width: 100%;
+            margin: 15px auto;
+        }
+
+        .amount-highlight {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .payment-message {
+            display: none;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background: #fff4d6;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+            <span>
+
+               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
+
+                <small>
+                    Reliable Solutions. Professional Service. One Point.
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+        </nav>
+
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+    <section
+        style="
+            padding:70px 0;
+        "
+    >
+
+        <div class="container">
+
+            <span class="eyebrow">
+                PAYMENT
+            </span>
+
+
+            <h1
+                style="
+                    margin-top:10px;
+                    color:var(--navy);
+                "
+            >
+                Complete Your Payment
+            </h1>
+
+
+            <div class="payment-box">
+
+
+                <!-- ==============================
+                     ORDER SUMMARY
+                =============================== -->
+
+                <div class="payment-summary">
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+
+                    <div class="payment-row">
+
+                        <span>
+                            Product Total
+                        </span>
+
+                        <strong id="productTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="payment-row">
+
+                        <span>
+                            Delivery Charge
+                        </span>
+
+                        <strong id="deliveryCharge">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="payment-row"
+                        id="discountRow"
+                        style="display:none;"
+                    >
+
+                        <span>
+                            Delivery Discount
+                        </span>
+
+                        <strong id="deliveryDiscount">
+                            -₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="payment-row">
+
+                        <span>
+                            Total Payable
+                        </span>
+
+                        <strong
+                            id="totalAmount"
+                            class="amount-highlight"
+                        >
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        style="
+                            margin-top:15px;
+                            font-weight:bold;
+                        "
+                    >
+
+                        Estimated Delivery:
+
+                        <span id="estimatedDelivery">
+                            Within 7 Days
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==============================
+                     PAYMENT METHODS
+                =============================== -->
+
+                <h2>
+                    Select Payment Method
+                </h2>
+
+
+                <!-- UPI -->
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="upi"
+                    >
+
+                    📱 UPI
+
+                </label>
+
+
+                <div
+                    id="upiOptions"
+                    class="upi-options"
+                >
+
+                    <strong>
+                        UPI payment will be processed
+                        through Razorpay.
+                    </strong>
+
+                </div>
+
+
+
+                <!-- CARD -->
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="card"
+                    >
+
+                    💳 Debit / Credit Card
+
+                </label>
+
+
+
+                <!-- QR -->
+
+                <label class="payment-option">
+
+                    <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="qr"
+                    >
+
+                    📷 Pay Using Our QR Code
+
+                </label>
+
+
+                <div
+                    id="qrBox"
+                    class="qr-box"
+                >
+
+                    <h3>
+                        Scan Our QR Code
+                    </h3>
+
+
+                    <p>
+                        Scan the QR code using any
+                        supported UPI application.
+                    </p>
+
+
+                    <img
+                        id="paymentQr"
+                        src=""
+                        alt="UPI Payment QR Code"
+                    >
+
+
+                    <p>
+
+                        Amount to Pay:
+
+                        <strong
+                            id="qrAmount"
+                            class="amount-highlight"
+                        >
+                            ₹0
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+                        The amount is already included
+                        in the QR code.
+                    </p>
+
+
+                    <p>
+                        After making the payment,
+                        click Continue.
+                    </p>
+
+                </div>
+
+
+
+                <div
+                    id="paymentMessage"
+                    class="payment-message"
+                ></div>
+
+
+
+                <!-- ==============================
+                     CONTINUE
+                =============================== -->
+
+                <button
+                    type="button"
+                    id="payButton"
+                    class="btn btn-primary"
+                    style="
+                        width:100%;
+                        margin-top:25px;
+                    "
+                >
+
+                    Continue
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+
+            © 2026 The Solution Point.
+            All rights reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- YOUR WEBSITE JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+<script src="products.js"></script>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =========================================
+           LOAD SAVED ORDER
+        ========================================== */
+
+        let order = null;
+
+
+        try {
+
+            order =
+                JSON.parse(
+                    localStorage.getItem(
+                        "tsp_pending_order"
+                    )
+                );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Unable to read order:",
+                error
+            );
+
+            order = null;
+
+        }
+
+
+
+        /* =========================================
+           REBUILD ORDER FROM CART IF NECESSARY
+        ========================================== */
+
+        if (
+            !order ||
+            Number(order.total) <= 0
+        ) {
+
+
+            let cart = [];
+
+
+            try {
+
+                cart =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "tsp_cart"
+                        )
+                    ) || [];
+
+            }
+            catch (error) {
+
+                cart = [];
+
+            }
+
+
+
+            if (
+                !Array.isArray(cart) ||
+                cart.length === 0
+            ) {
+
+                alert(
+                    "Your cart is empty. Please add a product first."
+                );
+
+                window.location.href =
+                    "products.html";
+
+                return;
+
+            }
+
+
+
+            /* =================================
+               PRODUCTS
+            ================================= */
+
+            let products = [];
+
+
+            try {
+
+                products =
+                    typeof getProducts === "function"
+                        ? getProducts()
+                        : [];
+
+            }
+            catch (error) {
+
+                products = [];
+
+            }
+
+
+
+            /* =================================
+               SUBTOTAL
+            ================================= */
+
+            let subtotal = 0;
+
+
+            cart.forEach(
+                function (item) {
+
+
+                    let product =
+                        products.find(
+                            function (product) {
+
+                                return (
+                                    product.code ===
+                                    item.code
+                                );
+
+                            }
+                        );
+
+
+                    if (!product) {
+
+                        product =
+                            products.find(
+                                function (product) {
+
+                                    return (
+                                        String(product.id) ===
+                                        String(item.id)
+                                    );
+
+                                }
+                            );
+
+                    }
+
+
+                    if (product) {
+
+                        const price =
+                            Number(
+                                product.price
+                            ) || 0;
+
+
+                        const quantity =
+                            Number(
+                                item.quantity
+                            ) || 1;
+
+
+                        subtotal +=
+                            price * quantity;
+
+                    }
+
+                }
+            );
+
+
+
+            /* =================================
+               SETTINGS
+            ================================= */
+
+            const DEFAULT_SETTINGS = {
+
+                deliveryCharge: 50,
+
+                freeDeliveryAmount: 0,
+
+                discountThreshold: 500,
+
+                deliveryDiscount: 10,
+
+                estimatedDeliveryDays: 7
+
+            };
+
+
+            let settings = {
+                ...DEFAULT_SETTINGS
+            };
+
+
+            try {
+
+                const savedSettings =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "tsp_store_settings"
+                        )
+                    );
+
+
+                if (
+                    savedSettings &&
+                    typeof savedSettings ===
+                        "object"
+                ) {
+
+                    settings = {
+
+                        ...DEFAULT_SETTINGS,
+
+                        ...savedSettings
+
+                    };
+
+                }
+
+            }
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+
+
+            /* =================================
+               DELIVERY
+            ================================= */
+
+            const baseDelivery =
+                Number(
+                    settings.deliveryCharge
+                ) || 0;
+
+
+            const freeDeliveryAmount =
+                Number(
+                    settings.freeDeliveryAmount
+                ) || 0;
+
+
+            const discountThreshold =
+                Number(
+                    settings.discountThreshold
+                ) || 0;
+
+
+            const configuredDiscount =
+                Number(
+                    settings.deliveryDiscount
+                ) || 0;
+
+
+            let deliveryCharge =
+                baseDelivery;
+
+
+            let deliveryDiscount =
+                0;
+
+
+
+            if (
+                freeDeliveryAmount > 0 &&
+                subtotal >= freeDeliveryAmount
+            ) {
+
+                deliveryCharge =
+                    0;
+
+            }
+
+
+            else if (
+                discountThreshold > 0 &&
+                subtotal > discountThreshold
+            ) {
+
+                deliveryDiscount =
+                    Math.min(
+                        configuredDiscount,
+                        baseDelivery
+                    );
+
+
+                deliveryCharge =
+                    Math.max(
+                        0,
+                        baseDelivery -
+                        deliveryDiscount
+                    );
+
+            }
+
+
+
+            /* =================================
+               TOTAL
+            ================================= */
+
+            const total =
+                subtotal +
+                deliveryCharge;
+
+
+
+            /* =================================
+               CREATE ORDER
+            ================================= */
+
+            order = {
+
+                orderId:
+                    "TSP-" +
+                    Date.now(),
+
+                orderDate:
+                    new Date().toISOString(),
+
+                items:
+                    cart,
+
+                subtotal:
+                    subtotal,
+
+                deliveryCharge:
+                    deliveryCharge,
+
+                deliveryDiscount:
+                    deliveryDiscount,
+
+                total:
+                    total,
+
+                estimatedDelivery:
+                    "Within " +
+                    (
+                        Number(
+                            settings.estimatedDeliveryDays
+                        ) || 7
+                    ) +
+                    " Days",
+
+                paymentStatus:
+                    "Pending",
+
+                orderStatus:
+                    "New"
+
+            };
+
+
+
+            localStorage.setItem(
+                "tsp_pending_order",
+                JSON.stringify(order)
+            );
+
+        }
+
+
+
+        /* =========================================
+           FINAL CHECK
+        ========================================== */
+
+        if (
+            !order ||
+            Number(order.total) <= 0
+        ) {
+
+            alert(
+                "Unable to calculate order amount."
+            );
+
+            window.location.href =
+                "cart.html";
+
+            return;
+
+        }
+
+
+
+        console.log(
+            "ORDER:",
+            order
+        );
+
+
+
+        /* =========================================
+           DISPLAY AMOUNTS
+        ========================================== */
+
+        document
+            .getElementById(
+                "productTotal"
+            )
+            .textContent =
+                "₹" +
+                Number(
+                    order.subtotal
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "deliveryCharge"
+            )
+            .textContent =
+                "₹" +
+                Number(
+                    order.deliveryCharge
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "totalAmount"
+            )
+            .textContent =
+                "₹" +
+                Number(
+                    order.total
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "qrAmount"
+            )
+            .textContent =
+                "₹" +
+                Number(
+                    order.total
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+        document
+            .getElementById(
+                "estimatedDelivery"
+            )
+            .textContent =
+                order.estimatedDelivery ||
+                "Within 7 Days";
+
+
+
+        /* =========================================
+           DELIVERY DISCOUNT
+        ========================================== */
+
+        if (
+            Number(
+                order.deliveryDiscount
+            ) > 0
+        ) {
+
+            document
+                .getElementById(
+                    "discountRow"
+                )
+                .style.display =
+                    "flex";
+
+
+            document
+                .getElementById(
+                    "deliveryDiscount"
+                )
+                .textContent =
+                    "-₹" +
+                    Number(
+                        order.deliveryDiscount
+                    ).toLocaleString(
+                        "en-IN"
+                    );
+
+        }
+
+
+
+        /* =========================================
+           CREATE UPI QR
+        ========================================== */
+
+        function generateQR() {
+
+
+            let settings = {};
+
+
+            try {
+
+                settings =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "tsp_store_settings"
+                        )
+                    ) || {};
+
+            }
+            catch (error) {
+
+                settings = {};
+
+            }
+
+
+
+            const upiId =
+                (
+                    settings.upiId ||
+                    ""
+                ).trim();
+
+
+
+            if (!upiId) {
+
+                console.warn(
+                    "UPI ID not configured."
+                );
+
+                return;
+
+            }
+
+
+
+            /*
+               IMPORTANT:
+               FULL ORDER AMOUNT
+            */
+
+            const amount =
+                Number(
+                    order.total
+                ).toFixed(2);
+
+
+
+            const upiLink =
+                "upi://pay" +
+                "?pa=" +
+                encodeURIComponent(
+                    upiId
+                ) +
+                "&pn=" +
+                encodeURIComponent(
+                    "The Solution Point"
+                ) +
+                "&am=" +
+                encodeURIComponent(
+                    amount
+                ) +
+                "&cu=INR" +
+                "&tn=" +
+                encodeURIComponent(
+                    "Order " +
+                    order.orderId
+                );
+
+
+
+            document
+                .getElementById(
+                    "paymentQr"
+                )
+                .src =
+                    "https://api.qrserver.com/v1/create-qr-code/" +
+                    "?size=300x300" +
+                    "&data=" +
+                    encodeURIComponent(
+                        upiLink
+                    );
+
+
+        }
+
+
+        generateQR();
+
+
+
+        /* =========================================
+           PAYMENT METHOD UI
+        ========================================== */
+
+        const paymentMethods =
+            document.querySelectorAll(
+                'input[name="paymentMethod"]'
+            );
+
+
+        paymentMethods.forEach(
+            function (radio) {
+
+                radio.addEventListener(
+                    "change",
+                    function () {
+
+
+                        document
+                            .getElementById(
+                                "upiOptions"
+                            )
+                            .style.display =
+                                "none";
+
+
+                        document
+                            .getElementById(
+                                "qrBox"
+                            )
+                            .style.display =
+                                "none";
+
+
+                        if (
+                            this.value ===
+                            "upi"
+                        ) {
+
+                            document
+                                .getElementById(
+                                    "upiOptions"
+                                )
+                                .style.display =
+                                    "block";
+
+                        }
+
+
+                        if (
+                            this.value ===
+                            "qr"
+                        ) {
+
+                            document
+                                .getElementById(
+                                    "qrBox"
+                                )
+                                .style.display =
+                                    "block";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =========================================
+           RAZORPAY PAYMENT
+        ========================================== */
+
+        async function startRazorpayPayment() {
+
+
+            const payButton =
+                document.getElementById(
+                    "payButton"
+                );
+
+
+            const amount =
+                Number(
+                    order.total
+                );
+
+
+            if (
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ) {
+
+                alert(
+                    "Invalid payment amount."
+                );
+
+                return;
+
+            }
+
+
+
+            payButton.disabled =
+                true;
+
+
+            payButton.textContent =
+                "Opening Payment...";
+
+
+
+            try {
+
+
+                /* =================================
+                   CREATE RAZORPAY ORDER
+                ================================= */
+
+                const response =
+                    await fetch(
+                        "/api/create-order",
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    amount:
+                                        amount,
+
+                                    receipt:
+                                        order.orderId
+
+                                })
+
+                        }
+                    );
+
+
+
+                const data =
+                    await response.json();
+
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to create Razorpay order."
+                    );
+
+                }
+
+
+
+                /* =================================
+                   RAZORPAY OPTIONS
+                ================================= */
+
+                const options = {
+
+                    key:
+                        data.keyId,
+
+                    amount:
+                        data.amount,
+
+                    currency:
+                        data.currency,
+
+                    name:
+                        "The Solution Point",
+
+                    description:
+                        "Payment for Order " +
+                        order.orderId,
+
+                    order_id:
+                        data.orderId,
+
+
+                    prefill: {
+
+                        name:
+                            order.customerName ||
+                            "",
+
+                        email:
+                            order.customerEmail ||
+                            "",
+
+                        contact:
+                            order.customerMobile ||
+                            ""
+
+                    },
+
+
+                    theme: {
+
+                        color:
+                            "#0f2f44"
+
+                    },
+
+
+                    handler:
+                        async function (
+                            razorpayResponse
+                        ) {
+
+
+                            payButton.textContent =
+                                "Verifying Payment...";
+
+
+                            try {
+
+
+                                /* =============================
+                                   VERIFY PAYMENT
+                                ============================= */
+
+                                const verifyResponse =
+                                    await fetch(
+                                        "/api/verify-payment",
+                                        {
+
+                                            method:
+                                                "POST",
+
+                                            headers: {
+
+                                                "Content-Type":
+                                                    "application/json"
+
+                                            },
+
+                                            body:
+                                                JSON.stringify({
+
+                                                    razorpay_order_id:
+                                                        razorpayResponse
+                                                            .razorpay_order_id,
+
+                                                    razorpay_payment_id:
+                                                        razorpayResponse
+                                                            .razorpay_payment_id,
+
+                                                    razorpay_signature:
+                                                        razorpayResponse
+                                                            .razorpay_signature
+
+                                                })
+
+                                        }
+                                    );
+
+
+
+                                const verifyData =
+                                    await verifyResponse.json();
+
+
+
+                                if (
+                                    !verifyResponse.ok ||
+                                    !verifyData.success
+                                ) {
+
+                                    throw new Error(
+                                        verifyData.message ||
+                                        "Payment verification failed."
+                                    );
+
+                                }
+
+
+
+                                /* =============================
+                                   PAYMENT SUCCESS
+                                ============================= */
+
+                                order.paymentStatus =
+                                    "Paid";
+
+
+                                order.paymentMethod =
+                                    "Razorpay";
+
+
+                                order.razorpayOrderId =
+                                    razorpayResponse
+                                        .razorpay_order_id;
+
+
+                                order.razorpayPaymentId =
+                                    razorpayResponse
+                                        .razorpay_payment_id;
+
+
+                                order.paymentVerified =
+                                    true;
+
+
+
+                                localStorage.setItem(
+                                    "tsp_pending_order",
+                                    JSON.stringify(
+                                        order
+                                    )
+                                );
+
+
+
+                                /* =============================
+                                   SUCCESS PAGE
+                                ============================= */
+
+                                window.location.href =
+                                    "order-success.html";
+
+                            }
+                            catch (error) {
+
+
+                                console.error(
+                                    "Verification Error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Payment verification failed. Please contact The Solution Point."
+                                );
+
+
+                                payButton.disabled =
+                                    false;
+
+
+                                payButton.textContent =
+                                    "Continue";
+
+                            }
+
+                        },
+
+
+                    modal: {
+
+                        ondismiss:
+                            function () {
+
+                                payButton.disabled =
+                                    false;
+
+                                payButton.textContent =
+                                    "Continue";
+
+                            }
+
+                    }
+
+                };
+
+
+
+                /* =================================
+                   OPEN RAZORPAY
+                ================================= */
+
+                const razorpay =
+                    new Razorpay(
+                        options
+                    );
+
+
+                razorpay.on(
+                    "payment.failed",
+                    function () {
+
+                        alert(
+                            "Payment failed. Please try again."
+                        );
+
+
+                        payButton.disabled =
+                            false;
+
+
+                        payButton.textContent =
+                            "Continue";
+
+                    }
+                );
+
+
+                razorpay.open();
+
+            }
+            catch (error) {
+
+
+                console.error(
+                    "Razorpay Error:",
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "Unable to start payment."
+                );
+
+
+                payButton.disabled =
+                    false;
+
+
+                payButton.textContent =
+                    "Continue";
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           CONTINUE BUTTON
+        ========================================== */
+
+        document
+            .getElementById(
+                "payButton"
+            )
+            .addEventListener(
+                "click",
+                async function () {
+
+
+                    const selected =
+                        document.querySelector(
+                            'input[name="paymentMethod"]:checked'
+                        );
+
+
+                    if (!selected) {
+
+                        alert(
+                            "Please select a payment method."
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    /* =================================
+                       RAZORPAY UPI
+                    ================================= */
+
+                    if (
+                        selected.value ===
+                        "upi"
+                    ) {
+
+                        await
+                            startRazorpayPayment();
+
+                        return;
+
+                    }
+
+
+
+                    /* =================================
+                       RAZORPAY CARD
+                    ================================= */
+
+                    if (
+                        selected.value ===
+                        "card"
+                    ) {
+
+                        await
+                            startRazorpayPayment();
+
+                        return;
+
+                    }
+
+
+
+                    /* =================================
+                       EXISTING QR PAYMENT
+                    ================================= */
+
+                    if (
+                        selected.value ===
+                        "qr"
+                    ) {
+
+
+                        const qr =
+                            document.getElementById(
+                                "paymentQr"
+                            );
+
+
+                        if (
+                            !qr ||
+                            !qr.src
+                        ) {
+
+                            alert(
+                                "QR code could not be generated. Please check your UPI ID."
+                            );
+
+                            return;
+
+                        }
+
+
+                        const confirmed =
+                            confirm(
+                                "Please confirm that you have completed the payment of ₹" +
+                                Number(
+                                    order.total
+                                ).toLocaleString(
+                                    "en-IN"
+                                ) +
+                                ".\n\nClick OK to continue."
+                            );
+
+
+                        if (!confirmed) {
+
+                            return;
+
+                        }
+
+
+                        order.paymentStatus =
+                            "Pending";
+
+
+                        order.paymentMethod =
+                            "QR";
+
+
+                        localStorage.setItem(
+                            "tsp_pending_order",
+                            JSON.stringify(
+                                order
+                            )
+                        );
+
+
+                        window.location.href =
+                            "order-success.html";
+
+                    }
+
+                }
+            );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

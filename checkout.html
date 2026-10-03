@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Checkout | The Solution Point
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+            <span>
+
+               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
+
+                <small>
+                   Reliable Solutions. Professional Service. One Point.
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+        </nav>
+
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+    <section
+        style="
+            padding:70px 0;
+        "
+    >
+
+        <div class="container">
+
+            <span class="eyebrow">
+                CHECKOUT
+            </span>
+
+
+            <h1
+                style="
+                    margin-top:10px;
+                    color:var(--navy);
+                "
+            >
+                Complete Your Order
+            </h1>
+
+
+            <div
+                style="
+                    margin-top:30px;
+                    padding:30px;
+                    border:1px solid var(--line);
+                    border-radius:14px;
+                    background:white;
+                "
+            >
+
+                <h2>
+                    Customer Details
+                </h2>
+
+
+                <form
+                    id="checkoutForm"
+                    style="
+                        margin-top:25px;
+                    "
+                >
+
+                    <p>
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <br>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            required
+                            style="
+                                width:100%;
+                                max-width:500px;
+                                padding:12px;
+                                margin-top:7px;
+                            "
+                        >
+
+                    </p>
+
+
+                    <p>
+
+                        <label>
+                            Mobile Number
+                        </label>
+
+                        <br>
+
+                        <input
+                            type="tel"
+                            id="customerMobile"
+                            required
+                            maxlength="10"
+                            style="
+                                width:100%;
+                                max-width:500px;
+                                padding:12px;
+                                margin-top:7px;
+                            "
+                        >
+
+                    </p>
+
+
+                    <p>
+
+                        <label>
+                            Email
+                        </label>
+
+                        <br>
+
+                        <input
+                            type="email"
+                            id="customerEmail"
+                            style="
+                                width:100%;
+                                max-width:500px;
+                                padding:12px;
+                                margin-top:7px;
+                            "
+                        >
+
+                    </p>
+
+
+                    <p>
+
+                        <label>
+                            Delivery Address
+                        </label>
+
+                        <br>
+
+                        <textarea
+                            id="customerAddress"
+                            required
+                            style="
+                                width:100%;
+                                max-width:500px;
+                                height:100px;
+                                padding:12px;
+                                margin-top:7px;
+                            "
+                        ></textarea>
+
+                    </p>
+
+
+                    <p>
+
+                        <label>
+                            PIN Code
+                        </label>
+
+                        <br>
+
+                        <input
+                            type="text"
+                            id="customerPin"
+                            required
+                            maxlength="6"
+                            style="
+                                width:100%;
+                                max-width:500px;
+                                padding:12px;
+                                margin-top:7px;
+                            "
+                        >
+
+                    </p>
+
+
+
+                    <h2
+                        style="
+                            margin-top:35px;
+                        "
+                    >
+                        Payment Method
+                    </h2>
+
+
+                    <div
+                        style="
+                            margin-top:20px;
+                        "
+                    >
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="upi"
+                                checked
+                            >
+
+                            UPI
+
+                        </label>
+
+                        <br><br>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="card"
+                            >
+
+                            Debit / Credit Card
+
+                        </label>
+
+                        <br><br>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="qr"
+                            >
+
+                            Pay Using Our QR Code
+
+                        </label>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="
+                            margin-top:30px;
+                        "
+                    >
+
+                        Proceed to Payment
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+
+            © 2026 The Solution Point.
+            All rights reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<script src="products.js"></script>
+
+
+<script>
+
+document
+    .getElementById("checkoutForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            /* =================================
+               CUSTOMER DETAILS
+            ================================= */
+
+            const customerName =
+                document
+                    .getElementById("customerName")
+                    .value
+                    .trim();
+
+
+            const customerMobile =
+                document
+                    .getElementById("customerMobile")
+                    .value
+                    .trim();
+
+
+            const customerEmail =
+                document
+                    .getElementById("customerEmail")
+                    .value
+                    .trim();
+
+
+            const customerAddress =
+                document
+                    .getElementById("customerAddress")
+                    .value
+                    .trim();
+
+
+            const customerPin =
+                document
+                    .getElementById("customerPin")
+                    .value
+                    .trim();
+
+
+            /* =================================
+               PAYMENT METHOD
+            ================================= */
+
+            const payment =
+                document.querySelector(
+                    'input[name="payment"]:checked'
+                );
+
+
+            if (!payment) {
+
+                alert(
+                    "Please select a payment method."
+                );
+
+                return;
+
+            }
+
+
+            /* =================================
+               MOBILE VALIDATION
+            ================================= */
+
+            if (
+                customerMobile.length !== 10 ||
+                !/^[0-9]+$/.test(customerMobile)
+            ) {
+
+                alert(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+
+            }
+
+
+            /* =================================
+               PIN CODE VALIDATION
+            ================================= */
+
+            if (
+                customerPin.length !== 6 ||
+                !/^[0-9]+$/.test(customerPin)
+            ) {
+
+                alert(
+                    "Please enter a valid 6-digit PIN Code."
+                );
+
+                return;
+
+            }
+
+
+            /* =================================
+               GET CART
+            ================================= */
+
+            let cart = [];
+
+
+            try {
+
+                cart =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "tsp_cart"
+                        )
+                    ) || [];
+
+            }
+
+            catch(error) {
+
+                cart = [];
+
+            }
+
+
+            if (
+                !Array.isArray(cart) ||
+                cart.length === 0
+            ) {
+
+                alert(
+                    "Your cart is empty."
+                );
+
+                window.location.href =
+                    "products.html";
+
+                return;
+
+            }
+/* =================================
+   CALCULATE SUBTOTAL
+   MATCH CART ITEM WITH PRODUCT
+================================= */
+
+let subtotal = 0;
+
+
+/* Get products from product catalogue */
+
+const products =
+    getProducts();
+
+
+/* Calculate each cart item */
+
+cart.forEach(
+    function(item) {
+
+        /* Find product using Item Code */
+
+        const product =
+            products.find(
+                function(product) {
+
+                    return (
+                        product.code ===
+                        item.code
+                    );
+
+                }
+            );
+
+
+        /* If product is not found,
+           skip this item */
+
+        if (!product) {
+
+            return;
+
+        }
+
+
+        /* Get actual selling price */
+
+        const price =
+            Number(
+                product.price
+            ) || 0;
+
+
+        /* Get quantity */
+
+        const quantity =
+            Number(
+                item.quantity
+            ) || 1;
+
+
+        /* Price × Quantity */
+
+        subtotal +=
+            price * quantity;
+
+    }
+);
+
+
+            /* =================================
+               DELIVERY SETTINGS
+            ================================= */
+
+            const SETTINGS_KEY =
+                "tsp_store_settings";
+
+
+            const DEFAULT_SETTINGS = {
+
+                deliveryCharge: 50,
+
+                freeDeliveryAmount: 0,
+
+                discountThreshold: 500,
+
+                deliveryDiscount: 10,
+
+                estimatedDeliveryDays: 7
+
+            };
+
+
+            let settings =
+                {
+                    ...DEFAULT_SETTINGS
+                };
+
+
+            try {
+
+                const savedSettings =
+                    JSON.parse(
+                        localStorage.getItem(
+                            SETTINGS_KEY
+                        )
+                    );
+
+
+                if (
+                    savedSettings &&
+                    typeof savedSettings === "object"
+                ) {
+
+                    settings =
+                        {
+                            ...DEFAULT_SETTINGS,
+                            ...savedSettings
+                        };
+
+                }
+
+            }
+
+            catch(error) {
+
+                console.log(
+                    "Using default delivery settings."
+                );
+
+            }
+
+
+            /* =================================
+               DELIVERY CALCULATION
+            ================================= */
+
+            const baseDelivery =
+                Number(
+                    settings.deliveryCharge
+                ) || 0;
+
+
+            const freeDeliveryAmount =
+                Number(
+                    settings.freeDeliveryAmount
+                ) || 0;
+
+
+            const discountThreshold =
+                Number(
+                    settings.discountThreshold
+                ) || 0;
+
+
+            const configuredDiscount =
+                Number(
+                    settings.deliveryDiscount
+                ) || 0;
+
+
+            let deliveryCharge =
+                baseDelivery;
+
+
+            let deliveryDiscount =
+                0;
+
+
+            /* FREE DELIVERY */
+
+            if (
+                freeDeliveryAmount > 0 &&
+                subtotal >= freeDeliveryAmount
+            ) {
+
+                deliveryCharge = 0;
+
+                deliveryDiscount = 0;
+
+            }
+
+
+            /* DELIVERY DISCOUNT */
+
+            else if (
+                discountThreshold > 0 &&
+                subtotal > discountThreshold
+            ) {
+
+                deliveryDiscount =
+                    Math.min(
+                        configuredDiscount,
+                        baseDelivery
+                    );
+
+
+                deliveryCharge =
+                    Math.max(
+                        0,
+                        baseDelivery -
+                        deliveryDiscount
+                    );
+
+            }
+
+
+            /* =================================
+               FINAL TOTAL
+            ================================= */
+
+            const grandTotal =
+                subtotal +
+                deliveryCharge;
+
+
+            /* =================================
+               CREATE ORDER
+            ================================= */
+
+            const order = {
+
+                orderId:
+                    "TSP-" +
+                    Date.now(),
+
+
+                orderDate:
+                    new Date().toISOString(),
+
+
+                customer: {
+
+                    name:
+                        customerName,
+
+                    mobile:
+                        customerMobile,
+
+                    email:
+                        customerEmail,
+
+                    address:
+                        customerAddress,
+
+                    pin:
+                        customerPin
+
+                },
+
+
+                items:
+                    cart,
+
+
+                subtotal:
+                    subtotal,
+
+
+                deliveryCharge:
+                    deliveryCharge,
+
+
+                deliveryDiscount:
+                    deliveryDiscount,
+
+
+                total:
+                    grandTotal,
+
+
+                estimatedDelivery:
+                    "Within 7 Days",
+
+
+                paymentMethod:
+                    payment.value,
+
+
+                paymentStatus:
+                    "Pending",
+
+
+                orderStatus:
+                    "New"
+
+            };
+
+
+           /* =================================
+   SAVE ORDER
+================================= */
+
+/* Get existing orders */
+
+let orders = [];
+
+try {
+
+    orders =
+        JSON.parse(
+            localStorage.getItem(
+                "tsp_orders"
+            )
+        ) || [];
+
+}
+
+catch(error) {
+
+    orders = [];
+
+}
+
+
+/* Make sure orders is an array */
+
+if (!Array.isArray(orders)) {
+
+    orders = [];
+
+}
+
+
+/* Add the new order */
+
+orders.push(order);
+
+
+/* Save all orders */
+
+localStorage.setItem(
+    "tsp_orders",
+    JSON.stringify(orders)
+);
+
+
+/* Also keep the current order
+   for the payment page */
+
+localStorage.setItem(
+    "tsp_pending_order",
+    JSON.stringify(order)
+);
+
+
+            /* =================================
+               OPEN PAYMENT PAGE
+            ================================= */
+
+            window.location.href =
+                "payment.html";
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Products and stationery catalog - The Solution Point."
+    >
+
+    <title>
+        Products | The Solution Point
+    </title>
+
+    
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- YOUR EXISTING CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- PRODUCT CSS -->
+
+    <style>
+
+        /* =====================================================
+           PRODUCT PAGE
+           ===================================================== */
+
+        .store-hero {
+
+            padding: 70px 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f9f6ef,
+                    #eef4f5
+                );
+        }
+
+
+        .store-toolbar {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin: 30px 0;
+        }
+
+
+        .store-toolbar input,
+        .store-toolbar select {
+
+            padding: 13px 15px;
+
+            border:
+                1px solid #d9dfe1;
+
+            border-radius: 8px;
+
+            font: inherit;
+
+            background: white;
+
+        }
+
+
+        .store-toolbar input {
+
+            flex: 1;
+
+            min-width: 240px;
+
+        }
+
+
+        .store-toolbar select {
+
+            min-width: 180px;
+
+        }
+
+
+        .admin-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 13px 15px;
+
+            color: var(--navy);
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT GRID
+           ===================================================== */
+
+        .product-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+
+        }
+
+
+        .product-card {
+
+            background: white;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            transition: .25s;
+
+        }
+
+
+        .product-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 16px 40px
+                rgba(16,43,63,.10);
+
+        }
+
+
+        /* =====================================================
+           PRODUCT IMAGE
+           ===================================================== */
+
+        .product-image {
+
+            height: 230px;
+
+            background: #faf9f6;
+
+            display: grid;
+
+            place-items: center;
+
+            overflow: hidden;
+
+        }
+
+
+        .product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 20px;
+
+        }
+
+
+        .product-placeholder {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5eee2,
+                    #eef4f5
+                );
+
+        }
+
+
+        .product-placeholder span {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 80px;
+
+            color: #a06d2d;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT CONTENT
+           ===================================================== */
+
+        .product-content {
+
+            padding: 23px;
+
+        }
+
+
+        .product-category {
+
+            display: inline-block;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            color: #9a6b2d;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .product-card h3 {
+
+            color: var(--navy);
+
+            font-size: 20px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .product-code {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .product-price {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .product-price strong {
+
+            color: var(--navy);
+
+            font-size: 22px;
+
+        }
+
+
+        .product-price del {
+
+            color: #89949a;
+
+            font-size: 13px;
+
+        }
+
+
+        .discount-badge {
+
+            background: #f5eee2;
+
+            color: #9a6b2d;
+
+            padding: 5px 8px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .add-cart {
+
+            width: 100%;
+
+        }
+
+
+        /* =====================================================
+           CART
+           ===================================================== */
+
+        .cart-link {
+
+            position: relative;
+
+        }
+
+
+        .cart-count {
+
+            display: inline-grid;
+
+            place-items: center;
+
+            min-width: 19px;
+
+            height: 19px;
+
+            padding: 0 5px;
+
+            border-radius: 20px;
+
+            background: var(--gold);
+
+            color: var(--navy);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           EMPTY
+           ===================================================== */
+
+        .empty-products {
+
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 60px;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =====================================================
+           TOAST
+           ===================================================== */
+
+        .store-toast {
+
+            position: fixed;
+
+            right: 20px;
+
+            bottom: 20px;
+
+            background: var(--navy);
+
+            color: white;
+
+            padding: 13px 20px;
+
+            border-radius: 8px;
+
+            opacity: 0;
+
+            transform:
+                translateY(15px);
+
+            transition: .25s;
+
+            z-index: 999;
+
+        }
+
+
+        .store-toast.show {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media(max-width:850px) {
+
+            .product-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media(max-width:560px) {
+
+            .product-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .product-image {
+
+                height: 210px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header class="site-header">
+
+    <div class="container nav-wrap">
+
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
+
+
+            <span>
+
+               
+               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
+
+                <small>
+                   Reliable Solutions. Professional Service. One Point.
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <button
+            class="menu-toggle"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
+
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a
+            class="active" href="products.html">
+                Products
+            </a>
+
+            <a
+                
+                href="contact.html"
+            >
+                Contact
+            </a>
+
+        </nav>
+
+
+        <a
+            class="nav-call cart-link"
+            href="cart.html"
+        >
+
+            🛒 Cart
+
+            <span class="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
+
+<main>
+
+
+    <section class="store-hero">
+
+        <div class="container">
+
+            <span class="eyebrow">
+                OUR PRODUCTS
+            </span>
+
+
+            <h1>
+                Stationery & everyday products.
+            </h1>
+
+
+            <p>
+                Browse our product catalog
+                and choose the products you need.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="section">
+
+        <div class="container">
+
+
+            <!-- SEARCH -->
+
+            <div class="store-toolbar">
+
+                <input
+                    type="search"
+                    id="productSearch"
+                    placeholder="Search products..."
+                >
+
+
+                <select id="categoryFilter">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                </select>
+                
+            </div>
+
+
+
+            <!-- PRODUCTS -->
+
+            <div
+                id="productGrid"
+                class="product-grid"
+            >
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="footer">
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+            <a
+                class="brand footer-brand"
+                href="index.html"
+            >
+
+                <span class="brand-mark">
+                    TSP
+                </span>
+
+
+                <span>
+
+                    <strong>
+                        The Solution Point
+                    </strong>
+
+                    <small>
+                        Accounting & Tax Solutions
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <p>
+                Professional accounting and
+                compliance support.
+            </p>
+
+        </div>
+
+
+
+        <div>
+
+            <h4>
+                Quick Links
+            </h4>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+        </div>
+
+
+
+        <div>
+
+            <h4>
+                Contact
+            </h4>
+
+            <a href="tel:+919217903420">
+                +91 9217903420
+            </a>
+
+            <a href="mailto:info.thesolutionpoint@gmail.com">
+                info.thesolutionpoint@gmail.com
+            </a>
+
+            <span>
+                www.thesolutionpoint.co.in
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 The Solution Point.
+        All rights reserved.
+
+    </div>
+
+</footer>
+
+
+
+<!-- EXISTING WEBSITE JS -->
+
+<script src="script.js"></script>
+
+
+<!-- PRODUCT JS -->
+
+<script src="products.js"></script>
+
+
+
+<script>
+
+/* =========================================================
+   RENDER PRODUCTS
+   ========================================================= */
+
+function renderProducts() {
+
+    const search =
+        document
+            .getElementById("productSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document
+            .getElementById("categoryFilter")
+            .value;
+
+
+    const products =
+        getProducts();
+
+
+    const filteredProducts =
+        products.filter(function(product) {
+
+            const searchText =
+                (
+                    product.code +
+                    " " +
+                    product.name +
+                    " " +
+                    product.category
+                )
+                .toLowerCase();
+
+
+            const matchesSearch =
+                searchText.includes(search);
+
+
+            const matchesCategory =
+                !category ||
+                product.category === category;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        });
+
+
+    const grid =
+        document.getElementById(
+            "productGrid"
+        );
+
+
+    if (filteredProducts.length === 0) {
+
+        grid.innerHTML = `
+            <div class="empty-products">
+
+                No products found.
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    grid.innerHTML =
+        filteredProducts
+            .map(createProductCard)
+            .join("");
+
+}
+
+
+
+/* =========================================================
+   CATEGORY FILTER
+   ========================================================= */
+
+function loadCategories() {
+
+    const select =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+
+    const products =
+        getProducts();
+
+
+    const categories =
+        [
+            ...new Set(
+                products.map(
+                    product =>
+                        product.category
+                )
+            )
+        ]
+        .sort();
+
+
+    categories.forEach(function(category) {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            category;
+
+
+        option.textContent =
+            category;
+
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+
+document
+    .getElementById("productSearch")
+    .addEventListener(
+        "input",
+        renderProducts
+    );
+
+
+document
+    .getElementById("categoryFilter")
+    .addEventListener(
+        "change",
+        renderProducts
+    );
+
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+loadCategories();
+
+renderProducts();
+
+</script>
+
+
+</body>
+
+</html>
