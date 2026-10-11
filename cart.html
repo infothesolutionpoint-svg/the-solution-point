@@ -10,12 +10,17 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="description"
+        content="Your shopping cart at The Solution Point."
+    >
+
     <title>
-        Shopping Cart | The Solution Point
+        Cart | The Solution Point
     </title>
 
 
-    <!-- Google Fonts -->
+    <!-- GOOGLE FONTS -->
 
     <link
         rel="preconnect"
@@ -34,7 +39,7 @@
     >
 
 
-    <!-- Main Website CSS -->
+    <!-- MAIN WEBSITE CSS -->
 
     <link
         rel="stylesheet"
@@ -44,460 +49,551 @@
 
     <style>
 
-        /* =========================================
+        /* =====================================================
            CART PAGE
-        ========================================= */
+        ===================================================== */
 
         .cart-page {
-
-            padding: 60px 0;
-
+            padding: 75px 0 100px;
         }
 
 
-        .cart-title {
-
-            margin-bottom: 30px;
-
+        .cart-page-header {
+            margin-bottom: 45px;
         }
 
 
-        .cart-title h1 {
+        .cart-page-header .eyebrow {
+            display: block;
+            margin-bottom: 12px;
+            color: #b17e3e;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+        }
 
-            font-family:
-                "Playfair Display",
-                serif;
 
+        .cart-page-header h1 {
+            margin: 0 0 14px;
             color: var(--navy);
-
-            font-size: 42px;
-
-            margin-top: 8px;
-
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(40px, 5vw, 62px);
+            line-height: 1.05;
         }
 
+
+        .cart-page-header p {
+            max-width: 650px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           CART LAYOUT
+        ===================================================== */
 
         .cart-layout {
-
             display: grid;
-
-            grid-template-columns:
-                1.5fr .7fr;
-
+            grid-template-columns: minmax(0, 1.6fr) minmax(300px, .8fr);
             gap: 30px;
-
+            align-items: start;
         }
 
 
-        /* =========================================
+        /* =====================================================
            CART ITEMS
-        ========================================= */
+        ===================================================== */
 
         .cart-items {
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 14px;
-
-            overflow: hidden;
-
-            background: white;
-
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
 
         .cart-item {
-
             display: grid;
-
-            grid-template-columns:
-                80px 1fr auto auto auto;
-
-            gap: 18px;
-
+            grid-template-columns: 105px minmax(0, 1fr) auto;
+            gap: 20px;
             align-items: center;
-
             padding: 20px;
-
-            border-bottom:
-                1px solid var(--line);
-
-        }
-
-
-        .cart-item:last-child {
-
-            border-bottom: 0;
-
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
         }
 
 
         .cart-item-image {
-
-            width: 80px;
-
-            height: 80px;
-
-            border-radius: 10px;
-
+            width: 105px;
+            height: 105px;
             overflow: hidden;
-
-            background: #faf9f6;
-
             display: grid;
-
             place-items: center;
-
+            background: #faf9f6;
+            border-radius: 9px;
         }
 
 
         .cart-item-image img {
-
             width: 100%;
-
             height: 100%;
-
             object-fit: contain;
-
+            padding: 12px;
         }
 
 
         .cart-placeholder {
-
-            font-family:
-                "Playfair Display",
-                serif;
-
-            font-size: 30px;
-
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(
+                135deg,
+                #f5eee2,
+                #eef4f5
+            );
             color: #a06d2d;
-
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 42px;
         }
 
 
-        .cart-item h3 {
+        .cart-item-category {
+            display: block;
+            margin-bottom: 6px;
+            color: #9a6b2d;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
 
+
+        .cart-item-info h3 {
+            margin: 0 0 5px;
             color: var(--navy);
-
-            font-size: 17px;
-
-            margin: 0 0 4px;
-
+            font-size: 18px;
         }
 
 
         .cart-item-code {
-
+            margin-bottom: 12px;
             color: var(--muted);
-
             font-size: 11px;
-
         }
 
 
-        .cart-price {
-
-            font-weight: 800;
-
+        .cart-item-price {
             color: var(--navy);
-
-            white-space: nowrap;
-
+            font-size: 15px;
+            font-weight: 700;
         }
 
 
-        /* =========================================
+        .cart-item-total {
+            margin-top: 4px;
+            color: var(--navy);
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
            QUANTITY
-        ========================================= */
+        ===================================================== */
+
+        .cart-item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
 
         .quantity-control {
-
-            display: flex;
-
+            display: inline-flex;
             align-items: center;
-
-            gap: 8px;
-
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #fff;
         }
 
 
         .quantity-control button {
-
-            width: 32px;
-
-            height: 32px;
-
-            border:
-                1px solid #ccd4d7;
-
-            background: white;
-
-            border-radius: 6px;
-
+            width: 34px;
+            height: 34px;
+            border: 0;
+            background: #f7f5ef;
+            color: var(--navy);
+            font-size: 17px;
             cursor: pointer;
-
-            font-size: 18px;
-
-            line-height: 1;
-
         }
 
 
         .quantity-control button:hover {
-
-            background: #f5f3ef;
-
+            background: #eeeae0;
         }
 
 
         .quantity-control span {
-
-            min-width: 25px;
-
+            min-width: 38px;
             text-align: center;
-
+            color: var(--navy);
+            font-size: 13px;
             font-weight: 700;
-
         }
 
 
-        /* =========================================
-           REMOVE
-        ========================================= */
-
-        .remove-item {
-
+        .remove-button {
             border: 0;
-
+            padding: 0;
             background: transparent;
-
-            color: #a33;
-
+            color: #9a5a50;
+            font: inherit;
+            font-size: 11px;
             cursor: pointer;
-
-            font-weight: 700;
-
         }
 
 
-        .remove-item:hover {
-
+        .remove-button:hover {
             text-decoration: underline;
-
         }
 
 
-        /* =========================================
-           SUMMARY
-        ========================================= */
+        /* =====================================================
+           ORDER SUMMARY
+        ===================================================== */
 
         .cart-summary {
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 14px;
-
-            padding: 25px;
-
-            background: #faf9f6;
-
-            height: fit-content;
-
+            position: sticky;
+            top: 25px;
+            padding: 28px;
+            background: #f7f5ef;
+            border: 1px solid #e4e0d7;
+            border-radius: 12px;
         }
 
 
         .cart-summary h2 {
-
-            font-family:
-                "Playfair Display",
-                serif;
-
+            margin: 0 0 24px;
             color: var(--navy);
-
-            margin: 0 0 20px;
-
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 28px;
         }
 
 
         .summary-row {
-
             display: flex;
-
-            justify-content:
-                space-between;
-
+            justify-content: space-between;
             gap: 20px;
-
             padding: 12px 0;
+            border-bottom: 1px solid rgba(16, 43, 63, .10);
+            color: var(--muted);
+            font-size: 13px;
+        }
 
-            border-bottom:
-                1px solid var(--line);
 
-            font-size: 14px;
-
+        .summary-row strong {
+            color: var(--navy);
+            white-space: nowrap;
         }
 
 
         .summary-total {
-
-            font-size: 20px;
-
-            font-weight: 800;
-
-            color: var(--navy);
-
-            border-bottom: 0;
-
+            margin-top: 8px;
             padding-top: 18px;
-
+            border-bottom: 0;
+            color: var(--navy);
+            font-size: 17px;
+            font-weight: 700;
         }
 
 
-        /* =========================================
-           BUTTON
-        ========================================= */
+        .summary-total strong {
+            font-size: 20px;
+        }
+
 
         .checkout-button {
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 
-            display: block;
+    margin-top: 22px;
+    padding: 14px 20px;
 
-            width: 100%;
+    background: #102b3f;
+    color: #ffffff !important;
 
-            margin-top: 20px;
+    border: 1px solid #102b3f;
+    border-radius: 7px;
 
-            text-align: center;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
 
-            text-decoration: none;
+    text-align: center;
+    text-decoration: none;
 
-            box-sizing: border-box;
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
 
-        }
+.checkout-button:hover {
+    background: #1a4058;
+    border-color: #1a4058;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
 
 
         .continue-shopping {
-
-            display: inline-block;
-
-            margin-top: 15px;
-
-            color: #9a6b2d;
-
-            text-decoration: none;
-
+            display: block;
+            margin-top: 16px;
+            color: var(--navy);
+            text-align: center;
+            font-size: 12px;
             font-weight: 700;
-
-            font-size: 13px;
-
+            text-decoration: none;
         }
 
 
         .continue-shopping:hover {
-
             text-decoration: underline;
-
         }
 
 
-        /* =========================================
+        /* =====================================================
            EMPTY CART
-        ========================================= */
+        ===================================================== */
 
         .empty-cart {
-
+            padding: 80px 30px;
             text-align: center;
-
-            padding: 70px 20px;
-
-            color: var(--muted);
-
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
         }
 
 
         .empty-cart h2 {
-
-            font-family:
-                "Playfair Display",
-                serif;
-
+            margin: 0 0 10px;
             color: var(--navy);
-
-            margin-bottom: 10px;
-
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 32px;
         }
 
 
         .empty-cart p {
-
-            margin-bottom: 20px;
-
+            margin: 0 auto 25px;
+            color: var(--muted);
+            font-size: 14px;
         }
 
 
-        /* =========================================
-           MOBILE
-        ========================================= */
+        .empty-cart .btn {
+            display: inline-flex;
+            text-decoration: none;
+        }
 
-        @media(max-width: 850px) {
+
+        /* =====================================================
+           MOBILE CART BAR
+        ===================================================== */
+
+        .mobile-cart-bar {
+            display: none;
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            z-index: 9998;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(17,19,24,.98);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 14px;
+            box-shadow: 0 12px 35px rgba(0,0,0,.22);
+            color: #ffffff;
+        }
+
+
+        .mobile-cart-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+
+        .mobile-cart-icon {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            display: grid;
+            place-items: center;
+            background: #f5eee2;
+            color: #111318;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+
+        .mobile-cart-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+
+        .mobile-cart-text strong {
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+
+        .mobile-cart-text span {
+            color: #b9bec6;
+            font-size: 10px;
+        }
+
+
+        .mobile-cart-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px;
+            background: var(--gold);
+            color: var(--navy);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
 
             .cart-layout {
-
                 grid-template-columns: 1fr;
+            }
 
+
+            .cart-summary {
+                position: static;
             }
 
         }
 
 
-        @media(max-width: 600px) {
+        @media (max-width: 650px) {
+
+            .cart-page {
+                padding: 55px 0 100px;
+            }
+
+
+            .cart-page-header {
+                margin-bottom: 30px;
+            }
+
+
+            .cart-page-header h1 {
+                font-size: 40px;
+            }
+
 
             .cart-item {
-
-                grid-template-columns:
-                    65px 1fr;
-
-                gap: 12px;
-
+                grid-template-columns: 80px minmax(0, 1fr);
+                gap: 15px;
+                padding: 15px;
             }
 
 
             .cart-item-image {
-
-                width: 65px;
-
-                height: 65px;
-
+                width: 80px;
+                height: 80px;
             }
 
 
-            .cart-price {
-
-                grid-column: 2;
-
+            .cart-item-actions {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: 12px;
+                border-top: 1px solid var(--line);
             }
 
 
-            .quantity-control {
-
-                grid-column: 2;
-
+            .cart-item-total {
+                font-size: 15px;
             }
 
 
-            .remove-item {
-
-                grid-column: 2;
-
-                text-align: left;
-
+            .cart-summary {
+                padding: 22px;
             }
 
 
-            .cart-title h1 {
+            .mobile-cart-bar.show {
+                display: flex;
+            }
 
-                font-size: 34px;
 
+            body.has-mobile-cart-bar {
+                padding-bottom: 95px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .mobile-cart-bar {
+                padding: 10px 11px;
+                border-radius: 12px;
+            }
+
+
+            .mobile-cart-icon {
+                width: 35px;
+                height: 35px;
+                flex-basis: 35px;
+            }
+
+
+            .mobile-cart-text strong {
+                font-size: 12px;
+            }
+
+
+            .mobile-cart-text span {
+                font-size: 9px;
+            }
+
+
+            .mobile-cart-button {
+                padding: 9px 12px;
+                font-size: 11px;
             }
 
         }
@@ -510,9 +606,9 @@
 <body>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-===================================================== -->
+========================================================= -->
 
 <header class="site-header">
 
@@ -531,10 +627,14 @@
             </span>
 
 
-            <span>
+            <span class="brand-text">
 
-               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>                <small>
-                    Reliable Solutions. Professional Service. One Point.
+                <strong>
+                    THE SOLUTION POINT
+                </strong>
+
+                <small>
+                    Connecting People. Creating Solutions.
                 </small>
 
             </span>
@@ -542,16 +642,15 @@
         </a>
 
 
-
         <!-- MOBILE MENU -->
 
         <button
             class="menu-toggle"
+            type="button"
             aria-label="Open menu"
         >
             ☰
         </button>
-
 
 
         <!-- NAVIGATION -->
@@ -566,154 +665,11 @@
                 About Us
             </a>
 
-            <a href="services.html">
+             <a href="services.html">
                 Services
             </a>
 
             <a href="products.html">
-                Product
-            </a>
-
-            <a href="contact.html">
-                Contact 
-            </a>
-
-        </nav>
-
-
-
-        <!-- CART -->
-
-        <a
-            class="nav-call cart-link"
-            href="cart.html"
-        >
-
-            🛒 Cart
-
-            <span class="cart-count">
-                0
-            </span>
-
-        </a>
-
-
-    </div>
-
-</header>
-
-
-
-<!-- =====================================================
-     MAIN CART
-===================================================== -->
-
-<main>
-
-<section class="cart-page">
-
-<div class="container">
-
-
-    <!-- PAGE TITLE -->
-
-    <div class="cart-title">
-
-        <span class="eyebrow">
-            SHOPPING CART
-        </span>
-
-        <h1>
-            Your Cart
-        </h1>
-
-    </div>
-
-
-
-    <!-- CART WILL BE INSERTED HERE -->
-
-    <div
-        id="cartContainer"
-        class="cart-layout"
-    >
-
-    </div>
-
-
-</div>
-
-</section>
-
-</main>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="footer">
-
-    <div class="container footer-grid">
-
-
-        <!-- COMPANY -->
-
-        <div>
-
-            <a
-                class="brand footer-brand"
-                href="index.html"
-            >
-
-                <span class="brand-mark">
-                    TSP
-                </span>
-
-                <span>
-
-                    <strong>
-                        The Solution Point
-                    </strong>
-
-                    <small>
-                        Accounting & Tax Solutions
-                    </small>
-
-                </span>
-
-            </a>
-
-
-            <p>
-                Professional accounting and
-                compliance support.
-            </p>
-
-        </div>
-
-
-
-        <!-- QUICK LINKS -->
-
-        <div>
-
-            <h4>
-                Quick Links
-            </h4>
-
-            <a href="index.html">
-                Home
-            </a>
-              <a href="about.html">
-                About Us
-            </a>
-
-            <a href="services.html">
-                Services
-            </a>
-             <a href="products.html">
                 Products
             </a>
 
@@ -721,839 +677,956 @@
                 Contact
             </a>
 
+
+            <a
+                href="cart.html"
+                class="cart-link active"
+            >
+                🛒 Cart
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+
+            <a
+                href="admin-login.html"
+                class="admin-link"
+            >
+                Admin Login
+            </a>
+
+        </nav>
+
+
+        <!-- CALL -->
+
+        <a
+            class="nav-call"
+            href="tel:+919217903420"
+        >
+            Call Us
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main>
+
+
+    <section class="cart-page">
+
+        <div class="container">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="cart-page-header">
+
+                <span class="eyebrow">
+                    YOUR CART
+                </span>
+
+
+                <h1>
+                    Review your order.
+                </h1>
+
+
+                <p>
+                    Check your products, update quantities,
+                    and continue to order when everything
+                    looks right.
+                </p>
+
+            </div>
+
+
+            <!-- CART CONTENT -->
+
+            <div
+                id="cartContainer"
+                class="cart-layout"
+            >
+
+                <!-- Javascript will render cart here -->
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<!-- =========================================================
+     THE SOLUTION POINT — MASTER FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container footer-main">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+
+            <a class="brand" href="index.html">
+
+                <span class="brand-mark">
+                    TSP
+                </span>
+
+                <span class="brand-text">
+
+                    <strong>
+                        THE SOLUTION POINT
+                    </strong>
+
+                    <small>
+                        Where Expertise Meets Solutions
+                    </small>
+
+                </span>
+
+            </a>
+
         </div>
 
 
-
-        <!-- CONTACT -->
-
-        <div>
+        <!-- EXPLORE -->
+        <div class="footer-column">
 
             <h4>
+                EXPLORE
+            </h4>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
                 Contact
+            </a>
+
+        </div>
+
+
+        <!-- CONTACT -->
+        <div class="footer-column">
+
+            <h4>
+                CONTACT
             </h4>
 
             <a href="tel:+919217903420">
                 +91 9217903420
             </a>
 
-            <a
-                href="mailto:info.thesolutionpoint@gmail.com"
-            >
+            <a href="mailto:info.thesolutionpoint@gmail.com">
                 info.thesolutionpoint@gmail.com
             </a>
 
             <span>
-                www.thesolutionpoint.co.in
+                thesolutionpoint.co.in
             </span>
 
         </div>
 
-
     </div>
 
 
+    <!-- FOOTER BOTTOM -->
 
-    <div class="copyright">
+    <div class="container footer-bottom">
 
-        © 2026 The Solution Point.
-        All rights reserved.
+        <span>
+            © 2026 The Solution Point. All rights reserved.
+        </span>
+
+        <span>
+            Reliable Solutions. Professional Service. One Point.
+        </span>
 
     </div>
 
 </footer>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      WEBSITE JAVASCRIPT
-===================================================== -->
+========================================================= -->
 
 <script src="script.js"></script>
 
 <script src="products.js"></script>
 
 
-
 <script>
 
-/* =====================================================
-   DISPLAY CART
-===================================================== */
-
-function displayCart() {
-
-    const products =
-        getProducts();
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
 
-    const cart =
-        getCart();
+        /* =================================================
+           GET PRODUCTS
+        ================================================= */
+
+        const products =
+            getProducts();
 
 
-    const container =
-        document.getElementById(
-            "cartContainer"
-        );
+        /* =================================================
+           GET CART
+        ================================================= */
+
+        let cart =
+            getCart();
 
 
-    /*
-       Remove products from cart that
-       no longer exist in product list.
-    */
-
-    const validCart =
-        cart.filter(function(item) {
-
-            return products.some(
-                function(product) {
-
-                    return (
-                        product.code ===
-                        item.code
-                    );
-
-                }
+        const container =
+            document.getElementById(
+                "cartContainer"
             );
 
-        });
+
+        if (!container) {
+            return;
+        }
 
 
-    /*
-       Save cleaned cart
-    */
+        /* =================================================
+           REMOVE INVALID CART ITEMS
+        ================================================= */
 
-    if (
-        validCart.length !==
-        cart.length
-    ) {
+        cart =
+            cart.filter(function(item) {
 
-        saveCart(validCart);
+                return products.some(
+                    function(product) {
 
-    }
+                        return (
+                            product.code ===
+                            item.code
+                        );
+
+                    }
+                );
+
+            });
 
 
+        saveCart(cart);
 
-    /* =================================================
-       EMPTY CART
-    ================================================= */
 
-    if (validCart.length === 0) {
+        /* =================================================
+           DISPLAY EMPTY CART
+        ================================================= */
 
-        container.innerHTML = `
+        if (
+            cart.length === 0
+        ) {
 
-            <div
-                class="cart-items"
-                style="grid-column:1/-1"
-            >
+            container.innerHTML = `
 
-                <div class="empty-cart">
+                <div
+                    class="empty-cart"
+                    style="grid-column:1/-1;"
+                >
 
                     <h2>
-                        Your cart is empty
+                        Your cart is empty.
                     </h2>
 
                     <p>
                         You haven't added any
-                        products yet.
+                        stationery products yet.
                     </p>
 
                     <a
-                        class="btn btn-primary"
                         href="products.html"
+                        class="btn btn-primary"
                     >
                         Browse Products
                     </a>
 
                 </div>
 
-            </div>
-
-        `;
+            `;
 
 
-        updateCartCount();
+            updateCartCount();
 
+            createMobileCartBar();
 
-        return;
-
-    }
-
-
-
-    /* =================================================
-       CALCULATE TOTAL
-    ================================================= */
-
-    let subtotal = 0;
-
-
-    let itemsHTML = "";
-
-
-
-    validCart.forEach(function(item) {
-
-
-        const product =
-            products.find(
-                function(p) {
-
-                    return (
-                        p.code ===
-                        item.code
-                    );
-
-                }
-            );
-
-
-        if (!product) {
+            updateMobileCartBar();
 
             return;
 
         }
 
 
-        const quantity =
-            Number(item.quantity);
+        /* =================================================
+           CALCULATE SUBTOTAL
+        ================================================= */
+
+        let subtotal = 0;
+
+        let itemsHTML = "";
 
 
-        const itemTotal =
-            product.price *
-            quantity;
+        cart.forEach(function(item) {
 
 
-        subtotal += itemTotal;
+            const product =
+                products.find(
+                    function(product) {
 
+                        return (
+                            product.code ===
+                            item.code
+                        );
 
-
-        /* =============================================
-           PRODUCT HTML
-        ============================================= */
-
-        itemsHTML += `
-
-            <div class="cart-item">
-
-
-                <!-- PRODUCT IMAGE -->
-
-                <div
-                    class="cart-item-image"
-                >
-
-                    ${
-                        product.image
-
-                        ?
-
-                        `
-                        <img
-                            src="${escapeHTML(
-                                product.image
-                            )}"
-                            alt="${escapeHTML(
-                                product.name
-                            )}"
-                        >
-                        `
-
-                        :
-
-                        `
-                        <span
-                            class="cart-placeholder"
-                        >
-                            ${escapeHTML(
-                                product.name
-                                    .charAt(0)
-                                    .toUpperCase()
-                            )}
-                        </span>
-                        `
                     }
-
-                </div>
-
+                );
 
 
-                <!-- PRODUCT NAME -->
+            if (!product) {
+                return;
+            }
 
-                <div>
 
-                    <h3>
+            const quantity =
+                Math.max(
+                    1,
+                    Number(item.quantity) || 1
+                );
+
+
+            const itemTotal =
+                Number(product.price) *
+                quantity;
+
+
+            subtotal +=
+                itemTotal;
+
+
+            /* =============================================
+               PRODUCT IMAGE
+            ============================================= */
+
+            let imageHTML = "";
+
+
+            if (product.image) {
+
+                imageHTML = `
+
+                    <img
+                        src="${escapeHTML(
+                            product.image
+                        )}"
+                        alt="${escapeHTML(
+                            product.name
+                        )}"
+                    >
+
+                `;
+
+            } else {
+
+                imageHTML = `
+
+                    <span class="cart-placeholder">
 
                         ${escapeHTML(
                             product.name
+                                .charAt(0)
+                                .toUpperCase()
                         )}
 
-                    </h3>
+                    </span>
+
+                `;
+
+            }
 
 
-                    <div
-                        class="cart-item-code"
-                    >
+            /* =============================================
+               CART ITEM
+            ============================================= */
 
-                        Item Code:
-                        ${escapeHTML(
-                            product.code
-                        )}
+            itemsHTML += `
+
+                <article class="cart-item">
+
+
+                    <div class="cart-item-image">
+
+                        ${imageHTML}
 
                     </div>
 
-                </div>
+
+                    <div class="cart-item-info">
 
 
+                        <span class="cart-item-category">
 
-                <!-- PRICE -->
+                            ${escapeHTML(
+                                product.category
+                            )}
 
-                <div
-                    class="cart-price"
-                >
-
-                    ₹${Number(
-                        product.price
-                    ).toLocaleString(
-                        "en-IN"
-                    )}
-
-                </div>
+                        </span>
 
 
+                        <h3>
 
-                <!-- QUANTITY -->
+                            ${escapeHTML(
+                                product.name
+                            )}
 
-                <div
-                    class="quantity-control"
-                >
-
-                    <button
-                        type="button"
-                        onclick="changeQuantity(
-                            '${product.code}',
-                            -1
-                        )"
-                    >
-                        −
-                    </button>
+                        </h3>
 
 
-                    <span>
-                        ${quantity}
-                    </span>
+                        <div class="cart-item-code">
+
+                            Item Code:
+                            ${escapeHTML(
+                                product.code
+                            )}
+
+                        </div>
 
 
-                    <button
-                        type="button"
-                        onclick="changeQuantity(
-                            '${product.code}',
-                            1
-                        )"
-                    >
-                        +
-                    </button>
+                        <div class="cart-item-price">
 
-                </div>
+                            ${formatMoney(
+                                product.price
+                            )}
+                            each
+
+                        </div>
 
 
+                        <div class="cart-item-total">
 
-                <!-- REMOVE -->
+                            ${formatMoney(
+                                itemTotal
+                            )}
 
-                <button
-                    type="button"
-                    class="remove-item"
-                    onclick="removeFromCart(
-                        '${product.code}'
-                    )"
-                >
+                        </div>
 
-                    Remove
 
-                </button>
+                    </div>
 
+
+                    <div class="cart-item-actions">
+
+
+                        <div class="quantity-control">
+
+
+                            <button
+                                type="button"
+                                class="quantity-minus"
+                                data-code="${escapeHTML(
+                                    product.code
+                                )}"
+                                aria-label="Decrease quantity"
+                            >
+                                −
+                            </button>
+
+
+                            <span>
+                                ${quantity}
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="quantity-plus"
+                                data-code="${escapeHTML(
+                                    product.code
+                                )}"
+                                aria-label="Increase quantity"
+                            >
+                                +
+                            </button>
+
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="remove-button"
+                            data-code="${escapeHTML(
+                                product.code
+                            )}"
+                        >
+                            Remove
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+            `;
+
+        });
+
+
+        /* =================================================
+           DELIVERY
+        ================================================= */
+
+        /*
+           Default delivery charge.
+           This can be changed later from
+           the admin settings system.
+        */
+
+        let baseDeliveryCharge = 100;
+
+
+        let deliveryDiscount = 0;
+
+
+        /*
+           Free / reduced delivery rule:
+           Orders above ₹500 receive ₹10
+           delivery discount.
+        */
+
+        if (subtotal > 500) {
+
+            deliveryDiscount = 10;
+
+        }
+
+
+        let deliveryCharge =
+            Math.max(
+                0,
+                baseDeliveryCharge -
+                deliveryDiscount
+            );
+
+
+        const grandTotal =
+            subtotal +
+            deliveryCharge;
+
+
+        /* =================================================
+           CART HTML
+        ================================================= */
+
+        container.innerHTML = `
+
+            <!-- =========================================
+                 CART ITEMS
+            ========================================== -->
+
+            <div class="cart-items">
+
+                ${itemsHTML}
 
             </div>
+
+
+            <!-- =========================================
+                 ORDER SUMMARY
+            ========================================== -->
+
+            <aside class="cart-summary">
+
+
+                <h2>
+                    Order Summary
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <strong>
+                        ${getCartCount()}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong>
+                        ${formatMoney(
+                            subtotal
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery Charge
+                    </span>
+
+                    <strong>
+                        ${formatMoney(
+                            baseDeliveryCharge
+                        )}
+                    </strong>
+
+                </div>
+
+
+                ${
+                    deliveryDiscount > 0
+
+                    ?
+
+                    `
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Discount
+                        </span>
+
+                        <strong
+                            style="color:#237a45;"
+                        >
+                            -${formatMoney(
+                                deliveryDiscount
+                            )}
+                        </strong>
+
+                    </div>
+
+                    `
+
+                    :
+
+                    ""
+                }
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Final Delivery Charge
+                    </span>
+
+                    <strong>
+
+                        ${
+                            deliveryCharge === 0
+
+                            ?
+
+                            "FREE"
+
+                            :
+
+                            formatMoney(
+                                deliveryCharge
+                            )
+
+                        }
+
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Estimated Delivery
+                    </span>
+
+                    <strong>
+                        Within 7 Days
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="summary-row summary-total"
+                >
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ${formatMoney(
+                            grandTotal
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <a
+                    href="checkout.html"
+                    class="checkout-button"
+                >
+                    Proceed to Order
+                </a>
+
+
+                <a
+                    href="products.html"
+                    class="continue-shopping"
+                >
+                    ← Continue Shopping
+                </a>
+
+
+            </aside>
 
         `;
 
-    });
+
+        /* =================================================
+           UPDATE HEADER CART
+        ================================================= */
+
+        updateCartCount();
 
 
+        createMobileCartBar();
 
-   /* =================================================
-   DELIVERY SETTINGS FROM ADMIN PANEL
-================================================= */
-
-const SETTINGS_KEY =
-    "tsp_store_settings";
+        updateMobileCartBar();
 
 
-const DEFAULT_SETTINGS = {
+        /* =================================================
+           QUANTITY PLUS
+        ================================================= */
 
-    deliveryCharge: 50,
-
-    freeDeliveryAmount: 0,
-
-    discountThreshold: 500,
-
-    deliveryDiscount: 10,
-
-    estimatedDeliveryDays: 7
-
-};
-
-
-let storeSettings = {
-    ...DEFAULT_SETTINGS
-};
-
-
-try {
-
-    const savedSettings =
-        JSON.parse(
-            localStorage.getItem(
-                SETTINGS_KEY
+        document
+            .querySelectorAll(
+                ".quantity-plus"
             )
-        );
+            .forEach(
+                function(button) {
 
+                    button.addEventListener(
+                        "click",
+                        function() {
 
-    if (
-        savedSettings &&
-        typeof savedSettings === "object"
-    ) {
+                            const code =
+                                button.dataset.code;
 
-        storeSettings = {
 
-            ...DEFAULT_SETTINGS,
+                            const currentCart =
+                                getCart();
 
-            ...savedSettings
 
-        };
+                            const item =
+                                currentCart.find(
+                                    function(item) {
 
-    }
+                                        return (
+                                            item.code ===
+                                            code
+                                        );
 
-}
+                                    }
+                                );
 
-catch(error) {
 
-    console.log(
-        "Using default delivery settings."
-    );
+                            if (item) {
 
-}
+                                item.quantity =
+                                    (Number(
+                                        item.quantity
+                                    ) || 0) + 1;
 
+                            }
 
-/* =================================================
-   DELIVERY CALCULATION
-================================================= */
 
-const baseDeliveryCharge =
-    Number(
-        storeSettings.deliveryCharge
-    ) || 0;
+                            saveCart(
+                                currentCart
+                            );
 
 
-const freeDeliveryAmount =
-    Number(
-        storeSettings.freeDeliveryAmount
-    ) || 0;
+                            location.reload();
 
-
-const discountThreshold =
-    Number(
-        storeSettings.discountThreshold
-    ) || 0;
-
-
-const configuredDeliveryDiscount =
-    Number(
-        storeSettings.deliveryDiscount
-    ) || 0;
-
-
-/* =================================================
-   FREE DELIVERY
-================================================= */
-
-let deliveryCharge =
-    baseDeliveryCharge;
-
-
-let deliveryDiscount =
-    0;
-
-
-/*
-   If the order qualifies for free delivery,
-   delivery becomes ₹0.
-*/
-
-if (
-    freeDeliveryAmount > 0 &&
-    subtotal >= freeDeliveryAmount
-) {
-
-    deliveryCharge = 0;
-
-    deliveryDiscount = 0;
-
-}
-
-
-/*
-   Otherwise apply delivery discount
-   when order is above the threshold.
-*/
-
-else if (
-    discountThreshold > 0 &&
-    subtotal > discountThreshold
-) {
-
-    deliveryDiscount =
-        Math.min(
-            configuredDeliveryDiscount,
-            baseDeliveryCharge
-        );
-
-
-    deliveryCharge =
-        Math.max(
-            0,
-            baseDeliveryCharge -
-            deliveryDiscount
-        );
-
-}
-
-
-/* =================================================
-   FINAL TOTAL
-================================================= */
-
-const grandTotal =
-    subtotal +
-    deliveryCharge;
-
-
-
-    /* =================================================
-       DISPLAY CART
-    ================================================= */
-
-    container.innerHTML = `
-
-        <!-- =========================================
-             PRODUCTS
-        ========================================== -->
-
-        <div class="cart-items">
-
-            ${itemsHTML}
-
-        </div>
-
-
-
-        <!-- =========================================
-             ORDER SUMMARY
-        ========================================== -->
-
-        <aside
-            class="cart-summary"
-        >
-
-            <h2>
-                Order Summary
-            </h2>
-
-
-
-            <div class="summary-row">
-
-                <span>
-                    Items
-                </span>
-
-                <strong>
-                    ${getCartCount()}
-                </strong>
-
-            </div>
-
-
-
-            <div class="summary-row">
-
-                <span>
-                    Subtotal
-                </span>
-
-                <strong>
-
-                    ₹${subtotal.toLocaleString(
-                        "en-IN"
-                    )}
-
-                </strong>
-
-            </div>
-
-
-
-           <div class="summary-row">
-
-    <span>
-        Delivery Charge
-    </span>
-
-    <strong>
-        ₹${baseDeliveryCharge.toLocaleString(
-            "en-IN"
-        )}
-    </strong>
-
-</div>
-
-
-
-${deliveryDiscount > 0 ? `
-
-<div class="summary-row">
-
-    <span>
-        Delivery Discount
-    </span>
-
-    <strong style="color: #237a45;">
-
-        -₹${deliveryDiscount.toLocaleString(
-            "en-IN"
-        )}
-
-    </strong>
-
-</div>
-
-` : ""}
-
-
-<div class="summary-row">
-
-    <span>
-        Final Delivery Charge
-    </span>
-
-    <strong>
-
-        ${
-            deliveryCharge === 0
-                ? "FREE"
-                : "₹" +
-                  deliveryCharge.toLocaleString(
-                      "en-IN"
-                  )
-        }
-
-    </strong>
-
-</div>
-<div class="summary-row">
-
-    <span>
-        Estimated Delivery
-    </span>
-
-    <strong>
-        Within 7 Days
-    </strong>
-
-</div>
-
-
-
-            <div
-                class="summary-row summary-total"
-            >
-
-                <span>
-                    Total
-                </span>
-
-                <span>
-
-                    ₹${grandTotal.toLocaleString(
-                        "en-IN"
-                    )}
-
-                </span>
-
-            </div>
-
-
-
-            <!-- =====================================
-                 PROCEED TO CHECKOUT
-
-                 IMPORTANT:
-                 This now goes to checkout.html
-                 instead of WhatsApp.
-            ====================================== -->
-
-            <a
-                class="btn btn-primary checkout-button"
-                href="checkout.html"
-            >
-
-                Proceed to Order
-
-            </a>
-
-
-
-            <a
-                class="continue-shopping"
-                href="products.html"
-            >
-
-                ← Continue Shopping
-
-            </a>
-
-
-        </aside>
-
-    `;
-
-
-
-    updateCartCount();
-
-}
-
-
-
-/* =====================================================
-   CHANGE QUANTITY
-===================================================== */
-
-function changeQuantity(
-    code,
-    amount
-) {
-
-
-    const cart =
-        getCart();
-
-
-    const item =
-        cart.find(
-            function(cartItem) {
-
-                return (
-                    cartItem.code ===
-                    code
-                );
-
-            }
-        );
-
-
-    if (!item) {
-
-        return;
-
-    }
-
-
-    item.quantity =
-        Number(item.quantity) +
-        Number(amount);
-
-
-
-    /* =============================================
-       REMOVE IF QUANTITY BECOMES ZERO
-    ============================================= */
-
-    if (
-        item.quantity <= 0
-    ) {
-
-
-        const newCart =
-            cart.filter(
-                function(cartItem) {
-
-                    return (
-                        cartItem.code !==
-                        code
+                        }
                     );
 
                 }
             );
 
 
-        saveCart(newCart);
+        /* =================================================
+           QUANTITY MINUS
+        ================================================= */
 
+        document
+            .querySelectorAll(
+                ".quantity-minus"
+            )
+            .forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            const code =
+                                button.dataset.code;
+
+
+                            const currentCart =
+                                getCart();
+
+
+                            const item =
+                                currentCart.find(
+                                    function(item) {
+
+                                        return (
+                                            item.code ===
+                                            code
+                                        );
+
+                                    }
+                                );
+
+
+                            if (item) {
+
+                                item.quantity =
+                                    (Number(
+                                        item.quantity
+                                    ) || 1) - 1;
+
+
+                                if (
+                                    item.quantity <= 0
+                                ) {
+
+                                    const index =
+                                        currentCart.indexOf(
+                                            item
+                                        );
+
+                                    currentCart.splice(
+                                        index,
+                                        1
+                                    );
+
+                                }
+
+                            }
+
+
+                            saveCart(
+                                currentCart
+                            );
+
+
+                            location.reload();
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =================================================
+           REMOVE ITEM
+        ================================================= */
+
+        document
+            .querySelectorAll(
+                ".remove-button"
+            )
+            .forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            const code =
+                                button.dataset.code;
+
+
+                            const currentCart =
+                                getCart();
+
+
+                            const updatedCart =
+                                currentCart.filter(
+                                    function(item) {
+
+                                        return (
+                                            item.code !==
+                                            code
+                                        );
+
+                                    }
+                                );
+
+
+                            saveCart(
+                                updatedCart
+                            );
+
+
+                            location.reload();
+
+                        }
+                    );
+
+                }
+            );
 
     }
-
-    else {
-
-        saveCart(cart);
-
-    }
-
-
-
-    displayCart();
-
-}
-
-
-
-/* =====================================================
-   REMOVE PRODUCT
-===================================================== */
-
-function removeFromCart(code) {
-
-
-    const cart =
-        getCart();
-
-
-    const newCart =
-        cart.filter(
-            function(item) {
-
-                return (
-                    item.code !==
-                    code
-                );
-
-            }
-        );
-
-
-    saveCart(newCart);
-
-
-    displayCart();
-
-}
-
-
-
-/* =====================================================
-   DISPLAY CART
-===================================================== */
-
-displayCart();
+);
 
 </script>
 

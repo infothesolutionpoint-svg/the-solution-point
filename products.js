@@ -8,10 +8,11 @@ const CART_STORAGE_KEY = "tsp_cart";
 
 
 /* =========================================================
-   YOUR INITIAL PRODUCT CATALOG
+   ACTUAL PRODUCT CATALOG
    ========================================================= */
 
 const DEFAULT_PRODUCTS = [
+
     {
         code: "TSP0001",
         category: "Register/Copy",
@@ -81,6 +82,7 @@ const DEFAULT_PRODUCTS = [
         price: 50,
         image: ""
     }
+
 ];
 
 
@@ -101,16 +103,41 @@ function getProducts() {
         );
 
         return [...DEFAULT_PRODUCTS];
+
     }
 
     try {
 
-        return JSON.parse(savedProducts);
+        const products =
+            JSON.parse(savedProducts);
+
+        if (
+            !Array.isArray(products) ||
+            products.length === 0
+        ) {
+
+            localStorage.setItem(
+                PRODUCT_STORAGE_KEY,
+                JSON.stringify(DEFAULT_PRODUCTS)
+            );
+
+            return [...DEFAULT_PRODUCTS];
+
+        }
+
+        return products;
 
     } catch (error) {
 
+        localStorage.setItem(
+            PRODUCT_STORAGE_KEY,
+            JSON.stringify(DEFAULT_PRODUCTS)
+        );
+
         return [...DEFAULT_PRODUCTS];
+
     }
+
 }
 
 
@@ -124,6 +151,7 @@ function saveProducts(products) {
         PRODUCT_STORAGE_KEY,
         JSON.stringify(products)
     );
+
 }
 
 
@@ -133,12 +161,15 @@ function saveProducts(products) {
 
 function formatMoney(amount) {
 
-    return "₹" + Number(amount).toLocaleString("en-IN");
+    return "₹" +
+        Number(amount || 0)
+            .toLocaleString("en-IN");
+
 }
 
 
 /* =========================================================
-   CALCULATE DISCOUNT %
+   DISCOUNT PERCENTAGE
    ========================================================= */
 
 function getDiscountPercentage(product) {
@@ -147,12 +178,18 @@ function getDiscountPercentage(product) {
         !product.mrp ||
         product.mrp <= product.price
     ) {
+
         return 0;
+
     }
 
     return Math.round(
-        ((product.mrp - product.price) / product.mrp) * 100
+        (
+            (product.mrp - product.price)
+            / product.mrp
+        ) * 100
     );
+
 }
 
 
@@ -167,16 +204,20 @@ function escapeHTML(value) {
         function(character) {
 
             const entities = {
+
                 "&": "&amp;",
                 "<": "&lt;",
                 ">": "&gt;",
                 '"': "&quot;",
                 "'": "&#039;"
+
             };
 
             return entities[character];
+
         }
     );
+
 }
 
 
@@ -194,17 +235,23 @@ function productImage(product) {
                 alt="${escapeHTML(product.name)}"
             >
         `;
+
     }
 
     return `
         <div class="product-placeholder">
+
             <span>
                 ${escapeHTML(
-                    product.name.charAt(0).toUpperCase()
+                    product.name
+                        .charAt(0)
+                        .toUpperCase()
                 )}
             </span>
+
         </div>
     `;
+
 }
 
 
@@ -230,53 +277,47 @@ function createProductCard(product) {
             <div class="product-content">
 
                 <span class="product-category">
-
                     ${escapeHTML(product.category)}
-
                 </span>
 
 
                 <h3>
-
                     ${escapeHTML(product.name)}
-
                 </h3>
 
 
                 <div class="product-code">
-
                     Item Code:
                     ${escapeHTML(product.code)}
-
                 </div>
 
 
                 <div class="product-price">
 
                     <strong>
-
                         ${formatMoney(product.price)}
-
                     </strong>
-
 
                     ${
                         product.mrp > product.price
                         ?
-                        `<del>
+                        `
+                        <del>
                             ${formatMoney(product.mrp)}
-                        </del>`
+                        </del>
+                        `
                         :
                         ""
                     }
 
-
                     ${
                         discountPercentage > 0
                         ?
-                        `<span class="discount-badge">
+                        `
+                        <span class="discount-badge">
                             ${discountPercentage}% OFF
-                        </span>`
+                        </span>
+                        `
                         :
                         ""
                     }
@@ -285,18 +326,177 @@ function createProductCard(product) {
 
 
                 <button
+                    type="button"
                     class="btn btn-primary add-cart"
                     data-code="${escapeHTML(product.code)}"
                 >
-
                     Add to Cart
-
                 </button>
 
             </div>
 
         </article>
     `;
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
+   ========================================================= */
+
+function renderProducts() {
+
+    const grid =
+        document.getElementById("productGrid");
+
+    if (!grid) {
+        return;
+    }
+
+
+    const searchInput =
+        document.getElementById("productSearch");
+
+    const categorySelect =
+        document.getElementById("categoryFilter");
+
+
+    const search =
+        searchInput
+        ? searchInput.value.toLowerCase().trim()
+        : "";
+
+
+    const category =
+        categorySelect
+        ? categorySelect.value
+        : "all";
+
+
+    const products =
+        getProducts();
+
+
+    const filteredProducts =
+        products.filter(function(product) {
+
+            const searchText = (
+
+                product.code +
+                " " +
+                product.name +
+                " " +
+                product.category
+
+            ).toLowerCase();
+
+
+            const matchesSearch =
+                searchText.includes(search);
+
+
+            const matchesCategory =
+                category === "all" ||
+                category === "" ||
+                product.category === category;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        });
+
+
+    if (filteredProducts.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="empty-products">
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        filteredProducts
+            .map(createProductCard)
+            .join("");
+
+}
+
+
+/* =========================================================
+   LOAD CATEGORIES
+   ========================================================= */
+
+function loadCategories() {
+
+    const select =
+        document.getElementById("categoryFilter");
+
+    if (!select) {
+        return;
+    }
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            All Categories
+        </option>
+
+    `;
+
+
+    const products =
+        getProducts();
+
+
+    const categories = [
+        ...new Set(
+            products.map(function(product) {
+
+                return product.category;
+
+            })
+        )
+    ].sort();
+
+
+    categories.forEach(function(category) {
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            category;
+
+
+        option.textContent =
+            category;
+
+
+        select.appendChild(option);
+
+    });
+
 }
 
 
@@ -308,16 +508,29 @@ function getCart() {
 
     try {
 
-        return JSON.parse(
-            localStorage.getItem(CART_STORAGE_KEY)
-        ) || [];
+        const cart =
+            JSON.parse(
+                localStorage.getItem(
+                    CART_STORAGE_KEY
+                )
+            );
 
-    } catch {
+        return Array.isArray(cart)
+            ? cart
+            : [];
+
+    } catch (error) {
 
         return [];
+
     }
+
 }
 
+
+/* =========================================================
+   SAVE CART
+   ========================================================= */
 
 function saveCart(cart) {
 
@@ -325,34 +538,197 @@ function saveCart(cart) {
         CART_STORAGE_KEY,
         JSON.stringify(cart)
     );
+
 }
 
 
+/* =========================================================
+   CART COUNT
+   ========================================================= */
+
 function getCartCount() {
 
-    const cart = getCart();
+    const cart =
+        getCart();
 
     return cart.reduce(
         function(total, item) {
 
-            return total + item.quantity;
+            return total +
+                (Number(item.quantity) || 0);
 
         },
         0
     );
+
 }
 
 
+/* =========================================================
+   CREATE MOBILE CART BAR
+   ========================================================= */
+
+function createMobileCartBar() {
+
+    if (
+        document.querySelector(
+            ".mobile-cart-bar"
+        )
+    ) {
+        return;
+    }
+
+
+    const bar =
+        document.createElement("div");
+
+
+    bar.className =
+        "mobile-cart-bar";
+
+
+    bar.innerHTML = `
+
+        <div class="mobile-cart-info">
+
+            <div class="mobile-cart-icon">
+                🛒
+            </div>
+
+            <div class="mobile-cart-text">
+
+                <strong>
+
+                    <span id="mobileCartCount">
+                        0
+                    </span>
+
+                    item(s) in cart
+
+                </strong>
+
+                <span>
+                    Ready to checkout
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="cart.html"
+            class="mobile-cart-button"
+        >
+            View Cart
+        </a>
+
+    `;
+
+
+    document.body.appendChild(bar);
+
+}
+
+
+/* =========================================================
+   UPDATE MOBILE CART BAR
+   ========================================================= */
+
+function updateMobileCartBar() {
+
+    const bar =
+        document.querySelector(
+            ".mobile-cart-bar"
+        );
+
+    if (!bar) {
+        return;
+    }
+
+
+    const count =
+        getCartCount();
+
+
+    const countElement =
+        document.getElementById(
+            "mobileCartCount"
+        );
+
+
+    if (countElement) {
+
+        countElement.textContent =
+            count;
+
+    }
+
+
+    if (count > 0) {
+
+        bar.classList.add("show");
+
+        document.body.classList.add(
+            "has-mobile-cart-bar"
+        );
+
+    } else {
+
+        bar.classList.remove("show");
+
+        document.body.classList.remove(
+            "has-mobile-cart-bar"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE CART COUNT
+   ========================================================= */
+
 function updateCartCount() {
+
+    const count =
+        getCartCount();
+
 
     document
         .querySelectorAll(".cart-count")
         .forEach(function(element) {
 
             element.textContent =
-                getCartCount();
+                count;
 
         });
+
+
+    updateMobileCartBar();
+
+}
+
+
+/* =========================================================
+   CART ANIMATION
+   ========================================================= */
+
+function animateCartCount() {
+
+    document
+        .querySelectorAll(".cart-count")
+        .forEach(function(element) {
+
+            element.classList.remove("bump");
+
+            void element.offsetWidth;
+
+            element.classList.add("bump");
+
+        });
+
 }
 
 
@@ -362,37 +738,43 @@ function updateCartCount() {
 
 function addToCart(productCode) {
 
-    const products = getProducts();
+    const products =
+        getProducts();
 
-    const product = products.find(
-        function(item) {
 
-            return item.code === productCode;
+    const product =
+        products.find(function(item) {
 
-        }
-    );
+            return (
+                item.code === productCode
+            );
+
+        });
+
 
     if (!product) {
-
         return;
     }
 
 
-    const cart = getCart();
+    const cart =
+        getCart();
 
 
-    const existingItem = cart.find(
-        function(item) {
+    const existingItem =
+        cart.find(function(item) {
 
-            return item.code === productCode;
+            return (
+                item.code === productCode
+            );
 
-        }
-    );
+        });
 
 
     if (existingItem) {
 
-        existingItem.quantity++;
+        existingItem.quantity =
+            (Number(existingItem.quantity) || 0) + 1;
 
     } else {
 
@@ -403,6 +785,7 @@ function addToCart(productCode) {
             quantity: 1
 
         });
+
     }
 
 
@@ -410,20 +793,26 @@ function addToCart(productCode) {
 
     updateCartCount();
 
+    animateCartCount();
+
     showToast(
-        product.name + " added to cart"
+        product.name +
+        " added to cart"
     );
+
 }
 
 
 /* =========================================================
-   TOAST MESSAGE
+   TOAST
    ========================================================= */
 
 function showToast(message) {
 
     let toast =
-        document.getElementById("storeToast");
+        document.getElementById(
+            "storeToast"
+        );
 
 
     if (!toast) {
@@ -431,16 +820,20 @@ function showToast(message) {
         toast =
             document.createElement("div");
 
-        toast.id = "storeToast";
+        toast.id =
+            "storeToast";
 
         toast.className =
             "store-toast";
 
         document.body.appendChild(toast);
+
     }
 
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
+
 
     toast.classList.add("show");
 
@@ -450,11 +843,12 @@ function showToast(message) {
         toast.classList.remove("show");
 
     }, 1800);
+
 }
 
 
 /* =========================================================
-   ADD TO CART BUTTON
+   ADD TO CART CLICK
    ========================================================= */
 
 document.addEventListener(
@@ -466,7 +860,6 @@ document.addEventListener(
 
 
         if (!button) {
-
             return;
         }
 
@@ -479,4 +872,99 @@ document.addEventListener(
 );
 
 
-updateCartCount();
+/* =========================================================
+   INITIALISE PRODUCT PAGE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        getProducts();
+
+        loadCategories();
+
+        renderProducts();
+
+        createMobileCartBar();
+
+        updateCartCount();
+
+
+        const searchInput =
+            document.getElementById(
+                "productSearch"
+            );
+
+
+        if (searchInput) {
+
+            searchInput.addEventListener(
+                "input",
+                renderProducts
+            );
+
+        }
+
+
+        const categorySelect =
+            document.getElementById(
+                "categoryFilter"
+            );
+
+
+        if (categorySelect) {
+
+            categorySelect.addEventListener(
+                "change",
+                renderProducts
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   STORAGE CHANGE
+   ========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key === CART_STORAGE_KEY
+        ) {
+
+            updateCartCount();
+
+        }
+
+
+        if (
+            event.key === PRODUCT_STORAGE_KEY
+        ) {
+
+            loadCategories();
+
+            renderProducts();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SAFETY CHECK
+   ========================================================= */
+
+setInterval(function() {
+
+    createMobileCartBar();
+
+    updateCartCount();
+
+}, 500);

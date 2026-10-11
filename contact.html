@@ -3,21 +3,626 @@
 
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <meta name="description"
-        content="Contact The Solution Point for accounting and tax services.">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <title>Contact | The Solution Point</title>
+    <meta
+        name="description"
+        content="Contact The Solution Point for accounting, tax, GST, TDS and business support services."
+    >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>
+        Contact Us | The Solution Point
+    </title>
 
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-        rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           CONTACT PAGE
+        ===================================================== */
+
+        .contact-page {
+            background: #f7f5ef;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .contact-hero {
+            padding: 90px 0 85px;
+        }
+
+
+        .contact-hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+            gap: 80px;
+            align-items: end;
+        }
+
+
+        .contact-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 22px;
+
+            color: #a87535;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+        }
+
+
+        .contact-eyebrow::before {
+            content: "";
+            width: 34px;
+            height: 1px;
+            background: #b8894e;
+        }
+
+
+        .contact-hero h1 {
+            max-width: 760px;
+            margin: 0;
+
+            color: #102b3f;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: clamp(48px, 6vw, 74px);
+            font-weight: 600;
+            line-height: 1.03;
+            letter-spacing: -.025em;
+        }
+
+
+        .contact-hero h1 em {
+            color: #a87535;
+            font-style: normal;
+        }
+
+
+        .contact-hero-side p {
+            max-width: 390px;
+            margin: 0;
+
+            color: #61717b;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+
+        /* =====================================================
+           CONTACT MAIN
+        ===================================================== */
+
+        .contact-main {
+            padding: 80px 0 100px;
+
+            background: #ffffff;
+
+            border-top: 1px solid #e4e0d7;
+            border-bottom: 1px solid #e4e0d7;
+        }
+
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 90px;
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           CONTACT INFORMATION
+        ===================================================== */
+
+        .contact-info-label {
+            display: block;
+            margin-bottom: 14px;
+
+            color: #a87535;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .18em;
+        }
+
+
+        .contact-info h2 {
+            max-width: 430px;
+            margin: 0 0 18px;
+
+            color: #102b3f;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+
+        .contact-info-intro {
+            max-width: 440px;
+            margin: 0 0 40px;
+
+            color: #61717b;
+            font-size: 13px;
+            line-height: 1.85;
+        }
+
+
+        .contact-details {
+            border-top: 1px solid #ddd8ce;
+        }
+
+
+        .contact-detail {
+            display: grid;
+            grid-template-columns: 45px 1fr;
+            gap: 16px;
+            align-items: center;
+
+            padding: 20px 0;
+
+            border-bottom: 1px solid #ddd8ce;
+
+            text-decoration: none;
+        }
+
+
+        .contact-detail-mark {
+            width: 36px;
+            height: 36px;
+
+            display: grid;
+            place-items: center;
+
+            background: #f1e5d3;
+            color: #a87535;
+
+            font-size: 15px;
+        }
+
+
+        .contact-detail small {
+            display: block;
+            margin-bottom: 5px;
+
+            color: #a87535;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .15em;
+        }
+
+
+        .contact-detail strong,
+        .contact-detail span {
+            color: #102b3f;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .contact-form-wrap {
+            padding: 42px 45px;
+
+            background: #f7f5ef;
+
+            border: 1px solid #e1ddd4;
+        }
+
+
+        .contact-form-wrap h2 {
+            margin: 0 0 8px;
+
+            color: #102b3f;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+
+        .contact-form-intro {
+            margin: 0 0 30px;
+
+            color: #687780;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 20px;
+        }
+
+
+        .contact-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .contact-field.full {
+            grid-column: 1 / -1;
+        }
+
+
+        .contact-field label {
+            margin-bottom: 7px;
+
+            color: #102b3f;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        .contact-field input,
+        .contact-field select,
+        .contact-field textarea {
+
+            width: 100%;
+            box-sizing: border-box;
+
+            padding: 13px 14px;
+
+            background: #ffffff;
+
+            border: 1px solid #d8d4cc;
+            border-radius: 0;
+
+            color: #102b3f;
+
+            font-family:
+                "DM Sans",
+                Arial,
+                sans-serif;
+
+            font-size: 13px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .contact-field textarea {
+            min-height: 135px;
+            resize: vertical;
+        }
+
+
+        .contact-field input:focus,
+        .contact-field select:focus,
+        .contact-field textarea:focus {
+
+            outline: none;
+
+            border-color: #b8894e;
+
+            box-shadow:
+                0 0 0 3px rgba(184,137,78,.08);
+
+        }
+
+
+        .contact-submit {
+            grid-column: 1 / -1;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 100%;
+
+            margin-top: 5px;
+            padding: 15px 20px;
+
+            background: #102b3f;
+            color: #ffffff;
+
+            border: 1px solid #102b3f;
+
+            font-family:
+                "DM Sans",
+                Arial,
+                sans-serif;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+        }
+
+
+        .contact-submit span {
+            color: #d2a66d;
+            font-size: 17px;
+        }
+
+
+        .contact-submit:hover {
+            background: #183c54;
+            transform: translateY(-1px);
+        }
+
+
+        .contact-form-note {
+            grid-column: 1 / -1;
+
+            margin: -2px 0 0;
+
+            color: #78858b;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           BOTTOM MESSAGE
+        ===================================================== */
+
+        .contact-closing {
+            padding: 85px 0;
+            background: #f7f5ef;
+        }
+
+
+        .contact-closing-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 50px;
+            align-items: center;
+
+            padding: 48px 55px;
+
+            background: #e9d5b7;
+        }
+
+
+        .contact-closing-inner h2 {
+            max-width: 650px;
+            margin: 0;
+
+            color: #102b3f;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: clamp(30px, 4vw, 46px);
+            line-height: 1.1;
+        }
+
+
+        .contact-closing-inner p {
+            margin: 10px 0 0;
+
+            color: #53636c;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .site-footer {
+            background: #101820;
+            color: #ffffff;
+        }
+
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.3fr .7fr 1fr;
+            gap: 60px;
+
+            padding-top: 55px;
+            padding-bottom: 45px;
+        }
+
+
+        .footer-brand .brand {
+            text-decoration: none;
+        }
+
+
+        .footer-brand .brand-text strong {
+            color: #ffffff;
+        }
+
+
+        .footer-brand .brand-text small {
+            color: #9faab0;
+        }
+
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+
+        .footer-column h4 {
+            margin: 0 0 8px;
+
+            color: #d2a66d;
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .16em;
+        }
+
+
+        .footer-column a,
+        .footer-column span {
+            color: #c1cbd0;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+            border-top: 1px solid rgba(255,255,255,.12);
+
+            color: #89959b;
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .contact-hero-grid,
+            .contact-main-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .contact-hero {
+                padding: 65px 0 70px;
+            }
+
+
+            .contact-hero h1 {
+                font-size: 47px;
+            }
+
+
+            .contact-main {
+                padding: 65px 0 75px;
+            }
+
+
+            .contact-form-wrap {
+                padding: 28px 22px;
+            }
+
+
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+
+
+            .contact-field.full,
+            .contact-submit,
+            .contact-form-note {
+                grid-column: auto;
+            }
+
+
+            .contact-closing {
+                padding: 65px 0;
+            }
+
+
+            .contact-closing-inner {
+                grid-template-columns: 1fr;
+                padding: 35px 28px;
+                gap: 25px;
+            }
+
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+
+            .footer-bottom {
+                display: block;
+            }
+
+
+            .footer-bottom span {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -25,371 +630,621 @@
 <body>
 
 
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="site-header">
 
-  <div class="container nav-wrap">
-
-    <a class="brand" href="index.html">
-
-      <span class="brand-mark">
-        TSP
-      </span>
-
-      <span>
-        <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
-        <small>Reliable Solutions. Professional Service. One Point.</small>
-      </span>
-
-    </a>
+    <div class="container nav-wrap">
 
 
-    <button class="menu-toggle" aria-label="Open menu">
-      ☰
-    </button>
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-mark">
+                TSP
+            </span>
 
 
-    <nav class="nav">
+            <span class="brand-text">
 
-      <a href="index.html">
-        Home
-      </a>
+                <strong>
+                    THE SOLUTION POINT
+                </strong>
 
-      <a href="about.html">
-        About Us
-      </a>
+                <small>
+                  Connecting People. Creating Solutions.
+                </small>
 
-      <a href="services.html">
-        Services
-      </a>
+            </span>
 
-      <a href="products.html">
-        Product
-      </a>
-
-      <a class="active" href="contact.html">
-        Contact
-      </a>
-
-    </nav>
+        </a>
 
 
-    <a class="nav-call" href="tel:+919217903420">
-      Call Us
-    </a>
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
 
-  </div>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="about.html">
+                About Us
+            </a>
+
+             
+            <a href="services.html">
+                Services
+            </a>
+
+
+            <a href="products.html">
+                Products
+            </a>
+
+
+            <a
+                class="active"
+                href="contact.html"
+            >
+                Contact
+            </a>
+
+        </nav>
+
+
+        <a
+            class="nav-call"
+            href="tel:+919217903420"
+        >
+            Call Us
+        </a>
+
+    </div>
 
 </header>
 
 
-<main>
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="contact-page">
 
 
-<section class="page-hero">
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-  <div class="container">
+    <section class="contact-hero">
 
-    <span class="eyebrow">
-      CONTACT US
-    </span>
-
-    <h1>
-      Let's talk about your requirements.
-    </h1>
-
-    <p>
-      Have a question or need an accounting service?
-      Get in touch with The Solution Point.
-    </p>
-
-  </div>
-
-</section>
+        <div class="container contact-hero-grid">
 
 
-<section class="section">
+            <div>
 
-  <div class="container contact-grid">
-
-
-    <div class="contact-info">
-
-      <span class="eyebrow">
-        GET IN TOUCH
-      </span>
-
-      <h2>
-        We're here to help.
-      </h2>
-
-      <p>
-        Choose the easiest way to reach us.
-      </p>
+                <div class="contact-eyebrow">
+                    CONTACT THE SOLUTION POINT
+                </div>
 
 
-      <a class="contact-item" href="tel:+919217903420">
+                <h1>
+                    Let's find the
+                    <em>right solution.</em>
+                </h1>
 
-        <span>☎</span>
+            </div>
 
-        <div>
 
-          <small>
-            PHONE
-          </small>
+            <div class="contact-hero-side">
 
-          <strong>
-            +91 9217903420
-          </strong>
+                <p>
+                    Have a question, need professional
+                    support, or want to discuss a service?
+                    Get in touch with The Solution Point.
+                </p>
+
+            </div>
+
 
         </div>
 
-      </a>
+    </section>
 
 
-      <a class="contact-item"
-         href="mailto:info.thesolutionpoint@gmail.com">
+    <!-- =====================================================
+         CONTACT AREA
+    ====================================================== -->
 
-        <span>✉</span>
+    <section class="contact-main">
 
-        <div>
+        <div class="container contact-main-grid">
 
-          <small>
-            EMAIL
-          </small>
 
-          <strong>
-            info.thesolutionpoint@gmail.com
-          </strong>
+            <!-- CONTACT DETAILS -->
+
+            <div class="contact-info">
+
+
+                <span class="contact-info-label">
+                    GET IN TOUCH
+                </span>
+
+
+                <h2>
+                    We're here to help.
+                </h2>
+
+
+                <p class="contact-info-intro">
+                    Choose the easiest way to reach us.
+                    For service enquiries, please use the
+                    form and tell us briefly what you need.
+                </p>
+
+
+                <div class="contact-details">
+
+
+                    <a
+                        class="contact-detail"
+                        href="tel:+919217903420"
+                    >
+
+                        <span class="contact-detail-mark">
+                            ☎
+                        </span>
+
+
+                        <span>
+
+                            <small>
+                                PHONE
+                            </small>
+
+
+                            <strong>
+                                +91 9217903420
+                            </strong>
+
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        class="contact-detail"
+                        href="mailto:info.thesolutionpoint@gmail.com"
+                    >
+
+                        <span class="contact-detail-mark">
+                            ✉
+                        </span>
+
+
+                        <span>
+
+                            <small>
+                                EMAIL
+                            </small>
+
+
+                            <strong>
+                                info.thesolutionpoint@gmail.com
+                            </strong>
+
+                        </span>
+
+                    </a>
+
+
+                    <div class="contact-detail">
+
+                        <span class="contact-detail-mark">
+                            ◉
+                        </span>
+
+
+                        <span>
+
+                            <small>
+                                WEBSITE
+                            </small>
+
+
+                            <strong>
+                                thesolutionpoint.co.in
+                            </strong>
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT FORM -->
+
+            <div class="contact-form-wrap">
+
+
+                <h2>
+                    Send an enquiry
+                </h2>
+
+
+                <p class="contact-form-intro">
+                    Share a few details and your email
+                    application will open with the enquiry
+                    prepared for you.
+                </p>
+
+
+                <form
+                    class="contact-form"
+                    id="contactForm"
+                >
+
+
+                    <div class="contact-field">
+
+                        <label for="name">
+                            Your Name
+                        </label>
+
+
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="contact-field">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+
+                        <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            placeholder="Enter your phone number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="contact-field full">
+
+                        <label for="service">
+                            Service Required
+                        </label>
+
+
+                        <select
+                            id="service"
+                            name="service"
+                        >
+
+                            <option value="">
+                                Select a service
+                            </option>
+
+
+                            <option>
+                                Bookkeeping & Accounting
+                            </option>
+
+
+                            <option>
+                                Income Tax Return (ITR)
+                            </option>
+
+
+                            <option>
+                                GST Registration
+                            </option>
+
+
+                            <option>
+                                GST Return Filing
+                            </option>
+
+
+                            <option>
+                                TDS Return Filing
+                            </option>
+
+
+                            <option>
+                                New Company Registration
+                            </option>
+
+
+                            <option>
+                                Balance Sheet & P&L Finalisation
+                            </option>
+
+
+                            <option>
+                                Tax Audit
+                            </option>
+
+
+                            <option>
+                                Digital Signature Certificate (DSC)
+                            </option>
+
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="contact-field full">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="Tell us briefly what you need..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        class="contact-submit"
+                        type="submit"
+                    >
+
+                        <span
+                            style="
+                                color:#ffffff;
+                                font-size:12px;
+                            "
+                        >
+                            Send Enquiry
+                        </span>
+
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <p class="contact-form-note">
+                        This form opens your email app with
+                        the enquiry details.
+                    </p>
+
+
+                </form>
+
+            </div>
+
 
         </div>
 
-      </a>
+    </section>
 
 
-      <div class="contact-item">
+    <!-- =====================================================
+         CLOSING
+    ====================================================== -->
 
-        <span>◉</span>
+    <section class="contact-closing">
 
-        <div>
+        <div class="container">
 
-          <small>
-            WEBSITE
-          </small>
 
-          <strong>
-            www.thesolutionpoint.co.in
-          </strong>
+            <div class="contact-closing-inner">
+
+
+                <div>
+
+                    <h2>
+                        Have something specific in mind?
+                    </h2>
+
+
+                    <p>
+                        Tell us what you need and we'll
+                        help you identify the right service.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="tel:+919217903420"
+                    class="about-contact-button"
+                    style="
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        min-height:52px;
+                        padding:0 24px;
+                        background:#102b3f;
+                        color:#ffffff;
+                        text-decoration:none;
+                        font-size:12px;
+                        font-weight:700;
+                    "
+                >
+
+                    Call Us
+
+                    <span
+                        style="
+                            margin-left:18px;
+                            color:#d2a66d;
+                            font-size:17px;
+                        "
+                    >
+                        →
+
+                    </span>
+
+                </a>
+
+
+            </div>
 
         </div>
 
-      </div>
-
-    </div>
-
-
-    <form class="contact-form" id="contactForm">
-
-      <h2>
-        Send an enquiry
-      </h2>
-
-
-      <label for="name">
-        Your Name
-      </label>
-
-      <input
-        id="name"
-        name="name"
-        type="text"
-        placeholder="Enter your name"
-        required
-      >
-
-
-      <label for="phone">
-        Phone Number
-      </label>
-
-      <input
-        id="phone"
-        name="phone"
-        type="tel"
-        placeholder="Enter your phone number"
-        required
-      >
-
-
-      <label for="service">
-        Service Required
-      </label>
-
-      <select id="service" name="service">
-
-        <option>
-          Bookkeeping & Accounting
-        </option>
-
-        <option>
-          Income Tax Return (ITR)
-        </option>
-
-        <option>
-          GST Registration
-        </option>
-
-        <option>
-          GST Return Filing
-        </option>
-
-        <option>
-          TDS Return Filing
-        </option>
-
-        <option>
-          New Company Registration
-        </option>
-
-        <option>
-          Balance Sheet & P&L Finalisation
-        </option>
-
-        <option>
-          Tax Audit
-        </option>
-
-        <option>
-          Digital Signature Certificate (DSC)
-        </option>
-
-        <option>
-          Other
-        </option>
-
-      </select>
-
-
-      <label for="message">
-        Message
-      </label>
-
-      <textarea
-        id="message"
-        name="message"
-        rows="5"
-        placeholder="Tell us briefly what you need..."
-        required
-      ></textarea>
-
-
-      <button
-        class="btn btn-primary"
-        type="submit"
-      >
-        Send Enquiry
-      </button>
-
-
-      <p class="form-note">
-        This form opens your email app with the enquiry details.
-      </p>
-
-    </form>
-
-  </div>
-
-</section>
+    </section>
 
 
 </main>
 
 
-<footer class="footer">
+<!-- =========================================================
+     FOOTER — SAME VISUAL SYSTEM AS HOME
+========================================================= -->
+<!-- =========================================================
+     THE SOLUTION POINT — MASTER FOOTER
+========================================================= -->
 
-  <div class="container footer-grid">
+<footer class="site-footer">
+
+    <div class="container footer-main">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+
+            <a class="brand" href="index.html">
+
+                <span class="brand-mark">
+                    TSP
+                </span>
+
+                <span class="brand-text">
+
+                    <strong>
+                        THE SOLUTION POINT
+                    </strong>
+
+                    <small>
+                        Where Expertise Meets Solutions
+                    </small>
+
+                </span>
+
+            </a>
+
+        </div>
 
 
-    <div>
+        <!-- EXPLORE -->
+        <div class="footer-column">
 
-      <a class="brand footer-brand" href="index.html">
+            <h4>
+                EXPLORE
+            </h4>
 
-        <span class="brand-mark">
-          TSP
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+
+        <!-- CONTACT -->
+        <div class="footer-column">
+
+            <h4>
+                CONTACT
+            </h4>
+
+            <a href="tel:+919217903420">
+                +91 9217903420
+            </a>
+
+            <a href="mailto:info.thesolutionpoint@gmail.com">
+                info.thesolutionpoint@gmail.com
+            </a>
+
+            <span>
+                thesolutionpoint.co.in
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="container footer-bottom">
+
+        <span>
+            © 2026 The Solution Point. All rights reserved.
         </span>
 
         <span>
-          <strong>The Solution Point</strong>
-          <small>Accounting & Tax Solutions</small>
+            Reliable Solutions. Professional Service. One Point.
         </span>
 
-      </a>
-
-      <p>
-        Professional accounting and compliance support.
-      </p>
-
     </div>
-
-
-    <div>
-
-      <h4>
-        Quick Links
-      </h4>
-
-     <a href="index.html">
-        Home
-      </a>
-
-      <a href="about.html">
-        About Us
-      </a>
-
-      <a href="services.html">
-        Services
-      </a>
-
-      <a href="products.html">
-        Product
-      </a>
-
-      <a class="active" href="contact.html">
-        Contact
-      </a>
-    </div>
-
-
-    <div>
-
-      <h4>
-        Contact
-      </h4>
-
-      <a href="tel:+919217903420">
-        +91 9217903420
-      </a>
-
-      <a href="mailto:info.thesolutionpoint@gmail.com">
-        info.thesolutionpoint@gmail.com
-      </a>
-
-      <span>
-        www.thesolutionpoint.co.in
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div class="copyright">
-    © 2026 The Solution Point. All rights reserved.
-  </div>
 
 </footer>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>

@@ -12,14 +12,13 @@
 
     <meta
         name="description"
-        content="Products and stationery catalog - The Solution Point."
+        content="Stationery products and everyday essentials from The Solution Point."
     >
 
     <title>
         Products | The Solution Point
     </title>
 
-    
 
     <!-- GOOGLE FONTS -->
 
@@ -40,7 +39,7 @@
     >
 
 
-    <!-- YOUR EXISTING CSS -->
+    <!-- MAIN WEBSITE CSS -->
 
     <link
         rel="stylesheet"
@@ -48,13 +47,13 @@
     >
 
 
-    <!-- PRODUCT CSS -->
+    <!-- PRODUCT PAGE CSS -->
 
     <style>
 
         /* =====================================================
-           PRODUCT PAGE
-           ===================================================== */
+           PRODUCT PAGE HERO
+        ===================================================== */
 
         .store-hero {
 
@@ -66,8 +65,34 @@
                     #f9f6ef,
                     #eef4f5
                 );
+
         }
 
+
+        .store-hero h1 {
+
+            color: #111318 !important;
+
+        }
+
+
+        .store-hero p {
+
+            color: #70747d !important;
+
+        }
+
+
+        .store-hero .eyebrow {
+
+            color: #9a6b2d !important;
+
+        }
+
+
+        /* =====================================================
+           TOOLBAR
+        ===================================================== */
 
         .store-toolbar {
 
@@ -78,6 +103,7 @@
             flex-wrap: wrap;
 
             margin: 30px 0;
+
         }
 
 
@@ -93,7 +119,11 @@
 
             font: inherit;
 
-            background: white;
+            background: #ffffff;
+
+            color: #20232a;
+
+            outline: none;
 
         }
 
@@ -107,33 +137,28 @@
         }
 
 
-        .store-toolbar select {
+        .store-toolbar input:focus,
+        .store-toolbar select:focus {
 
-            min-width: 180px;
+            border-color: #c89b5d;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(200,155,93,.12);
 
         }
 
 
-        .admin-link {
+        .store-toolbar select {
 
-            display: inline-flex;
-
-            align-items: center;
-
-            padding: 13px 15px;
-
-            color: var(--navy);
-
-            font-weight: 700;
-
-            text-decoration: none;
+            min-width: 190px;
 
         }
 
 
         /* =====================================================
            PRODUCT GRID
-           ===================================================== */
+        ===================================================== */
 
         .product-grid {
 
@@ -149,7 +174,7 @@
 
         .product-card {
 
-            background: white;
+            background: #ffffff;
 
             border:
                 1px solid var(--line);
@@ -158,7 +183,9 @@
 
             overflow: hidden;
 
-            transition: .25s;
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
 
         }
 
@@ -177,7 +204,7 @@
 
         /* =====================================================
            PRODUCT IMAGE
-           ===================================================== */
+        ===================================================== */
 
         .product-image {
 
@@ -231,6 +258,7 @@
 
             font-family:
                 "Playfair Display",
+                Georgia,
                 serif;
 
             font-size: 80px;
@@ -242,7 +270,7 @@
 
         /* =====================================================
            PRODUCT CONTENT
-           ===================================================== */
+        ===================================================== */
 
         .product-content {
 
@@ -346,16 +374,26 @@
 
             width: 100%;
 
+            cursor: pointer;
+
         }
 
 
         /* =====================================================
-           CART
-           ===================================================== */
+           HEADER CART
+        ===================================================== */
 
         .cart-link {
 
             position: relative;
+
+            display: inline-flex !important;
+
+            align-items: center;
+
+            gap: 5px;
+
+            white-space: nowrap;
 
         }
 
@@ -385,9 +423,45 @@
         }
 
 
+        .cart-count.bump {
+
+            animation:
+                cartCountBump .35s ease;
+
+        }
+
+
+        @keyframes cartCountBump {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+
         /* =====================================================
-           EMPTY
-           ===================================================== */
+           ADMIN LINK
+        ===================================================== */
+
+        .admin-link {
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =====================================================
+           EMPTY PRODUCTS
+        ===================================================== */
 
         .empty-products {
 
@@ -402,9 +476,16 @@
         }
 
 
+        .empty-products h3 {
+
+            margin-bottom: 8px;
+
+        }
+
+
         /* =====================================================
            TOAST
-           ===================================================== */
+        ===================================================== */
 
         .store-toast {
 
@@ -416,7 +497,7 @@
 
             background: var(--navy);
 
-            color: white;
+            color: #ffffff;
 
             padding: 13px 20px;
 
@@ -427,9 +508,11 @@
             transform:
                 translateY(15px);
 
-            transition: .25s;
+            transition:
+                opacity .25s ease,
+                transform .25s ease;
 
-            z-index: 999;
+            z-index: 9999;
 
         }
 
@@ -445,10 +528,167 @@
 
 
         /* =====================================================
-           RESPONSIVE
-           ===================================================== */
+           MOBILE CART BAR
+           
+           IMPORTANT:
+           Hidden on desktop.
+           Only displayed on mobile.
+        ===================================================== */
 
-        @media(max-width:850px) {
+        .mobile-cart-bar {
+
+            display: none;
+
+            position: fixed;
+
+            left: 10px;
+
+            right: 10px;
+
+            bottom: 10px;
+
+            z-index: 9998;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 12px 14px;
+
+            background:
+                rgba(17,19,24,.98);
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0,0,0,.22);
+
+            color: #ffffff;
+
+        }
+
+
+        .mobile-cart-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            min-width: 0;
+
+        }
+
+
+        .mobile-cart-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            flex:
+                0 0 38px;
+
+            display: grid;
+
+            place-items: center;
+
+            background: #f5eee2;
+
+            color: #111318;
+
+            border-radius: 10px;
+
+            font-size: 18px;
+
+        }
+
+
+        .mobile-cart-text {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 2px;
+
+            min-width: 0;
+
+        }
+
+
+        .mobile-cart-text strong {
+
+            font-size: 13px;
+
+            white-space: nowrap;
+
+        }
+
+
+        .mobile-cart-text span {
+
+            font-size: 10px;
+
+            color: #b9bec6;
+
+        }
+
+
+        .mobile-cart-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 10px 15px;
+
+            background: var(--gold);
+
+            color: var(--navy);
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+        }
+
+
+        .mobile-cart-button:hover {
+
+            opacity: .92;
+
+        }
+
+
+        body.has-mobile-cart-bar {
+
+            padding-bottom: 88px;
+
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media(max-width: 1100px) {
 
             .product-grid {
 
@@ -460,7 +700,29 @@
         }
 
 
-        @media(max-width:560px) {
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width: 850px) {
+
+            .nav-call {
+
+                display: none;
+
+            }
+
+            .product-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media(max-width: 700px) {
 
             .product-grid {
 
@@ -468,9 +730,129 @@
 
             }
 
+
+            .store-toolbar {
+
+                flex-direction: column;
+
+            }
+
+
+            .store-toolbar input,
+            .store-toolbar select {
+
+                width: 100%;
+
+                min-width: 0;
+
+            }
+
+
             .product-image {
 
-                height: 210px;
+                height: 220px;
+
+            }
+
+
+            /*
+               MOBILE CART BAR ONLY
+            */
+
+            .mobile-cart-bar.show {
+
+                display: flex;
+
+            }
+
+
+            body.has-mobile-cart-bar {
+
+                padding-bottom: 95px;
+
+            }
+
+        }
+
+
+        @media(max-width: 480px) {
+
+            .store-hero {
+
+                padding:
+                    55px 0;
+
+            }
+
+
+            .store-hero h1 {
+
+                font-size:
+                    clamp(
+                        38px,
+                        11vw,
+                        54px
+                    );
+
+                line-height: 1.05;
+
+            }
+
+
+            .store-hero p {
+
+                font-size: 14px;
+
+            }
+
+
+            .product-content {
+
+                padding: 20px;
+
+            }
+
+
+            .mobile-cart-bar {
+
+                padding: 10px 11px;
+
+                border-radius: 12px;
+
+            }
+
+
+            .mobile-cart-icon {
+
+                width: 35px;
+
+                height: 35px;
+
+                flex-basis: 35px;
+
+            }
+
+
+            .mobile-cart-text strong {
+
+                font-size: 12px;
+
+            }
+
+
+            .mobile-cart-text span {
+
+                font-size: 9px;
+
+            }
+
+
+            .mobile-cart-button {
+
+                padding:
+                    9px 12px;
+
+                font-size: 11px;
 
             }
 
@@ -486,12 +868,14 @@
 
 <!-- =========================================================
      HEADER
-     ========================================================= -->
+========================================================= -->
 
 <header class="site-header">
 
     <div class="container nav-wrap">
 
+
+        <!-- BRAND -->
 
         <a
             class="brand"
@@ -502,14 +886,14 @@
                 TSP
             </span>
 
+            <span class="brand-text">
 
-            <span>
-
-               
-               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
+                <strong>
+                    THE SOLUTION POINT
+                </strong>
 
                 <small>
-                   Reliable Solutions. Professional Service. One Point.
+                 Connecting People. Creating Solutions.
                 </small>
 
             </span>
@@ -517,13 +901,19 @@
         </a>
 
 
+        <!-- MOBILE MENU -->
+
         <button
             class="menu-toggle"
             aria-label="Open menu"
+            aria-expanded="false"
+            type="button"
         >
             ☰
         </button>
 
+
+        <!-- NAVIGATION -->
 
         <nav class="nav">
 
@@ -535,50 +925,73 @@
                 About Us
             </a>
 
-            <a href="services.html">
+             <a href="services.html">
                 Services
             </a>
 
             <a
-            class="active" href="products.html">
+                href="products.html"
+                class="active"
+            >
                 Products
             </a>
 
-            <a
-                
-                href="contact.html"
-            >
+            <a href="contact.html">
                 Contact
+            </a>
+
+
+            <!-- CART -->
+
+            <a
+                href="cart.html"
+                class="cart-link"
+            >
+
+                🛒 Cart
+
+                <span class="cart-count">
+                    0
+                </span>
+
+            </a>
+
+
+            <!-- ADMIN -->
+
+            <a
+                href="admin-login.html"
+                class="admin-link"
+            >
+                Admin Login
             </a>
 
         </nav>
 
 
+        <!-- CALL -->
+
         <a
-            class="nav-call cart-link"
-            href="cart.html"
+            class="nav-call"
+            href="tel:+919217903420"
         >
-
-            🛒 Cart
-
-            <span class="cart-count">
-                0
-            </span>
-
+            Call Us
         </a>
+
 
     </div>
 
 </header>
 
 
-
 <!-- =========================================================
      MAIN
-     ========================================================= -->
+========================================================= -->
 
 <main>
 
+
+    <!-- HERO -->
 
     <section class="store-hero">
 
@@ -590,7 +1003,7 @@
 
 
             <h1>
-                Stationery & everyday products.
+                Stationery &amp; everyday products.
             </h1>
 
 
@@ -604,13 +1017,14 @@
     </section>
 
 
+    <!-- PRODUCT SECTION -->
 
     <section class="section">
 
         <div class="container">
 
 
-            <!-- SEARCH -->
+            <!-- SEARCH + FILTER -->
 
             <div class="store-toolbar">
 
@@ -618,22 +1032,25 @@
                     type="search"
                     id="productSearch"
                     placeholder="Search products..."
+                    aria-label="Search products"
                 >
 
 
-                <select id="categoryFilter">
+                <select
+                    id="categoryFilter"
+                    aria-label="Filter products by category"
+                >
 
-                    <option value="">
+                    <option value="all">
                         All Categories
                     </option>
 
                 </select>
-                
+
             </div>
 
 
-
-            <!-- PRODUCTS -->
+            <!-- PRODUCT GRID -->
 
             <div
                 id="productGrid"
@@ -651,64 +1068,56 @@
 </main>
 
 
-
 <!-- =========================================================
      FOOTER
-     ========================================================= -->
+========================================================= -->
+<!-- =========================================================
+     THE SOLUTION POINT — MASTER FOOTER
+========================================================= -->
 
-<footer class="footer">
+<footer class="site-footer">
 
-    <div class="container footer-grid">
+    <div class="container footer-main">
 
+        <!-- BRAND -->
+        <div class="footer-brand">
 
-        <div>
-
-            <a
-                class="brand footer-brand"
-                href="index.html"
-            >
+            <a class="brand" href="index.html">
 
                 <span class="brand-mark">
                     TSP
                 </span>
 
-
-                <span>
+                <span class="brand-text">
 
                     <strong>
-                        The Solution Point
+                        THE SOLUTION POINT
                     </strong>
 
                     <small>
-                        Accounting & Tax Solutions
+                        Where Expertise Meets Solutions
                     </small>
 
                 </span>
 
             </a>
 
-
-            <p>
-                Professional accounting and
-                compliance support.
-            </p>
-
         </div>
 
 
-
-        <div>
+        <!-- EXPLORE -->
+        <div class="footer-column">
 
             <h4>
-                Quick Links
+                EXPLORE
             </h4>
-
-            <a href="index.html">
-                Home
-            </a>
 
             <a href="services.html">
                 Services
+            </a>
+
+            <a href="products.html">
+                Products
             </a>
 
             <a href="about.html">
@@ -719,18 +1128,14 @@
                 Contact
             </a>
 
-            <a href="products.html">
-                Products
-            </a>
-
         </div>
 
 
-
-        <div>
+        <!-- CONTACT -->
+        <div class="footer-column">
 
             <h4>
-                Contact
+                CONTACT
             </h4>
 
             <a href="tel:+919217903420">
@@ -742,203 +1147,37 @@
             </a>
 
             <span>
-                www.thesolutionpoint.co.in
+                thesolutionpoint.co.in
             </span>
 
         </div>
 
-
     </div>
 
 
-    <div class="copyright">
+    <!-- FOOTER BOTTOM -->
 
-        © 2026 The Solution Point.
-        All rights reserved.
+    <div class="container footer-bottom">
+
+        <span>
+            © 2026 The Solution Point. All rights reserved.
+        </span>
+
+        <span>
+            Reliable Solutions. Professional Service. One Point.
+        </span>
 
     </div>
 
 </footer>
 
-
-
-<!-- EXISTING WEBSITE JS -->
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script src="script.js"></script>
 
-
-<!-- PRODUCT JS -->
-
 <script src="products.js"></script>
-
-
-
-<script>
-
-/* =========================================================
-   RENDER PRODUCTS
-   ========================================================= */
-
-function renderProducts() {
-
-    const search =
-        document
-            .getElementById("productSearch")
-            .value
-            .toLowerCase()
-            .trim();
-
-
-    const category =
-        document
-            .getElementById("categoryFilter")
-            .value;
-
-
-    const products =
-        getProducts();
-
-
-    const filteredProducts =
-        products.filter(function(product) {
-
-            const searchText =
-                (
-                    product.code +
-                    " " +
-                    product.name +
-                    " " +
-                    product.category
-                )
-                .toLowerCase();
-
-
-            const matchesSearch =
-                searchText.includes(search);
-
-
-            const matchesCategory =
-                !category ||
-                product.category === category;
-
-
-            return (
-                matchesSearch &&
-                matchesCategory
-            );
-
-        });
-
-
-    const grid =
-        document.getElementById(
-            "productGrid"
-        );
-
-
-    if (filteredProducts.length === 0) {
-
-        grid.innerHTML = `
-            <div class="empty-products">
-
-                No products found.
-
-            </div>
-        `;
-
-        return;
-    }
-
-
-    grid.innerHTML =
-        filteredProducts
-            .map(createProductCard)
-            .join("");
-
-}
-
-
-
-/* =========================================================
-   CATEGORY FILTER
-   ========================================================= */
-
-function loadCategories() {
-
-    const select =
-        document.getElementById(
-            "categoryFilter"
-        );
-
-
-    const products =
-        getProducts();
-
-
-    const categories =
-        [
-            ...new Set(
-                products.map(
-                    product =>
-                        product.category
-                )
-            )
-        ]
-        .sort();
-
-
-    categories.forEach(function(category) {
-
-        const option =
-            document.createElement("option");
-
-
-        option.value =
-            category;
-
-
-        option.textContent =
-            category;
-
-
-        select.appendChild(option);
-
-    });
-
-}
-
-
-
-/* =========================================================
-   EVENTS
-   ========================================================= */
-
-document
-    .getElementById("productSearch")
-    .addEventListener(
-        "input",
-        renderProducts
-    );
-
-
-document
-    .getElementById("categoryFilter")
-    .addEventListener(
-        "change",
-        renderProducts
-    );
-
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-loadCategories();
-
-renderProducts();
-
-</script>
 
 
 </body>

@@ -10,14 +10,601 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="description"
+        content="Complete your order with The Solution Point."
+    >
+
     <title>
         Checkout | The Solution Point
     </title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- MAIN WEBSITE CSS -->
 
     <link
         rel="stylesheet"
         href="style.css"
     >
+
+
+    <style>
+
+        /* =====================================================
+           CHECKOUT PAGE
+        ===================================================== */
+
+        .checkout-page {
+
+            padding:
+                60px 0 80px;
+
+        }
+
+
+        .checkout-title {
+
+            margin-bottom: 32px;
+
+        }
+
+
+        .checkout-title h1 {
+
+            margin-top: 8px;
+
+            color: #111318;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: 46px;
+
+            line-height: 1.1;
+
+        }
+
+
+        .checkout-title p {
+
+            margin-top: 12px;
+
+            color: #70747d;
+
+            max-width: 650px;
+
+        }
+
+
+        /* =====================================================
+           CHECKOUT LAYOUT
+        ===================================================== */
+
+        .checkout-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.25fr)
+                minmax(300px, .75fr);
+
+            gap: 30px;
+
+            align-items: start;
+
+        }
+
+
+        /* =====================================================
+           CUSTOMER FORM
+        ===================================================== */
+
+        .checkout-form-box {
+
+            background: #ffffff;
+
+            border:
+                1px solid #deddd8;
+
+            border-radius: 14px;
+
+            padding: 30px;
+
+        }
+
+
+        .checkout-form-box h2 {
+
+            margin: 0;
+
+            color: #111318;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: 27px;
+
+        }
+
+
+        .form-intro {
+
+            margin:
+                8px 0 25px;
+
+            color: #70747d;
+
+            font-size: 13px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #20232a;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .required {
+
+            color: #a06d2d;
+
+        }
+
+
+        .checkout-input,
+        .checkout-textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #d9dfe1;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: #20232a;
+
+            font-family:
+                "DM Sans",
+                Arial,
+                sans-serif;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .checkout-input {
+
+            min-height: 46px;
+
+        }
+
+
+        .checkout-textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+        }
+
+
+        .checkout-input:focus,
+        .checkout-textarea:focus {
+
+            border-color: #c89b5d;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(200,155,93,.12);
+
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        /* =====================================================
+           PAYMENT METHOD
+        ===================================================== */
+
+        .payment-section {
+
+            margin-top: 32px;
+
+            padding-top: 28px;
+
+            border-top:
+                1px solid #deddd8;
+
+        }
+
+
+        .payment-section h2 {
+
+            margin: 0 0 8px;
+
+            color: #111318;
+
+            font-family:
+                "Playfair Display",
+                Georgia,
+                serif;
+
+            font-size: 27px;
+
+        }
+
+
+        .payment-description {
+
+            color: #70747d;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .payment-options {
+
+            display: grid;
+
+            gap: 10px;
+
+        }
+
+
+        .payment-option {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            border:
+                1px solid #deddd8;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            background: #ffffff;
+
+            transition:
+                border-color .2s ease,
+                background .2s ease;
+
+        }
+
+
+        .payment-option:hover {
+
+            border-color: #c89b5d;
+
+            background: #faf8f3;
+
+        }
+
+
+        .payment-option input {
+
+            width: 17px;
+
+            height: 17px;
+
+            accent-color: #111318;
+
+        }
+
+
+        .payment-option-text {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 2px;
+
+        }
+
+
+        .payment-option-text strong {
+
+            color: #20232a;
+
+            font-size: 14px;
+
+        }
+
+
+        .payment-option-text span {
+
+            color: #70747d;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           PROCEED BUTTON
+        ===================================================== */
+
+        .proceed-payment-button {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            margin-top: 28px;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            background: #111318;
+
+            color: #ffffff;
+
+            font-family:
+                "DM Sans",
+                Arial,
+                sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+
+        }
+
+
+        .proceed-payment-button:hover {
+
+            background: #252932;
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           ORDER INFORMATION
+        ===================================================== */
+
+        .checkout-info {
+
+            display: grid;
+
+            gap: 14px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .checkout-info-item {
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            background: #faf9f6;
+
+            border:
+                1px solid #deddd8;
+
+            border-radius: 9px;
+
+        }
+
+
+        .checkout-info-icon {
+
+            width: 32px;
+
+            height: 32px;
+
+            flex:
+                0 0 32px;
+
+            display: grid;
+
+            place-items: center;
+
+            background: #f5eee2;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+        }
+
+
+        .checkout-info-item strong {
+
+            display: block;
+
+            color: #20232a;
+
+            font-size: 13px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .checkout-info-item span {
+
+            color: #70747d;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =====================================================
+           BACK TO CART
+        ===================================================== */
+
+        .back-to-cart {
+
+            display: inline-block;
+
+            margin-top: 18px;
+
+            color: #9a6b2d;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .back-to-cart:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width: 900px) {
+
+            .checkout-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .checkout-page {
+
+                padding:
+                    45px 0 65px;
+
+            }
+
+
+            .checkout-title h1 {
+
+                font-size: 38px;
+
+            }
+
+
+            .checkout-form-box {
+
+                padding: 22px 18px;
+
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
+
+            }
+
+
+            .checkout-form-box h2,
+            .payment-section h2 {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -25,9 +612,16 @@
 <body>
 
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="site-header">
 
     <div class="container nav-wrap">
+
+
+        <!-- BRAND -->
 
         <a
             class="brand"
@@ -38,12 +632,14 @@
                 TSP
             </span>
 
-            <span>
+            <span class="brand-text">
 
-               <strong style="text-transfer : uppercase;">THE SOLUTION POINT</strong>
+                <strong>
+                    THE SOLUTION POINT
+                </strong>
 
                 <small>
-                   Reliable Solutions. Professional Service. One Point.
+                    Connecting People. Creating Solutions.
                 </small>
 
             </span>
@@ -51,14 +647,603 @@
         </a>
 
 
+        <!-- MOBILE MENU -->
+
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+
+        <!-- NAVIGATION -->
+
         <nav class="nav">
 
             <a href="index.html">
                 Home
             </a>
 
+            <a href="about.html">
+                About Us
+            </a>
+
             <a href="services.html">
                 Services
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+                <span class="cart-count">
+                    0
+                </span>
+            </a>
+
+            <a href="admin-login.html">
+                Admin Login
+            </a>
+
+        </nav>
+
+
+        <!-- CALL -->
+
+        <a
+            class="nav-call"
+            href="tel:+919217903420"
+        >
+            Call Us
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+<section class="checkout-page">
+
+<div class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="checkout-title">
+
+        <span class="eyebrow">
+            CHECKOUT
+        </span>
+
+        <h1>
+            Complete Your Order
+        </h1>
+
+        <p>
+            Please enter your delivery details and
+            select your preferred payment method.
+        </p>
+
+    </div>
+
+
+    <!-- CHECKOUT LAYOUT -->
+
+    <div class="checkout-layout">
+
+
+        <!-- =================================================
+             CUSTOMER FORM
+        ================================================= -->
+
+        <div class="checkout-form-box">
+
+            <h2>
+                Customer Details
+            </h2>
+
+            <p class="form-intro">
+                Please provide the details required
+                to process and deliver your order.
+            </p>
+
+
+            <form id="checkoutForm">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="customerName">
+
+                        Full Name
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        class="checkout-input"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MOBILE + PIN -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="customerMobile">
+
+                            Mobile Number
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerMobile"
+                            class="checkout-input"
+                            maxlength="10"
+                            inputmode="numeric"
+                            autocomplete="tel"
+                            placeholder="10-digit mobile number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="customerPin">
+
+                            PIN Code
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerPin"
+                            class="checkout-input"
+                            maxlength="6"
+                            inputmode="numeric"
+                            autocomplete="postal-code"
+                            placeholder="6-digit PIN"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="customerEmail">
+
+                        Email Address
+
+                        <span
+                            style="color:#70747d;font-weight:400;"
+                        >
+                            (Optional)
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        class="checkout-input"
+                        autocomplete="email"
+                        placeholder="your@email.com"
+                    >
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group">
+
+                    <label for="customerAddress">
+
+                        Delivery Address
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+                    <textarea
+                        id="customerAddress"
+                        class="checkout-textarea"
+                        autocomplete="street-address"
+                        placeholder="Enter your complete delivery address"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     PAYMENT
+                ================================================= -->
+
+                <div class="payment-section">
+
+                    <h2>
+                        Payment Method
+                    </h2>
+
+                    <p class="payment-description">
+                        Select how you would like to pay
+                        for your order.
+                    </p>
+
+
+                    <div class="payment-options">
+
+
+                        <!-- UPI -->
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="upi"
+                                checked
+                            >
+
+                            <span
+                                class="payment-option-text"
+                            >
+
+                                <strong>
+                                    UPI
+                                </strong>
+
+                                <span>
+                                    Pay using a UPI-enabled payment app.
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- CARD -->
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="card"
+                            >
+
+                            <span
+                                class="payment-option-text"
+                            >
+
+                                <strong>
+                                    Debit / Credit Card
+                                </strong>
+
+                                <span>
+                                    Pay securely using your card.
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- QR -->
+
+                        <label class="payment-option">
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="qr"
+                            >
+
+                            <span
+                                class="payment-option-text"
+                            >
+
+                                <strong>
+                                    Pay Using Our QR Code
+                                </strong>
+
+                                <span>
+                                    Scan the payment QR code on the next step.
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+
+                    <!-- PROCEED -->
+
+                    <button
+                        type="submit"
+                        class="proceed-payment-button"
+                    >
+                        Proceed to Payment
+                    </button>
+
+
+                    <a
+                        href="cart.html"
+                        class="back-to-cart"
+                    >
+                        ← Back to Cart
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================================
+             ORDER INFORMATION
+        ================================================= -->
+
+        <aside>
+
+
+            <div class="checkout-form-box">
+
+                <h2>
+                    Order Process
+                </h2>
+
+
+                <div class="checkout-info">
+
+
+                    <div class="checkout-info-item">
+
+                        <div
+                            class="checkout-info-icon"
+                        >
+                            1
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Enter your details
+                            </strong>
+
+                            <span>
+                                Provide your name,
+                                mobile number and
+                                delivery address.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkout-info-item">
+
+                        <div
+                            class="checkout-info-icon"
+                        >
+                            2
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Select payment
+                            </strong>
+
+                            <span>
+                                Choose UPI, card,
+                                or our QR code option.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkout-info-item">
+
+                        <div
+                            class="checkout-info-icon"
+                        >
+                            3
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Complete payment
+                            </strong>
+
+                            <span>
+                                You will be taken to
+                                the payment page to
+                                complete your order.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="checkout-info"
+            >
+
+                <div class="checkout-info-item">
+
+                    <div
+                        class="checkout-info-icon"
+                    >
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Delivery
+                        </strong>
+
+                        <span>
+                            Estimated delivery is
+                            within 7 days.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="checkout-info-item">
+
+                    <div
+                        class="checkout-info-icon"
+                    >
+                        🔒
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Secure Checkout
+                        </strong>
+
+                        <span>
+                            Your order details are
+                            handled securely.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<!-- =========================================================
+     THE SOLUTION POINT — MASTER FOOTER
+========================================================= -->
+
+<footer class="site-footer">
+
+    <div class="container footer-main">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+
+            <a class="brand" href="index.html">
+
+                <span class="brand-mark">
+                    TSP
+                </span>
+
+                <span class="brand-text">
+
+                    <strong>
+                        THE SOLUTION POINT
+                    </strong>
+
+                    <small>
+                        Where Expertise Meets Solutions
+                    </small>
+
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- EXPLORE -->
+        <div class="footer-column">
+
+            <h4>
+                EXPLORE
+            </h4>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="products.html">
+                Products
             </a>
 
             <a href="about.html">
@@ -69,299 +1254,53 @@
                 Contact
             </a>
 
-            <a href="products.html">
-                Products
+        </div>
+
+
+        <!-- CONTACT -->
+        <div class="footer-column">
+
+            <h4>
+                CONTACT
+            </h4>
+
+            <a href="tel:+919217903420">
+                +91 9217903420
             </a>
 
-        </nav>
+            <a href="mailto:info.thesolutionpoint@gmail.com">
+                info.thesolutionpoint@gmail.com
+            </a>
 
-
-        <a
-            class="nav-call cart-link"
-            href="cart.html"
-        >
-
-            🛒 Cart
-
-            <span class="cart-count">
-                0
+            <span>
+                thesolutionpoint.co.in
             </span>
-
-        </a>
-
-    </div>
-
-</header>
-
-
-
-<main>
-
-    <section
-        style="
-            padding:70px 0;
-        "
-    >
-
-        <div class="container">
-
-            <span class="eyebrow">
-                CHECKOUT
-            </span>
-
-
-            <h1
-                style="
-                    margin-top:10px;
-                    color:var(--navy);
-                "
-            >
-                Complete Your Order
-            </h1>
-
-
-            <div
-                style="
-                    margin-top:30px;
-                    padding:30px;
-                    border:1px solid var(--line);
-                    border-radius:14px;
-                    background:white;
-                "
-            >
-
-                <h2>
-                    Customer Details
-                </h2>
-
-
-                <form
-                    id="checkoutForm"
-                    style="
-                        margin-top:25px;
-                    "
-                >
-
-                    <p>
-
-                        <label>
-                            Full Name
-                        </label>
-
-                        <br>
-
-                        <input
-                            type="text"
-                            id="customerName"
-                            required
-                            style="
-                                width:100%;
-                                max-width:500px;
-                                padding:12px;
-                                margin-top:7px;
-                            "
-                        >
-
-                    </p>
-
-
-                    <p>
-
-                        <label>
-                            Mobile Number
-                        </label>
-
-                        <br>
-
-                        <input
-                            type="tel"
-                            id="customerMobile"
-                            required
-                            maxlength="10"
-                            style="
-                                width:100%;
-                                max-width:500px;
-                                padding:12px;
-                                margin-top:7px;
-                            "
-                        >
-
-                    </p>
-
-
-                    <p>
-
-                        <label>
-                            Email
-                        </label>
-
-                        <br>
-
-                        <input
-                            type="email"
-                            id="customerEmail"
-                            style="
-                                width:100%;
-                                max-width:500px;
-                                padding:12px;
-                                margin-top:7px;
-                            "
-                        >
-
-                    </p>
-
-
-                    <p>
-
-                        <label>
-                            Delivery Address
-                        </label>
-
-                        <br>
-
-                        <textarea
-                            id="customerAddress"
-                            required
-                            style="
-                                width:100%;
-                                max-width:500px;
-                                height:100px;
-                                padding:12px;
-                                margin-top:7px;
-                            "
-                        ></textarea>
-
-                    </p>
-
-
-                    <p>
-
-                        <label>
-                            PIN Code
-                        </label>
-
-                        <br>
-
-                        <input
-                            type="text"
-                            id="customerPin"
-                            required
-                            maxlength="6"
-                            style="
-                                width:100%;
-                                max-width:500px;
-                                padding:12px;
-                                margin-top:7px;
-                            "
-                        >
-
-                    </p>
-
-
-
-                    <h2
-                        style="
-                            margin-top:35px;
-                        "
-                    >
-                        Payment Method
-                    </h2>
-
-
-                    <div
-                        style="
-                            margin-top:20px;
-                        "
-                    >
-
-                        <label>
-
-                            <input
-                                type="radio"
-                                name="payment"
-                                value="upi"
-                                checked
-                            >
-
-                            UPI
-
-                        </label>
-
-                        <br><br>
-
-
-                        <label>
-
-                            <input
-                                type="radio"
-                                name="payment"
-                                value="card"
-                            >
-
-                            Debit / Credit Card
-
-                        </label>
-
-                        <br><br>
-
-
-                        <label>
-
-                            <input
-                                type="radio"
-                                name="payment"
-                                value="qr"
-                            >
-
-                            Pay Using Our QR Code
-
-                        </label>
-
-                    </div>
-
-
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        style="
-                            margin-top:30px;
-                        "
-                    >
-
-                        Proceed to Payment
-
-                    </button>
-
-
-                </form>
-
-            </div>
 
         </div>
 
-    </section>
-
-</main>
+    </div>
 
 
+    <!-- FOOTER BOTTOM -->
 
-<footer class="footer">
+    <div class="container footer-bottom">
 
-    <div class="container">
+        <span>
+            © 2026 The Solution Point. All rights reserved.
+        </span>
 
-        <p>
-
-            © 2026 The Solution Point.
-            All rights reserved.
-
-        </p>
+        <span>
+            Reliable Solutions. Professional Service. One Point.
+        </span>
 
     </div>
 
 </footer>
 
 
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script src="script.js"></script>
 
@@ -379,9 +1318,9 @@ document
             event.preventDefault();
 
 
-            /* =================================
+            /* =============================================
                CUSTOMER DETAILS
-            ================================= */
+            ============================================= */
 
             const customerName =
                 document
@@ -418,9 +1357,9 @@ document
                     .trim();
 
 
-            /* =================================
-               PAYMENT METHOD
-            ================================= */
+            /* =============================================
+               PAYMENT
+            ============================================= */
 
             const payment =
                 document.querySelector(
@@ -439,13 +1378,15 @@ document
             }
 
 
-            /* =================================
+            /* =============================================
                MOBILE VALIDATION
-            ================================= */
+            ============================================= */
 
             if (
                 customerMobile.length !== 10 ||
-                !/^[0-9]+$/.test(customerMobile)
+                !/^[0-9]+$/.test(
+                    customerMobile
+                )
             ) {
 
                 alert(
@@ -457,13 +1398,15 @@ document
             }
 
 
-            /* =================================
-               PIN CODE VALIDATION
-            ================================= */
+            /* =============================================
+               PIN VALIDATION
+            ============================================= */
 
             if (
                 customerPin.length !== 6 ||
-                !/^[0-9]+$/.test(customerPin)
+                !/^[0-9]+$/.test(
+                    customerPin
+                )
             ) {
 
                 alert(
@@ -475,9 +1418,9 @@ document
             }
 
 
-            /* =================================
+            /* =============================================
                GET CART
-            ================================= */
+            ============================================= */
 
             let cart = [];
 
@@ -506,95 +1449,129 @@ document
             ) {
 
                 alert(
-                    "Your cart is empty."
+                    "Your cart is empty. Please add a product first."
                 );
+
 
                 window.location.href =
                     "products.html";
 
+
                 return;
 
             }
-/* =================================
-   CALCULATE SUBTOTAL
-   MATCH CART ITEM WITH PRODUCT
-================================= */
-
-let subtotal = 0;
 
 
-/* Get products from product catalogue */
+            /* =============================================
+               GET PRODUCTS
+            ============================================= */
 
-const products =
-    getProducts();
+            let products = [];
 
 
-/* Calculate each cart item */
+            try {
 
-cart.forEach(
-    function(item) {
+                products =
+                    typeof getProducts ===
+                    "function"
 
-        /* Find product using Item Code */
+                        ?
 
-        const product =
-            products.find(
-                function(product) {
+                    getProducts()
 
-                    return (
-                        product.code ===
-                        item.code
-                    );
+                        :
+
+                    [];
+
+            }
+
+            catch(error) {
+
+                products = [];
+
+            }
+
+
+            /* =============================================
+               CALCULATE SUBTOTAL
+            ============================================= */
+
+            let subtotal = 0;
+
+
+            cart.forEach(
+                function(item) {
+
+                    let product =
+                        products.find(
+                            function(product) {
+
+                                return (
+                                    product.code ===
+                                    item.code
+                                );
+
+                            }
+                        );
+
+
+                    /* FALLBACK TO ID */
+
+                    if (!product) {
+
+                        product =
+                            products.find(
+                                function(product) {
+
+                                    return (
+                                        String(
+                                            product.id
+                                        ) ===
+                                        String(
+                                            item.id
+                                        )
+                                    );
+
+                                }
+                            );
+
+                    }
+
+
+                    if (!product) {
+
+                        return;
+
+                    }
+
+
+                    const price =
+                        Number(
+                            product.price
+                        ) || 0;
+
+
+                    const quantity =
+                        Number(
+                            item.quantity
+                        ) || 1;
+
+
+                    subtotal +=
+                        price *
+                        quantity;
 
                 }
             );
 
 
-        /* If product is not found,
-           skip this item */
-
-        if (!product) {
-
-            return;
-
-        }
-
-
-        /* Get actual selling price */
-
-        const price =
-            Number(
-                product.price
-            ) || 0;
-
-
-        /* Get quantity */
-
-        const quantity =
-            Number(
-                item.quantity
-            ) || 1;
-
-
-        /* Price × Quantity */
-
-        subtotal +=
-            price * quantity;
-
-    }
-);
-
-
-            /* =================================
+            /* =============================================
                DELIVERY SETTINGS
-            ================================= */
-
-            const SETTINGS_KEY =
-                "tsp_store_settings";
-
+            ============================================= */
 
             const DEFAULT_SETTINGS = {
 
-                deliveryCharge: 50,
+                deliveryCharge: 100,
 
                 freeDeliveryAmount: 0,
 
@@ -607,10 +1584,11 @@ cart.forEach(
             };
 
 
-            let settings =
-                {
-                    ...DEFAULT_SETTINGS
-                };
+            let settings = {
+
+                ...DEFAULT_SETTINGS
+
+            };
 
 
             try {
@@ -618,21 +1596,24 @@ cart.forEach(
                 const savedSettings =
                     JSON.parse(
                         localStorage.getItem(
-                            SETTINGS_KEY
+                            "tsp_store_settings"
                         )
                     );
 
 
                 if (
                     savedSettings &&
-                    typeof savedSettings === "object"
+                    typeof savedSettings ===
+                        "object"
                 ) {
 
-                    settings =
-                        {
-                            ...DEFAULT_SETTINGS,
-                            ...savedSettings
-                        };
+                    settings = {
+
+                        ...DEFAULT_SETTINGS,
+
+                        ...savedSettings
+
+                    };
 
                 }
 
@@ -640,16 +1621,18 @@ cart.forEach(
 
             catch(error) {
 
-                console.log(
-                    "Using default delivery settings."
-                );
+                settings = {
+
+                    ...DEFAULT_SETTINGS
+
+                };
 
             }
 
 
-            /* =================================
+            /* =============================================
                DELIVERY CALCULATION
-            ================================= */
+            ============================================= */
 
             const baseDelivery =
                 Number(
@@ -679,15 +1662,15 @@ cart.forEach(
                 baseDelivery;
 
 
-            let deliveryDiscount =
-                0;
+            let deliveryDiscount = 0;
 
 
             /* FREE DELIVERY */
 
             if (
                 freeDeliveryAmount > 0 &&
-                subtotal >= freeDeliveryAmount
+                subtotal >=
+                    freeDeliveryAmount
             ) {
 
                 deliveryCharge = 0;
@@ -701,7 +1684,8 @@ cart.forEach(
 
             else if (
                 discountThreshold > 0 &&
-                subtotal > discountThreshold
+                subtotal >
+                    discountThreshold
             ) {
 
                 deliveryDiscount =
@@ -721,18 +1705,18 @@ cart.forEach(
             }
 
 
-            /* =================================
+            /* =============================================
                FINAL TOTAL
-            ================================= */
+            ============================================= */
 
             const grandTotal =
                 subtotal +
                 deliveryCharge;
 
 
-            /* =================================
+            /* =============================================
                CREATE ORDER
-            ================================= */
+            ============================================= */
 
             const order = {
 
@@ -786,7 +1770,14 @@ cart.forEach(
 
 
                 estimatedDelivery:
-                    "Within 7 Days",
+                    "Within " +
+                    (
+                        Number(
+                            settings
+                                .estimatedDeliveryDays
+                        ) || 7
+                    ) +
+                    " Days",
 
 
                 paymentMethod:
@@ -803,66 +1794,63 @@ cart.forEach(
             };
 
 
-           /* =================================
-   SAVE ORDER
-================================= */
+            /* =============================================
+               SAVE ORDER
+            ============================================= */
 
-/* Get existing orders */
-
-let orders = [];
-
-try {
-
-    orders =
-        JSON.parse(
-            localStorage.getItem(
-                "tsp_orders"
-            )
-        ) || [];
-
-}
-
-catch(error) {
-
-    orders = [];
-
-}
+            let orders = [];
 
 
-/* Make sure orders is an array */
+            try {
 
-if (!Array.isArray(orders)) {
+                orders =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "tsp_orders"
+                        )
+                    ) || [];
 
-    orders = [];
+            }
 
-}
+            catch(error) {
 
+                orders = [];
 
-/* Add the new order */
-
-orders.push(order);
-
-
-/* Save all orders */
-
-localStorage.setItem(
-    "tsp_orders",
-    JSON.stringify(orders)
-);
+            }
 
 
-/* Also keep the current order
-   for the payment page */
+            if (
+                !Array.isArray(orders)
+            ) {
 
-localStorage.setItem(
-    "tsp_pending_order",
-    JSON.stringify(order)
-);
+                orders = [];
+
+            }
 
 
-            /* =================================
-               OPEN PAYMENT PAGE
-            ================================= */
+            orders.push(order);
+
+
+            localStorage.setItem(
+                "tsp_orders",
+                JSON.stringify(orders)
+            );
+
+
+            /* =============================================
+               SAVE CURRENT ORDER
+               FOR PAYMENT PAGE
+            ============================================= */
+
+            localStorage.setItem(
+                "tsp_pending_order",
+                JSON.stringify(order)
+            );
+
+
+            /* =============================================
+               GO TO PAYMENT
+            ============================================= */
 
             window.location.href =
                 "payment.html";
