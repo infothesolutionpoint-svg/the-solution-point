@@ -1025,164 +1025,84 @@ document.addEventListener(
            QR GENERATION
         ===================================================== */
 
-        function generateQR() {
+        
+async function generateQR() {
+    const qrImage = document.getElementById("paymentQr");
+    const placeholder = document.getElementById("qrPlaceholder");
 
-            let settings = {};
+    qrImage.style.display = "none";
+    placeholder.style.display = "block";
+    placeholder.textContent = "Loading payment QR code...";
 
+    try {
+        const response = await fetch("/api/store-settings");
+        const data = await response.json();
 
-            try {
-
-                settings =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "tsp_store_settings"
-                        )
-                    ) || {};
-
-            }
-
-            catch (error) {
-
-                settings = {};
-
-            }
-
-
-            const qrImage =
-                document.getElementById(
-                    "paymentQr"
-                );
-
-
-            const placeholder =
-                document.getElementById(
-                    "qrPlaceholder"
-                );
-
-
-            /*
-                If Admin Settings contains an uploaded
-                QR image, use that QR image.
-            */
-
-            if (
-                settings.qrCode
-            ) {
-
-                qrImage.src =
-                    settings.qrCode;
-
-                qrImage.style.display =
-                    "block";
-
-                placeholder.style.display =
-                    "none";
-
-                return;
-
-            }
-
-
-            /*
-                Otherwise generate a dynamic
-                UPI QR from the saved UPI ID.
-            */
-
-            const upiId =
-                String(
-                    settings.upiId || ""
-                ).trim();
-
-
-            if (!upiId) {
-
-                qrImage.style.display =
-                    "none";
-
-                placeholder.style.display =
-                    "block";
-
-                placeholder.textContent =
-                    "UPI ID is not configured. Please add your UPI ID in Admin Settings.";
-
-                return;
-
-            }
-
-
-            const amount =
-                Number(
-                    order.total
-                ).toFixed(2);
-
-
-            const upiLink =
-                "upi://pay" +
-                "?pa=" +
-                encodeURIComponent(
-                    upiId
-                ) +
-                "&pn=" +
-                encodeURIComponent(
-                    "The Solution Point"
-                ) +
-                "&am=" +
-                encodeURIComponent(
-                    amount
-                ) +
-                "&cu=INR" +
-                "&tn=" +
-                encodeURIComponent(
-                    "Order " +
-                    order.orderId
-                );
-
-
-            const qrUrl =
-                "https://api.qrserver.com/v1/create-qr-code/" +
-                "?size=300x300" +
-                "&data=" +
-                encodeURIComponent(
-                    upiLink
-                );
-
-
-            qrImage.onload =
-                function () {
-
-                    qrImage.style.display =
-                        "block";
-
-                    placeholder.style.display =
-                        "none";
-
-                };
-
-
-            qrImage.onerror =
-                function () {
-
-                    qrImage.style.display =
-                        "none";
-
-                    placeholder.style.display =
-                        "block";
-
-                    placeholder.textContent =
-                        "Unable to load the QR code. Please try again.";
-
-                };
-
-
-            qrImage.src =
-                qrUrl;
-
+        if (!response.ok || !data.success) {
+            throw new Error("Unable to load payment settings.");
         }
 
+        const settings = data.settings || {};
 
-        generateQR();
+        if (settings.qrCode) {
+            qrImage.onload = function () {
+                qrImage.style.display = "block";
+                placeholder.style.display = "none";
+            };
 
+            qrImage.onerror = function () {
+                qrImage.style.display = "none";
+                placeholder.style.display = "block";
+                placeholder.textContent = "Unable to load the QR code.";
+            };
 
+            qrImage.src = settings.qrCode;
+            return;
+        }
+
+        const upiId = String(settings.upiId || "").trim();
+
+        if (!upiId) {
+            placeholder.textContent =
+                "UPI ID is not configured. Please contact the store.";
+            return;
+        }
+
+        const amount = Number(order.total).toFixed(2);
+
+        const upiLink =
+            "upi://pay" +
+            "?pa=" + encodeURIComponent(upiId) +
+            "&pn=" + encodeURIComponent("The Solution Point") +
+            "&am=" + encodeURIComponent(amount) +
+            "&cu=INR" +
+            "&tn=" + encodeURIComponent("Order " + order.orderId);
+
+        const qrUrl =
+            "https://api.qrserver.com/v1/create-qr-code/" +
+            "?size=300x300&data=" + encodeURIComponent(upiLink);
+
+        qrImage.onload = function () {
+            qrImage.style.display = "block";
+            placeholder.style.display = "none";
+        };
+
+        qrImage.onerror = function () {
+            qrImage.style.display = "none";
+            placeholder.style.display = "block";
+            placeholder.textContent = "Unable to load the QR code. Please try again.";
+        };
+
+        qrImage.src = qrUrl;
+
+    } catch (error) {
+        console.error("QR loading error:", error);
+        placeholder.textContent =
+            "Unable to load payment settings. Please try again.";
+    }
+}
+
+generateQR();
 
         /* =====================================================
            PAYMENT METHOD UI

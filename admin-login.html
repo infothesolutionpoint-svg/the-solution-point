@@ -210,6 +210,10 @@ document
                     "tsp_admin_logged_in",
                     "true"
                 );
+                sessionStorage.setItem(
+                    "tsp_admin_token",
+                    data.token
+                );
 
                 window.location.href =
                     "admin.html";

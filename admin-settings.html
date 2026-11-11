@@ -755,324 +755,161 @@ const DEFAULT_SETTINGS = {
    LOAD SETTINGS
 ===================================================== */
 
-function loadSettings() {
 
-
-    let settings = {
-        ...DEFAULT_SETTINGS
-    };
-
+async function loadSettings() {
+    let settings = { ...DEFAULT_SETTINGS };
 
     try {
+        const response = await fetch("/api/store-settings");
+        const data = await response.json();
 
-
-        const saved =
-            JSON.parse(
-                localStorage.getItem(
-                    SETTINGS_KEY
-                )
-            );
-
-
-        if (
-            saved &&
-            typeof saved === "object"
-        ) {
-
-
-            settings = {
-
-                ...DEFAULT_SETTINGS,
-
-                ...saved
-
-            };
-
-
+        if (!response.ok || !data.success) {
+            throw new Error("Unable to load settings from Neon.");
         }
 
+        const remoteSettings = data.settings || {};
 
+        let localSettings = {};
+
+        try {
+            localSettings = JSON.parse(
+                localStorage.getItem(SETTINGS_KEY)
+            ) || {};
+        } catch (error) {
+            localSettings = {};
+        }
+
+        settings = {
+            ...settings,
+            ...localSettings,
+            ...remoteSettings
+        };
+
+    } catch (error) {
+        console.error("Settings loading error:", error);
+        alert("Unable to load settings from the database. Please check your connection.");
     }
 
-    catch(error) {
-
-
-        console.log(
-            "Using default settings."
-        );
-
-
-    }
-
-
-
-    /* DELIVERY */
-
-    document.getElementById(
-        "deliveryCharge"
-    ).value =
+    document.getElementById("deliveryCharge").value =
         settings.deliveryCharge;
 
-
-
-    document.getElementById(
-        "freeDeliveryAmount"
-    ).value =
+    document.getElementById("freeDeliveryAmount").value =
         settings.freeDeliveryAmount;
 
-
-
-    /* DISCOUNT */
-
-    document.getElementById(
-        "discountThreshold"
-    ).value =
+    document.getElementById("discountThreshold").value =
         settings.discountThreshold;
 
-
-
-    document.getElementById(
-        "deliveryDiscount"
-    ).value =
+    document.getElementById("deliveryDiscount").value =
         settings.deliveryDiscount;
 
-
-
-    /* UPI */
-
-    document.getElementById(
-        "upiId"
-    ).value =
+    document.getElementById("upiId").value =
         settings.upiId || "";
 
-
-
-    /* QR */
-
-    if (
-        settings.qrCode
-    ) {
-
-        showQRCode(
-            settings.qrCode
-        );
-
+    if (settings.qrCode) {
+        showQRCode(settings.qrCode);
     }
-
 }
-
 
 
 /* =====================================================
    SAVE SETTINGS
 ===================================================== */
 
-function saveSettings() {
 
+async function saveSettings() {
+    const deliveryCharge = Number(
+        document.getElementById("deliveryCharge").value
+    );
 
-    const deliveryCharge =
-        Number(
-            document.getElementById(
-                "deliveryCharge"
-            ).value
-        );
+    const freeDeliveryAmount = Number(
+        document.getElementById("freeDeliveryAmount").value
+    );
 
+    const discountThreshold = Number(
+        document.getElementById("discountThreshold").value
+    );
 
-    const freeDeliveryAmount =
-        Number(
-            document.getElementById(
-                "freeDeliveryAmount"
-            ).value
-        );
+    const deliveryDiscount = Number(
+        document.getElementById("deliveryDiscount").value
+    );
 
-
-    const discountThreshold =
-        Number(
-            document.getElementById(
-                "discountThreshold"
-            ).value
-        );
-
-
-    const deliveryDiscount =
-        Number(
-            document.getElementById(
-                "deliveryDiscount"
-            ).value
-        );
-
-
-    const upiId =
-        document.getElementById(
-            "upiId"
-        ).value.trim();
-
-
-
-    /* =========================================
-       VALIDATION
-    ========================================= */
-
+    const upiId = document.getElementById("upiId").value.trim();
 
     if (
-        deliveryCharge < 0
+        !Number.isFinite(deliveryCharge) ||
+        !Number.isFinite(freeDeliveryAmount) ||
+        !Number.isFinite(discountThreshold) ||
+        !Number.isFinite(deliveryDiscount) ||
+        deliveryCharge < 0 ||
+        freeDeliveryAmount < 0 ||
+        discountThreshold < 0 ||
+        deliveryDiscount < 0 ||
+        deliveryDiscount > deliveryCharge
     ) {
-
-        alert(
-            "Delivery charge cannot be negative."
-        );
-
+        alert("Please check your delivery settings.");
         return;
-
     }
 
-
-    if (
-        freeDeliveryAmount < 0
-    ) {
-
-        alert(
-            "Free delivery amount cannot be negative."
-        );
-
+    if (!/^[^\s@]+@[^\s@]+$/.test(upiId)) {
+        alert("Please enter a valid UPI ID.");
         return;
-
     }
-
-
-    if (
-        discountThreshold < 0
-    ) {
-
-        alert(
-            "Discount threshold cannot be negative."
-        );
-
-        return;
-
-    }
-
-
-    if (
-        deliveryDiscount < 0
-    ) {
-
-        alert(
-            "Delivery discount cannot be negative."
-        );
-
-        return;
-
-    }
-
-
-    if (
-        deliveryDiscount >
-        deliveryCharge
-    ) {
-
-        alert(
-            "Delivery discount cannot be greater than the delivery charge."
-        );
-
-        return;
-
-    }
-
-
-
-    /* =========================================
-       KEEP EXISTING QR
-    ========================================= */
 
     let oldSettings = {};
 
-
     try {
-
-        oldSettings =
-            JSON.parse(
-                localStorage.getItem(
-                    SETTINGS_KEY
-                )
-            ) || {};
-
-    }
-
-    catch(error) {
-
+        oldSettings = JSON.parse(
+            localStorage.getItem(SETTINGS_KEY)
+        ) || {};
+    } catch (error) {
         oldSettings = {};
-
     }
-
-
-
-    /* =========================================
-       SAVE
-    ========================================= */
 
     const settings = {
-
-        deliveryCharge:
-            deliveryCharge,
-
-        freeDeliveryAmount:
-            freeDeliveryAmount,
-
-        discountThreshold:
-            discountThreshold,
-
-        deliveryDiscount:
-            deliveryDiscount,
-
-        /* ALWAYS 7 DAYS */
-
-        estimatedDeliveryDays:
-            7,
-
-        upiId:
-            upiId,
-
-        qrCode:
-            oldSettings.qrCode || ""
-
+        deliveryCharge,
+        freeDeliveryAmount,
+        discountThreshold,
+        deliveryDiscount,
+        estimatedDeliveryDays: 7,
+        upiId,
+        qrCode: oldSettings.qrCode || ""
     };
 
+    try {
+        const response = await fetch("/api/store-settings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " +
+                    sessionStorage.getItem("tsp_admin_token")
+            },
+            body: JSON.stringify(settings)
+        });
 
-    localStorage.setItem(
-        SETTINGS_KEY,
-        JSON.stringify(
-            settings
-        )
-    );
+        const data = await response.json();
 
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Unable to save settings.");
+        }
 
-
-    /* =========================================
-       SUCCESS MESSAGE
-    ========================================= */
-
-    const message =
-        document.getElementById(
-            "saveMessage"
+        localStorage.setItem(
+            SETTINGS_KEY,
+            JSON.stringify(settings)
         );
 
+        const message = document.getElementById("saveMessage");
+        message.textContent = "✓ Settings Saved";
+        message.style.display = "inline";
 
-    message.style.display =
-        "inline";
+        setTimeout(() => {
+            message.style.display = "none";
+        }, 3000);
 
-
-    setTimeout(
-        function() {
-
-            message.style.display =
-                "none";
-
-        },
-        3000
-    );
-
+    } catch (error) {
+        alert("Settings could not be saved: " + error.message);
+    }
 }
+
 
 
 
@@ -1080,120 +917,56 @@ function saveSettings() {
    QR CODE UPLOAD
 ===================================================== */
 
-document
-    .getElementById(
-        "qrCode"
-    )
-    .addEventListener(
-        "change",
-        function(event) {
 
+document.getElementById("qrCode").addEventListener("change", function(event) {
+    const file = event.target.files[0];
 
-            const file =
-                event.target.files[0];
+    if (!file) return;
 
+    if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
+        alert("Please select a PNG, JPG or WEBP image.");
+        return;
+    }
 
-            if (!file) {
+    if (file.size > 500000) {
+        alert("Please upload a QR image smaller than 500 KB.");
+        event.target.value = "";
+        return;
+    }
 
-                return;
+    const reader = new FileReader();
 
-            }
+    reader.onload = function(e) {
+        const qrCode = e.target.result;
 
+        showQRCode(qrCode);
 
-            /* CHECK IMAGE */
+        let settings = {};
 
-            if (
-                !file.type.startsWith(
-                    "image/"
-                )
-            ) {
-
-                alert(
-                    "Please select a valid image file."
-                );
-
-                return;
-
-            }
-
-
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function(e) {
-
-
-                    const qrCode =
-                        e.target.result;
-
-
-                    let settings = {};
-
-
-                    try {
-
-
-                        settings =
-                            JSON.parse(
-                                localStorage.getItem(
-                                    SETTINGS_KEY
-                                )
-                            ) || {};
-
-
-                    }
-
-                    catch(error) {
-
-                        settings = {};
-
-                    }
-
-
-
-                    settings = {
-
-                        ...DEFAULT_SETTINGS,
-
-                        ...settings,
-
-                        qrCode:
-                            qrCode,
-
-                        estimatedDeliveryDays:
-                            7
-
-                    };
-
-
-
-                    localStorage.setItem(
-                        SETTINGS_KEY,
-                        JSON.stringify(
-                            settings
-                        )
-                    );
-
-
-
-                    showQRCode(
-                        qrCode
-                    );
-
-
-                };
-
-
-            reader.readAsDataURL(
-                file
-            );
-
-
+        try {
+            settings = JSON.parse(
+                localStorage.getItem(SETTINGS_KEY)
+            ) || {};
+        } catch (error) {
+            settings = {};
         }
-    );
+
+        settings = {
+            ...DEFAULT_SETTINGS,
+            ...settings,
+            qrCode: qrCode
+        };
+
+        localStorage.setItem(
+            SETTINGS_KEY,
+            JSON.stringify(settings)
+        );
+
+        alert("QR preview updated. Click Save Settings to share it with customers.");
+    };
+
+    reader.readAsDataURL(file);
+});
 
 
 
